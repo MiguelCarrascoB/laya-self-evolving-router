@@ -1,54 +1,29 @@
 # Laya Self-Evolving Router
 
-<p align="center">
-  <svg width="520" height="60" viewBox="0 0 520 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated router flow: prompt, Laya decision, category">
-    <defs>
-      <linearGradient id="lg" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#0e2233"/>
-        <stop offset="0.5" stop-color="#4fd8c3"/>
-        <stop offset="1" stop-color="#0e2233"/>
-      </linearGradient>
-    </defs>
-    <line x1="40" y1="30" x2="480" y2="30" stroke="url(#lg)" stroke-width="2"/>
-    <circle cx="40" cy="30" r="10" fill="#0d1219" stroke="#6da2ff" stroke-width="2"/>
-    <circle cx="260" cy="30" r="16" fill="#0d1219" stroke="#4fd8c3" stroke-width="2">
-      <animate attributeName="r" values="14;17;14" dur="3.2s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="480" cy="30" r="10" fill="#0d1219" stroke="#4ade80" stroke-width="2"/>
-    <text x="40" y="52" text-anchor="middle" font-size="10" fill="#6da2ff">prompt</text>
-    <text x="260" y="52" text-anchor="middle" font-size="10" fill="#4fd8c3">laya choice</text>
-    <text x="480" y="52" text-anchor="middle" font-size="10" fill="#4ade80">category</text>
-  </svg>
-</p>
+A prompt-intent router that starts with no categories and grows its own taxonomy as traffic arrives. Each prompt is classified on-device by Laya against the current registry plus an `other` fallback. Prompts that land in `other`, or below the confidence threshold, are held; an LLM proposes new categories from that batch, and Laya re-routes the held prompts against the larger registry.
 
-**A local, zero-generated-token prompt-intent router that starts from an *empty* category registry and grows it while it runs.** Prompts it can't confidently classify fall into `other`, an LLM proposes fresh categories from those, and Laya re-routes the pending traffic against the grown registry — so your router organizes itself instead of being hand-maintained.
-
-<p align="center">
-  <b>⚡ ~27 ms decisions</b> &nbsp;·&nbsp; <b>🔋 runs 100% on-device</b> &nbsp;·&nbsp; <b>🌱 zero starting categories</b> &nbsp;·&nbsp; <b>🧠 taxonomy grows itself</b>
-</p>
+Routing is local and generates no tokens: a single Laya `choice` call, 27–32 ms median on an M4 Pro. Category discovery is the only step that needs an LLM endpoint, and it runs once per 10 accumulated `other` prompts (39 calls over 650 prompts in the best run).
 
 ---
 
 ## How it works
 
-Every prompt is classified locally by [Laya](https://github.com/NandhaKishorM/laya) (via [`laya-mlx`](https://github.com/mizorewww/laya-mlx) on Apple Silicon or [`laya-coreml`](https://github.com/mizorewww/laya-coreml)) against the *living* registry plus a single `other` fallback. Prompts that fall below a confidence threshold — or land in `other` — are batched, and an LLM proposes new reusable categories that Laya can use on the very next prompt.
+Classification runs through [Laya](https://github.com/NandhaKishorM/laya), via [`laya-mlx`](https://github.com/mizorewww/laya-mlx) on Apple Silicon or [`laya-coreml`](https://github.com/mizorewww/laya-coreml). Laya picks one option from a list assembled fresh on every call: the categories that exist right now, plus `other`.
 
 ```mermaid
 flowchart LR
-    A["Prompt stream<br/><i>starts empty: 0 categories</i>"] --> B{"laya.choice<br/>registry ∪ other"}
+    A["Prompt stream<br/>starts at 0 categories"] --> B{"laya.choice<br/>registry ∪ other"}
     B -- "confident ≥ θ" --> C["Routed to category"]
     B -- "other / low confidence" --> D[("other bucket")]
-    D -- "every 10 prompts" --> E["LLM proposes<br/>1–2 categories"]
-    E --> F[("registry grows 🌱")]
+    D -- "every 10 prompts" --> E["LLM proposes<br/>up to 3 categories"]
+    E --> F[("registry grows")]
     F -- "re-route pending" --> B
 ```
 
-Key details:
-
-- **Choice options are built per call** from the living registry — name + one-line description each — capped at 30 (512-token Laya context). Starting set: **zero**.
-- **Confidence gate**: the top non-`other` option under `--threshold` (default `0.5`) is also treated as `other`.
-- **LLM calls are minimal**: one batched call per 10 accumulated `other` prompts, return-only-JSON constraint, with an OpenAI-compatible primary + LMStudio fallback.
-- **Everything is logged**: each routing decision, probability, latency, category birth and re-route lands in `results/*.json`, which powers the offline visualizer.
+- Options are rebuilt per call from the registry, one name and a one-line description each, capped at 30 because Laya's context is 512 tokens. The registry starts empty.
+- A top non-`other` pick scoring under `--threshold` (default `0.5`) is treated as `other`.
+- The proposer sees one batch of 10 `other` prompts at a time and must answer with a JSON array of up to 3 categories, or `[]`. It calls an OpenAI-compatible endpoint and falls back to LMStudio.
+- Every decision, probability, latency, category birth and re-route is written to `results/*.json`, which is what the visualizer reads.
 
 ## Architecture
 
@@ -59,18 +34,18 @@ src/laya_router/
   llm.py           LLMCategoryProposer — OpenAI-compatible client + LMStudio fallback
   simulation.py    closed-loop run: route → batch "other" → propose → re-route
   cli.py           `laya-router simulate` / `laya-router live`
-data/dataset.jsonl 650 synthetic prompts (10 seeded intents × 55, + 100 deliberately novel)
-visualizer/visualizer.html   single-file, offline dashboard (story mode, charts, tables)
+data/dataset.jsonl 650 synthetic prompts: 10 seeded intents × 55, plus 10 novel intents × 10
+visualizer/visualizer.html   single-file offline dashboard (story mode, charts, tables)
 results/           simulation output (JSON) — what the visualizer reads
 ```
 
 ## Run it
 
-Requires [`uv`](https://docs.astral.sh/uv/). The router (Laya) runs fully local — only category discovery needs an LLM endpoint.
+Requires [`uv`](https://docs.astral.sh/uv/). Only category discovery reaches the network, so the simulation needs an LLM endpoint configured in `.env`.
 
 ```bash
 uv sync
-cp .env.example .env        # fill OPENAI_API_KEY (gitignored — never commit it)
+cp .env.example .env        # fill OPENAI_API_KEY (gitignored - never commit it)
 uv run laya-router simulate  # closed-loop over data/dataset.jsonl → results/results.json
 uv run laya-router live      # type prompts, watch categories appear
 
@@ -79,70 +54,75 @@ python -m http.server 8787
 # open http://localhost:8787/visualizer/visualizer.html
 ```
 
-Core ML backend (Python ≤3.13; `laya-coreml` requires `<3.14`):
+Core ML backend (Python ≤ 3.13; `laya-coreml` requires `<3.14`):
 
 ```bash
 uv sync --extra coreml
 uv run laya-router simulate --backend coreml --model aac6fef/laya-coreml --out results/results-coreml.json
 ```
 
-> **Env safety:** `.env` is gitignored and never read from code — the key is loaded via `python-dotenv` at runtime only. Copy `.env.example`, never commit secrets.
+`.env` is gitignored and is only read at runtime through `python-dotenv`; nothing in the code reads the key from anywhere else.
 
-## Results (Apple M4 Pro, 650 prompts)
+## Results
 
-Every run discovers its own 30-category taxonomy from a cold start, on an Apple M4 Pro.
+650 prompts, Apple M4 Pro, threshold `0.5`. Every run below fills the registry to its 30-category cap from a cold start.
 
-### Best variant — MLX · few-shot proposer (`results/results-v3-full.json`)
+### Few-shot proposer, MLX (`results/results-v3-full.json`)
 
-System-prompt with canonical seed names + per-category descriptions, up-to-3 proposals, `[]` is valid. This is the winning variant of a four-way ablation: it gained exact-label accuracy (+19 pt) and seed recovery (+50 pt) for a 2 pt coverage cost.
+The proposer's system prompt carries the canonical seed names with their descriptions, allows up to three proposals, and accepts `[]` as an answer. In a four-way ablation this variant bought 19 points of exact-label accuracy and 50 points of seed recovery for 2 points of coverage.
 
 | Metric | Value |
 |---|---:|
-| Seed categories recovered | **10 / 10** |
-| Label-match rate (of covered) | **62.1%** |
-| Accuracy (exact label) | **40.6%** |
+| Seed categories recovered | 10 / 10 |
+| Label-match rate (of covered) | 62.1% |
+| Accuracy (exact label) | 40.6% |
 | Coverage (routed out of `other`) | 65.4% |
 | Other-rate at end | 34.6% |
 | Novel prompts absorbed (of 100) | 79 |
 | Re-routed prompts | 486 |
+| Decision latency p50 / p95 | 32.0 ms / 37.6 ms |
 | LLM calls / wall time | 39 / 133 s |
 
-> Coverage ≈65% is the honest ceiling for single-label routing here: 97–99% of residual "other" events are genuine "no single category fits" choices by Laya (not threshold artifacts). Fixing coverage further means changing routing policy (threshold, bucketing, hierarchy), not proposers.
+Coverage stops near 65% because 97–99% of the remaining `other` events are Laya deciding that no single category fits, not prompts lost to the threshold. Getting past that means changing routing policy (threshold, bucketing, hierarchy) rather than changing the proposer.
 
-### Cross-backend — base proposer
+### Cross-backend, base proposer
 
-| Metric | MLX · `aac6fef/laya-mlx` FP16 | CoreML · `aac6fef/laya-coreml` |
+| Metric | MLX `aac6fef/laya-mlx` FP16 | Core ML `aac6fef/laya-coreml` |
 |---|---:|---:|
-| Coverage (routed out of `other`) | **67.4%** | 63.2% |
+| Coverage (routed out of `other`) | 67.4% | 63.2% |
 | Other-rate at end | 32.6% | 36.8% |
-| Label-match rate (of covered) | **32.4%** | 12.7% |
-| Seed categories recovered | **5 / 10** | 2 / 10 |
+| Label-match rate (of covered) | 32.4% | 12.7% |
+| Accuracy (exact label) | 21.9% | 8.0% |
+| Seed categories recovered | 5 / 10 | 2 / 10 |
 | Re-routed prompts | 467 | 521 |
-| Decision latency p50 | **27.4 ms** | 28.3 ms |
-| Decision latency p95 | **32.7 ms** | 365 ms (first-call Core ML init) |
+| Decision latency p50 | 27.4 ms | 28.3 ms |
+| Decision latency p95 | 32.7 ms | 365 ms (first-call Core ML init) |
 | Decision latency mean | 28.1 ms | 50.1 ms |
 | Wall time | 145 s | 156 s |
 | LLM calls | 15 | 15 |
 
-Sample discovered categories — MLX: `math_fundamentals`, `web_layout`, `genealogy_research`, `astronomy_concepts`, `plant_care`, `translation`, `travel_planning`… · CoreML: `vehicle_maintenance`, `genealogy_research`, `houseplant_care`, `wine_tasting`, `sports_betting`, `food_safety`…
+Categories the MLX run discovered include `math_fundamentals`, `web_layout`, `genealogy_research`, `astronomy_concepts`, `plant_care`, `translation` and `travel_planning`. The Core ML run found `vehicle_maintenance`, `genealogy_research`, `houseplant_care`, `wine_tasting`, `sports_betting` and `food_safety`.
 
-## What this taught us
+## What the runs show
 
-- **Cold start works.** 0 categories → `other` → batched LLM proposals → Laya routes with the grown registry within the first ~15% of the stream.
-- **Taxonomy quality is the real lever, not Laya.** The base proposer coins *valid but differently-named* intents, so it only recovers 5/10 seed categories and 32% label-match. Feeding it canonical few-shot names + full descriptions jumps to **10/10 seeds recovered and 62.1% label-match** — the router's value is gated by how well the LLM names categories, not by Laya's ~27 ms decision speed.
-- **Core ML ≈ MLX on accuracy**, similar p50, with a heavier tail from Core ML pipeline initialization on first long inputs.
-- **Re-routing is where coverage is won**: hundreds of held prompts get a second chance once new categories exist.
+The cold start works. From zero categories every prompt lands in `other`, and Laya is routing against a grown registry within the first ~15% of the stream.
+
+Taxonomy quality is the limiting factor, not Laya. The base proposer coins valid intents under different names, which is why it recovers only 5 of the 10 seed categories and matches 32% of labels. Hand it the canonical names and full descriptions and it recovers all 10 and matches 62.1%. What the router is worth turns on how the LLM names categories, not on the ~30 ms decision itself.
+
+Core ML keeps up with MLX on coverage (63.2% against 67.4%) but not on label quality: 12.7% label-match against 32.4%, and 2 of 10 seed categories against 5. Its p50 is comparable; its tail is far heavier, 365 ms at p95, from Core ML pipeline initialization on the first long input.
+
+Re-routing is where coverage comes from. 486 held prompts get a second pass once the categories they needed exist.
 
 ## Roadmap
 
 - [ ] Semantic (embedding) evaluation instead of exact-label matching
 - [ ] Proposal dedup by semantic similarity, not substring heuristics
-- [ ] Threshold / batch-size sweeps with a calibration harness
+- [ ] Threshold and batch-size sweeps with a calibration harness
 - [ ] Incremental registry persistence across runs (resume, merge, prune)
-- [ ] Streaming re-route (re-classify as soon as a category is born, no full drain)
+- [ ] Streaming re-route: re-classify as soon as a category is born, no full drain
 - [ ] More Laya backends (ONNX, Metal) and few-shot LLM baselines
 
 ## License
 
-Apache-2.0, like `laya-mlx` / `laya-coreml`. See [LICENSE](LICENSE) for the full
+Apache-2.0, like `laya-mlx` and `laya-coreml`. See [LICENSE](LICENSE) for the full
 text and [NOTICE.md](NOTICE.md) for upstream attribution.
