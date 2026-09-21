@@ -83,7 +83,7 @@ class SelfEvolvingRouter:
         }
 
     def learn_from_others(self, others: list[dict], step: int) -> list[dict]:
-        """LLM proposes 1-2 categories from a batch of 'other' events."""
+        """LLM proposes up to 3 categories from a batch of 'other' events."""
         if self.registry.is_full() or not others:
             return []
         batch = others[: self.proposer.batch_size]
