@@ -3,47 +3,1103 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Self-Evolving Laya Router</title>
+<title>Laya · Self-Evolving Router — Analytics</title>
 <style>
-:root{--bg:#0b0f14;--panel:#111821;--panel2:#151f2a;--line:#263340;--text:#edf3f7;--muted:#8d9aa7;--cyan:#55d6be;--blue:#6da8ff;--orange:#ffad67;--pink:#e58bff;--green:#63db9a;--shadow:0 16px 45px #0004}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% -10%,#163245 0,#0b0f14 34rem),var(--bg);color:var(--text);font:14px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1480px;margin:auto;padding:34px 34px 60px}header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:28px}h1{font-size:clamp(27px,4vw,45px);letter-spacing:-.045em;line-height:1;margin:0 0 9px}h2{font-size:15px;letter-spacing:.02em;margin:0 0 17px}p{margin:0}.eyebrow{color:var(--cyan);font-size:11px;font-weight:750;letter-spacing:.14em;text-transform:uppercase}.subtitle{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}.chip{background:#12202a;border:1px solid #294150;border-radius:999px;color:#b8c7d3;padding:7px 11px;font-size:12px}.chip b{color:#fff;margin-left:4px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.card,.panel{background:linear-gradient(145deg,#121b24,#0f161e);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.card{padding:18px 20px;min-height:112px}.label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.13em}.value{font-size:34px;font-weight:730;letter-spacing:-.04em;margin-top:8px}.value small{font-size:16px;color:var(--muted);font-weight:500}.accent{color:var(--cyan)}.row{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(310px,1fr);gap:18px;margin-bottom:18px}.panel{padding:20px}.panel-head{display:flex;align-items:start;justify-content:space-between;gap:12px}.hint{color:var(--muted);font-size:12px}.chart-wrap{height:260px;position:relative}.chart-wrap canvas{width:100%;height:100%;display:block}.legend{display:flex;flex-wrap:wrap;gap:13px;color:var(--muted);font-size:11px;margin-top:3px}.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}.growth-svg{width:100%;height:120px;display:block;margin-top:5px}.growth-svg text{fill:#93a1ac;font:11px system-ui}.growth-svg .born{fill:var(--cyan)}.scrub{padding:20px 22px;margin-bottom:18px;background:linear-gradient(110deg,#122632,#121b24 60%)}.control-line{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.control-line button,.speed button{border:1px solid #385263;background:#182934;color:#e7f6f3;border-radius:8px;padding:7px 11px;cursor:pointer}.control-line button:hover,.speed button:hover{border-color:var(--cyan)}input[type=range]{accent-color:var(--cyan);flex:1;min-width:210px}.step-readout{min-width:102px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--cyan);font-weight:700}.speed{display:flex;gap:5px;align-items:center;color:var(--muted);font-size:12px}.speed button.active{background:#24534f;color:#fff;border-color:var(--cyan)}.lower{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.event-list{display:flex;flex-direction:column;gap:9px;max-height:490px;overflow:auto}.event{padding:11px 12px;border-radius:10px;border:1px solid #26343e;background:#101820}.event-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:6px}.badge{font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.08em;border-radius:999px;padding:3px 7px}.classified{background:#153b32;color:var(--green)}.created{background:#49301c;color:var(--orange)}.other{background:#27313a;color:#aeb8c0}.event-id,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.event-id{color:var(--muted);font-size:11px}.prompt{color:#e0e8ed;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.event-detail{color:var(--muted);font-size:12px;margin-top:5px}.event-detail b{color:#d9e4ea;font-weight:550}.categories{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:17px}.cat-btn{background:#17232d;color:#d8e4eb;border:1px solid #2b414e;border-radius:8px;padding:8px 10px;cursor:pointer;text-align:left}.cat-btn:hover,.cat-btn.selected{border-color:var(--cyan);color:#fff}.cat-btn small{display:block;color:var(--muted);font-size:10px}.detail{border-top:1px solid var(--line);padding-top:16px;min-height:160px}.detail h3{font-size:18px;margin:0 0 7px}.detail p{color:#b8c5cd}.from-list{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px}.from-list li{color:var(--muted);font:11px ui-monospace,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.drop{display:none;margin-top:15px;border:1px dashed #527181;padding:22px;text-align:center;border-radius:10px;color:#aebdc5}.drop.show{display:block}.sample-note{color:var(--orange);font-size:11px;margin-top:13px}.empty{color:var(--muted);padding:28px 0;text-align:center}@media(max-width:960px){main{padding:24px 18px}.grid{grid-template-columns:repeat(2,1fr)}.row,.lower{grid-template-columns:1fr}}@media(max-width:540px){header{display:block}.meta{justify-content:flex-start;margin-top:18px}.grid{gap:9px}.card{padding:14px}.value{font-size:27px}}
+:root{
+  --bg:#0a0e14;
+  --bg-2:#0d1219;
+  --panel:#111823;
+  --panel-2:#141d29;
+  --line:#1f2b3a;
+  --line-soft:#182230;
+  --text:#e8eef5;
+  --text-2:#b9c4d2;
+  --muted:#7e8ca0;
+  --faint:#5a6a80;
+  --cyan:#4fd8c3;
+  --blue:#6da2ff;
+  --violet:#a78bfa;
+  --amber:#f5b45a;
+  --orange:#f08a5d;
+  --green:#4ade80;
+  --red:#f87171;
+  --glow:0 0 0 1px rgba(79,216,195,.35), 0 0 18px rgba(79,216,195,.18);
+  --shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 18px 50px -18px rgba(0,0,0,.6);
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,system-ui,sans-serif;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:
+    radial-gradient(1100px 480px at 85% -12%, rgba(38,68,102,.42), transparent 65%),
+    radial-gradient(900px 420px at -10% 8%, rgba(48,36,80,.28), transparent 60%),
+    var(--bg);
+  color:var(--text);
+  font:14px/1.5 var(--sans);
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:rgba(79,216,195,.28)}
+main{max-width:1460px;margin:0 auto;padding:28px 32px 64px}
+a{color:var(--cyan)}
+
+/* ---------- header ---------- */
+.hdr{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  padding:16px 0 24px;margin-bottom:6px;
+  border-bottom:1px solid var(--line-soft);
+}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.logo{
+  width:40px;height:40px;border-radius:11px;flex:none;
+  background:linear-gradient(135deg,#1de9c2 0%,#3b82f6 100%);
+  display:grid;place-items:center;color:#04121a;font-weight:800;font-size:18px;
+  box-shadow:0 6px 22px -6px rgba(29,233,194,.5);
+}
+.hdr h1{font-size:19px;font-weight:650;letter-spacing:-.02em;margin:0;white-space:nowrap}
+.hdr .sub{color:var(--muted);font-size:12px;margin-top:1px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  background:linear-gradient(180deg,var(--panel-2),var(--panel));
+  border:1px solid var(--line);border-radius:999px;
+  padding:6px 12px;font-size:12px;color:var(--text-2);
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.chip b{color:var(--text);font-weight:600}
+.chip .dot{width:7px;height:7px;border-radius:50%;background:var(--muted)}
+.chip.ok .dot{background:var(--green);box-shadow:0 0 8px rgba(74,222,128,.7)}
+
+/* ---------- generic panel ---------- */
+.panel{
+  background:linear-gradient(180deg,var(--panel-2),var(--panel));
+  border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  margin-bottom:16px;
+}
+.panel-hd{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:14px 20px;border-bottom:1px solid var(--line-soft);
+  cursor:pointer;user-select:none;
+}
+.panel-hd.no-toggle{cursor:default}
+.panel-hd h2{font-size:13px;font-weight:600;letter-spacing:.01em;margin:0;display:flex;align-items:center;gap:9px}
+.panel-hd .hint{color:var(--muted);font-size:12px}
+.panel-bd{padding:18px 20px}
+.chev{color:var(--faint);font-size:11px;transition:transform .25s ease}
+.panel.collapsed .chev{transform:rotate(-90deg)}
+.panel.collapsed .panel-bd{display:none}
+h2 .tickle{width:8px;height:8px;border-radius:2px;display:inline-block}
+
+/* ---------- how-it-works ---------- */
+.diagram-wrap{overflow-x:auto;padding:4px 2px 8px}
+.diagram-wrap svg{min-width:820px;width:100%;display:block}
+.dnode{fill:#16202d;stroke:#2b4054;rx:10}
+.dnode-t{fill:#e8eef5;font:600 12.5px var(--sans)}
+.dnode-s{fill:#7e8ca0;font:11px var(--sans)}
+.dlbl{fill:#9aa7b8;font:600 11px var(--sans);letter-spacing:.04em}
+.dedge{stroke:#3a5166;stroke-width:1.6;fill:none}
+.dedge-accent{stroke:#4fd8c3;stroke-width:1.8;fill:none}
+.dmark{fill:#3a5166}
+.dmark-acc{fill:#4fd8c3}
+.dbadge{fill:#12303a;stroke:#1f5a54}
+
+/* ---------- KPIs ---------- */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.kpi{
+  position:relative;padding:18px 20px 16px;
+  background:linear-gradient(180deg,var(--panel-2),var(--panel));
+  border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.kpi::before{
+  content:'';position:absolute;inset:0 0 auto 0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);
+}
+.kpi .lbl{color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase}
+.kpi .val{
+  margin-top:10px;font-size:32px;font-weight:680;letter-spacing:-.035em;
+  font-variant-numeric:tabular-nums;font-feature-settings:'tnum' 1;
+}
+.kpi .unit{font-size:15px;color:var(--muted);font-weight:500;margin-left:2px}
+.kpi .spark{margin-top:10px;height:22px;display:block;width:100%}
+.k-cyan .val{color:var(--cyan)} .k-amber .val{color:var(--amber)}
+.k-blue .val{color:var(--blue)} .k-violet .val{color:var(--violet)}
+
+/* ---------- main grid ---------- */
+.row{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(320px,1fr);gap:16px;align-items:start}
+@media(max-width:1020px){.row,.lower{grid-template-columns:1fr!important}.kpis{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- chart ---------- */
+.chart-wrap{position:relative;height:300px}
+.chart-wrap canvas{width:100%;height:100%;display:block;cursor:crosshair}
+.tip{
+  position:absolute;pointer-events:none;z-index:20;display:none;
+  background:rgba(10,14,20,.94);border:1px solid var(--line);
+  border-radius:10px;padding:10px 12px;min-width:180px;
+  box-shadow:0 12px 32px -10px rgba(0,0,0,.7);
+  font-size:12px;backdrop-filter:blur(6px);
+}
+.tip .t-hd{display:flex;justify-content:space-between;gap:14px;color:var(--muted);font-size:11px;margin-bottom:7px}
+.tip .t-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:2px 0}
+.tip .t-row b{font-variant-numeric:tabular-nums;color:var(--text);font-weight:600}
+.tip .sw{width:8px;height:8px;border-radius:50%;margin-right:7px;display:inline-block}
+.legend{display:flex;flex-wrap:wrap;gap:16px;padding:0 20px 14px;color:var(--muted);font-size:12px}
+.legend .sw{width:9px;height:9px;border-radius:50%;margin-right:7px;display:inline-block;vertical-align:-1px}
+
+/* ---------- scrubber ---------- */
+.scrub .panel-bd{padding:14px 20px 16px}
+.controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.btn{
+  border:1px solid var(--line);background:var(--panel-2);color:var(--text);
+  border-radius:9px;padding:7px 14px;font-size:12.5px;font-weight:550;cursor:pointer;
+  transition:border-color .15s, background .15s, color .15s;
+}
+.btn:hover{border-color:#37506a;background:#182635}
+.btn.primary{background:linear-gradient(180deg,#17635a,#124a44);border-color:#1f7a6e;color:#d8fff7}
+.btn.primary:hover{border-color:var(--cyan)}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;flex:1;min-width:220px;height:26px;background:transparent;cursor:pointer;
+}
+input[type=range]::-webkit-slider-runnable-track{
+  height:5px;border-radius:99px;
+  background:linear-gradient(90deg,var(--cyan) var(--fill,0%),#223146 var(--fill,0%));
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:15px;height:15px;border-radius:50%;margin-top:-5px;
+  background:#eafff9;border:2px solid var(--cyan);box-shadow:0 0 10px rgba(79,216,195,.55);
+}
+input[type=range]::-moz-range-track{height:5px;border-radius:99px;background:#223146}
+input[type=range]::-moz-range-progress{height:5px;border-radius:99px;background:var(--cyan)}
+input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:#eafff9;border:2px solid var(--cyan)}
+.step-readout{
+  font-family:var(--mono);font-size:12px;color:var(--cyan);
+  font-variant-numeric:tabular-nums;background:rgba(79,216,195,.07);
+  border:1px solid rgba(79,216,195,.22);border-radius:8px;padding:6px 10px;white-space:nowrap;
+}
+.seg{display:flex;gap:0;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg button{
+  border:0;background:transparent;color:var(--muted);padding:7px 13px;font-size:12px;cursor:pointer;
+  font-variant-numeric:tabular-nums;border-right:1px solid var(--line-soft);
+}
+.seg button:last-child{border-right:0}
+.seg button.active{background:rgba(79,216,195,.14);color:var(--cyan);font-weight:650}
+.seg label{align-self:center;padding:0 10px 0 12px;color:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+
+/* ---------- registry ---------- */
+.registry{display:flex;flex-direction:column;gap:8px;max-height:430px;overflow-y:auto;padding-right:2px}
+.cat{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  background:var(--panel);border:1px solid var(--line);border-radius:11px;
+  padding:11px 13px;cursor:pointer;color:var(--text);
+  transition:border-color .15s, background .15s, box-shadow .25s;
+}
+.cat:hover{border-color:#3a5670;background:#162130}
+.cat.new{box-shadow:var(--glow);border-color:rgba(79,216,195,.55)}
+.cat .swatch{width:9px;height:9px;border-radius:3px;flex:none}
+.cat .nm{font-weight:600;font-size:13px}
+.cat small{display:block;color:var(--muted);font-size:11px;margin-top:2px;font-variant-numeric:tabular-nums}
+.cat .cnt{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--cyan);font-variant-numeric:tabular-nums}
+.cat .bar{flex:none;width:64px;height:5px;border-radius:99px;background:#1c2836;overflow:hidden}
+.cat .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--blue))}
+.mini-bar{height:7px;border-radius:99px;background:#1c2836;overflow:hidden;margin-top:8px}
+.mini-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--violet))}
+.empty{color:var(--faint);text-align:center;padding:34px 0;font-size:13px}
+
+/* ---------- event log ---------- */
+.lower{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(340px,1fr);gap:16px;align-items:start}
+.filters{display:flex;gap:7px;flex-wrap:wrap;align-items:center;padding:12px 20px;border-bottom:1px solid var(--line-soft)}
+.fchip{
+  border:1px solid var(--line);background:transparent;color:var(--muted);
+  border-radius:999px;padding:4px 12px;font-size:11.5px;cursor:pointer;transition:all .15s;
+}
+.fchip:hover{color:var(--text-2);border-color:#33506b}
+.fchip.active{background:rgba(109,162,255,.12);border-color:#2c4f8f;color:var(--blue);font-weight:600}
+.fsearch{
+  margin-left:auto;min-width:170px;background:var(--bg-2);border:1px solid var(--line);
+  border-radius:8px;color:var(--text);padding:5px 11px;font-size:12px;outline:none;
+}
+.fsearch:focus{border-color:var(--blue)}
+.fsearch::placeholder{color:var(--faint)}
+.evfeed{max-height:520px;overflow-y:auto;scrollbar-width:thin}
+.ev{
+  display:grid;grid-template-columns:78px minmax(0,1fr) 118px 92px;gap:12px;align-items:center;
+  padding:10px 20px;border-bottom:1px solid var(--line-soft);
+  font-size:12.5px;transition:background .15s;
+}
+.ev:hover{background:rgba(109,162,255,.045)}
+.ev.cur{background:rgba(79,216,195,.05);border-left:2px solid var(--cyan);padding-left:18px}
+.ev .id{font-family:var(--mono);font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums}
+.ev .stepn{font-family:var(--mono);font-size:10px;color:var(--faint)}
+.ev .body{min-width:0}
+.ev .txt{
+  font-family:var(--mono);font-size:12px;color:#cfdae6;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;
+}
+.ev .txt.open{white-space:normal;word-break:break-word;color:var(--text)}
+.ev .sub{color:var(--muted);font-size:11px;margin-top:3px}
+.ev .sub b{color:var(--text-2);font-weight:550}
+.badge{
+  font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  border-radius:6px;padding:3px 8px;white-space:nowrap;text-align:center;display:inline-block;
+}
+.b-classified{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.28)}
+.b-other{background:rgba(240,138,93,.12);color:var(--orange);border:1px solid rgba(240,138,93,.3)}
+.b-low{background:rgba(245,180,90,.12);color:var(--amber);border:1px solid rgba(245,180,90,.3)}
+.b-rerouted{background:rgba(109,162,255,.13);color:var(--blue);border:1px solid rgba(109,162,255,.32)}
+.conf{display:flex;flex-direction:column;gap:4px}
+.conf .bar{height:4px;border-radius:99px;background:#1c2836;overflow:hidden}
+.conf .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));border-radius:99px}
+.conf span{font-family:var(--mono);font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
+.lat{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ---------- inspector slide-over ---------- */
+.inspector{
+  position:fixed;top:0;right:0;bottom:0;width:min(440px,92vw);z-index:60;
+  background:linear-gradient(180deg,#141d2a,#0f1722);
+  border-left:1px solid var(--line);box-shadow:-30px 0 70px -20px rgba(0,0,0,.7);
+  transform:translateX(105%);transition:transform .28s cubic-bezier(.22,.8,.3,1);
+  display:flex;flex-direction:column;
+}
+.inspector.open{transform:translateX(0)}
+.insp-hd{padding:18px 22px;border-bottom:1px solid var(--line-soft);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.insp-hd h3{margin:0;font-size:18px;letter-spacing:-.02em;font-family:var(--mono)}
+.insp-bd{padding:20px 22px;overflow-y:auto;flex:1;font-size:13px}
+.insp-bd h4{margin:20px 0 9px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.insp-bd h4:first-child{margin-top:0}
+.insp-close{border:0;background:transparent;color:var(--muted);font-size:17px;cursor:pointer;padding:4px 8px;border-radius:8px}
+.insp-close:hover{background:var(--panel-2);color:var(--text)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-variant-numeric:tabular-nums}
+.kv dt{color:var(--muted)} .kv dd{margin:0;font-family:var(--mono);font-size:12px}
+.fromlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.fromlist li{
+  background:var(--panel);border:1px solid var(--line-soft);border-radius:9px;padding:8px 11px;
+  font-family:var(--mono);font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.routed{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px;max-height:260px;overflow-y:auto}
+.routed li{
+  display:flex;gap:10px;align-items:baseline;font-family:var(--mono);font-size:11px;color:var(--text-2);
+  padding:6px 10px;border-radius:8px;border:1px solid transparent;cursor:pointer;
+}
+.routed li:hover{background:var(--panel);border-color:var(--line)}
+.routed .rid{color:var(--faint);flex:none}
+.scrim{
+  position:fixed;inset:0;background:rgba(5,8,12,.55);z-index:50;opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.scrim.show{opacity:1;pointer-events:auto}
+
+/* ---------- footer ---------- */
+footer{
+  margin-top:26px;padding:18px 4px;border-top:1px solid var(--line-soft);
+  color:var(--faint);font-size:12px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+footer .mono{font-family:var(--mono)}
+.notice{color:var(--amber)}
+.dropzone{
+  display:none;margin:12px 20px 16px;border:1px dashed #3a5a72;border-radius:10px;
+  padding:16px;text-align:center;color:var(--muted);font-size:12.5px;
+}
+.dropzone.show{display:block}
+.dropzone.hot{border-color:var(--cyan);color:var(--cyan);background:rgba(79,216,195,.05)}
+.badge-row{display:flex;gap:8px;padding:0 20px 16px;flex-wrap:wrap}
+.viz-btn{
+  border:1px solid var(--line);background:var(--panel);color:var(--text-2);
+  border-radius:8px;padding:5px 11px;font-size:11.5px;cursor:pointer;
+}
+.viz-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:#233448;border-radius:99px;border:2px solid var(--bg)}
+::-webkit-scrollbar-track{background:transparent}
 </style>
 </head>
 <body>
-<main id="app">
-<header><div><div class="eyebrow">Simulation observatory / adaptive routing</div><h1>Self-Evolving Laya Router</h1><p class="subtitle">Watch the registry learn new categories as prompts arrive.</p></div><div class="meta" id="meta"></div></header>
-<section class="grid" id="metrics"></section>
-<div class="row"><section class="panel"><div class="panel-head"><div><h2>Category growth</h2><p class="hint">Birth events across the simulation</p></div><span class="hint" id="growth-count"></span></div><svg class="growth-svg" id="growth-svg" viewBox="0 0 800 120" preserveAspectRatio="none"></svg><div class="chart-wrap"><canvas id="chart"></canvas></div><div class="legend"><span><i style="background:#55d6be"></i>cumulative categories</span><span><i style="background:#6da8ff"></i>rolling accuracy</span><span><i style="background:#ffad67"></i>other-rate</span></div></section>
-<section class="panel"><div class="panel-head"><div><h2>Registry at this step</h2><p class="hint" id="registry-hint"></p></div></div><div class="categories" id="categories"></div><div class="detail" id="detail"></div></section></div>
-<section class="panel scrub"><div class="panel-head"><div><h2>Replay timeline</h2><p class="hint">Scrub the run, or let it play through each prompt.</p></div><span class="step-readout" id="step-readout"></span></div><div class="control-line"><button id="play" aria-label="Play timeline">▶ Play</button><input id="slider" type="range" min="0" value="0"><div class="speed"><span>Speed</span><button data-speed="1" class="active">1×</button><button data-speed="3">3×</button><button data-speed="8">8×</button></div></div></section>
-<div class="lower"><section class="panel"><div class="panel-head"><div><h2>Event log</h2><p class="hint">Recent prompts around the current step</p></div></div><div id="events" class="event-list"></div></section><section class="panel"><h2>Data source</h2><p class="hint">Expected at <span class="mono">../results/results.json</span> or <span class="mono">results/results.json</span>.</p><div id="drop" class="drop">Drop <b>results.json</b> here to explore it locally.<br><span class="hint">No data is uploaded.</span></div><div id="sample-note" class="sample-note"></div><input id="file" type="file" accept="application/json" hidden></section></div>
+<main>
+
+  <!-- 1 · Header -->
+  <header class="hdr">
+    <div class="brand">
+      <div class="logo">◈</div>
+      <div>
+        <h1>Self-Evolving Laya Router</h1>
+        <div class="sub">Adaptive category registry · simulation observatory</div>
+      </div>
+    </div>
+    <div class="chips" id="hdr-chips"></div>
+  </header>
+
+  <!-- 2 · How it works -->
+  <section class="panel collapsed" id="how-panel">
+    <div class="panel-hd" id="how-toggle">
+      <h2><span class="tickle" style="background:var(--violet)"></span>How it works</h2>
+      <span class="chev">▾</span>
+    </div>
+    <div class="panel-bd">
+      <p class="hint" style="margin:0 0 14px;color:var(--muted)">Every prompt is routed against the live registry. Prompts that fall into <b style="color:var(--orange)">other</b> are batch-proposed to the LLM, which grows the registry — then pending prompts are re-routed against it.</p>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 1040 250" role="img" aria-label="Data flow: prompt to laya choice to route or other, LLM propose, registry grow, re-route">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#3a5166"/>
+            </marker>
+            <marker id="arr-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#4fd8c3"/>
+            </marker>
+            <linearGradient id="ng" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#182636"/><stop offset="1" stop-color="#131c28"/>
+            </linearGradient>
+          </defs>
+          <!-- main flow nodes -->
+          <g>
+            <rect class="dnode" x="16" y="96" width="128" height="56" rx="10" fill="url(#ng)"/>
+            <text class="dnode-t" x="80" y="120" text-anchor="middle">Prompt event</text>
+            <text class="dnode-s" x="80" y="137" text-anchor="middle">stream · step t</text>
+          </g>
+          <path class="dedge" d="M144,124 L186,124" marker-end="url(#arr)"/>
+          <g>
+            <rect class="dnode" x="190" y="88" width="164" height="72" rx="10" fill="url(#ng)" stroke="#1f5a54"/>
+            <text class="dnode-t" x="272" y="114" text-anchor="middle">laya.choice()</text>
+            <text class="dnode-s" x="272" y="131" text-anchor="middle">registry ∪ “other”</text>
+            <text class="dnode-s" x="272" y="146" text-anchor="middle">softmax probs</text>
+          </g>
+          <!-- branch to route (high confidence) -->
+          <path class="dedge" d="M354,110 C 400,104 410,72 448,64" marker-end="url(#arr)"/>
+          <text class="dlbl" x="368" y="84" fill="#4ade80">confidence ≥ θ</text>
+          <g>
+            <rect class="dnode" x="452" y="34" width="158" height="56" rx="10" fill="url(#ng)" stroke="#255047"/>
+            <text class="dnode-t" x="531" y="58" text-anchor="middle">Route → category</text>
+            <text class="dnode-s" x="531" y="75" text-anchor="middle">reason: classified</text>
+          </g>
+          <!-- branch to other (low confidence) -->
+          <path class="dedge" d="M354,140 C 400,146 410,178 448,186" marker-end="url(#arr)"/>
+          <text class="dlbl" x="372" y="184" fill="#f08a5d">falls into “other”</text>
+          <g>
+            <rect class="dnode" x="452" y="162" width="158" height="56" rx="10" fill="url(#ng)" stroke="#7a4a30"/>
+            <text class="dnode-t" x="531" y="186" text-anchor="middle">Held in “other”</text>
+            <text class="dnode-s" x="531" y="203" text-anchor="middle">reason: other_bucket</text>
+          </g>
+          <!-- LLM propose -->
+          <path class="dedge" d="M610,190 L660,190 C 676,190 676,150 692,150" marker-end="url(#arr)"/>
+          <g>
+            <rect class="dnode" x="696" y="122" width="160" height="56" rx="10" fill="url(#ng)" stroke="#6b4a86"/>
+            <text class="dnode-t" x="776" y="138" text-anchor="middle">LLM proposes</text>
+            <text class="dnode-s" x="776" y="155" text-anchor="middle">new category name + desc</text>
+          </g>
+          <!-- registry grow -->
+          <path class="dedge-acc dedge" d="M856,150 C 886,150 890,124 912,124" marker-end="url(#arr-acc)"/>
+          <g>
+            <rect class="dnode" x="808" y="88" width="196" height="52" rx="10" fill="url(#ng)" stroke="#1f7a6e"/>
+            <text class="dnode-t" x="906" y="110" text-anchor="middle" fill="#7defdd">Registry grows 🌱</text>
+            <text class="dnode-s" x="906" y="127" text-anchor="middle">category_creations logged</text>
+          </g>
+          <!-- re-route loop back to laya.choice -->
+          <path class="dedge-acc dedge" d="M906,140 C 906,222 460,232 300,168" marker-end="url(#arr-acc)"/>
+          <rect class="dbadge" x="520" y="236" width="150" height="24" rx="12"/>
+          <text class="dlbl" x="595" y="252" text-anchor="middle" fill="#7defdd">pending re-route ↺</text>
+          <text class="dnode-s" x="16" y="60">Run flow</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · KPI cards -->
+  <section class="kpis" id="kpis"></section>
+
+  <!-- 4+5 · Chart + registry / scrubber -->
+  <div class="row">
+    <section class="panel">
+      <div class="panel-hd no-toggle">
+        <h2><span class="tickle" style="background:var(--cyan)"></span>Run dynamics</h2>
+        <span class="hint" id="chart-hint">rolling window = 20</span>
+      </div>
+      <div class="panel-bd" style="padding-bottom:8px">
+        <div class="chart-wrap">
+          <canvas id="chart"></canvas>
+          <div class="tip" id="tip"></div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i class="sw" style="background:var(--cyan)"></i>Cumulative categories</span>
+        <span><i class="sw" style="background:var(--blue)"></i>Rolling accuracy (w=20)</span>
+        <span><i class="sw" style="background:var(--amber)"></i>Rolling other-rate (w=20)</span>
+      </div>
+    </section>
+
+    <section class="panel" id="reg-panel">
+      <div class="panel-hd no-toggle">
+        <h2><span class="tickle" style="background:var(--blue)"></span>Registry state</h2>
+        <span class="hint" id="reg-hint"></span>
+      </div>
+      <div class="panel-bd">
+        <div class="registry" id="registry"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- scrubber -->
+  <section class="panel scrub">
+    <div class="panel-bd">
+      <div class="controls">
+        <button class="btn primary" id="play">▶ Play</button>
+        <span class="step-readout" id="step-readout">step 0 / 0</span>
+        <input id="slider" type="range" min="0" max="0" value="0" aria-label="Timeline scrubber">
+        <div class="seg" role="group" aria-label="Playback speed">
+          <label>Speed</label>
+          <button data-speed="1" class="active">1×</button>
+          <button data-speed="2">2×</button>
+          <button data-speed="4">4×</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · Lifecycle mini-diagram -->
+  <div class="row">
+    <section class="panel">
+      <div class="panel-hd no-toggle">
+        <h2><span class="tickle" style="background:var(--violet)"></span>Lifecycle of a category</h2>
+      </div>
+      <div class="panel-bd diagram-wrap">
+        <svg viewBox="0 0 760 190" role="img" aria-label="Lifecycle: born from a batch of other prompts, registry grows, re-route pending, absorbs future prompts">
+          <g>
+            <rect class="dnode" x="18" y="64" width="168" height="60" rx="10" fill="url(#ng)" stroke="#7a4a86"/>
+            <text class="dnode-t" x="102" y="88" text-anchor="middle">Born 🌱</text>
+            <text class="dnode-s" x="102" y="105" text-anchor="middle">from a batch of “other”</text>
+          </g>
+          <path class="dedge" d="M186,94 L246,94" marker-end="url(#arr)"/>
+          <g>
+            <rect class="dnode" x="250" y="64" width="150" height="60" rx="10" fill="url(#ng)" stroke="#1f7a6e"/>
+            <text class="dnode-t" x="325" y="88" text-anchor="middle">Joins registry</text>
+            <text class="dnode-s" x="325" y="105" text-anchor="middle">choice set grows</text>
+          </g>
+          <path class="dedge" d="M400,94 L460,94" marker-end="url(#arr)"/>
+          <g>
+            <rect class="dnode" x="464" y="64" width="150" height="60" rx="10" fill="url(#ng)" stroke="#27548f"/>
+            <text class="dnode-t" x="539" y="88" text-anchor="middle">Re-route pending</text>
+            <text class="dnode-s" x="539" y="105" text-anchor="middle">held prompts retried</text>
+          </g>
+          <path class="dedge-acc dedge" d="M614,94 C 668,94 672,94 706,94 L 716,94 C 748,94 748,150 700,152 C 640,154 560,154 470,152 C 380,150 360,150 300,140" marker-end="url(#arr-acc)"/>
+          <g>
+            <rect class="dnode" x="404" y="128" width="196" height="50" rx="10" fill="url(#ng)" stroke="#255047"/>
+            <text class="dnode-t" x="502" y="149" text-anchor="middle" fill="#7defdd">Absorbs future prompts</text>
+            <text class="dnode-s" x="502" y="165" text-anchor="middle">“other” rate ↓ · accuracy ↑</text>
+          </g>
+          <text class="dnode-s" x="18" y="42">From “other”-bucket discovery to steady-state routing</text>
+        </svg>
+      </div>
+      <div class="badge-row" id="lifecycle-note" style="padding-top:0;color:var(--muted);font-size:12px"></div>
+    </section>
+  </div>
+
+  <!-- 7 · Event log -->
+  <div class="lower">
+    <section class="panel">
+      <div class="panel-hd no-toggle">
+        <h2><span class="tickle" style="background:var(--orange)"></span>Event log</h2>
+        <span class="hint" id="ev-count"></span>
+      </div>
+      <div class="filters">
+        <button class="fchip active" data-f="all">All</button>
+        <button class="fchip" data-f="classified">Classified</button>
+        <button class="fchip" data-f="other">Other</button>
+        <button class="fchip" data-f="rerouted">Re-routed</button>
+        <button class="fchip" data-f="low">Low-confidence</button>
+        <input class="fsearch" id="ev-search" type="search" placeholder="Search prompts…" aria-label="Search prompts">
+      </div>
+      <div class="evfeed" id="evfeed"><div class="empty">Move the playhead to reveal events.</div></div>
+    </section>
+
+    <!-- data source -->
+    <section class="panel">
+      <div class="panel-hd no-toggle">
+        <h2><span class="tickle" style="background:var(--green)"></span>Data source</h2>
+        <span class="hint">local only · nothing uploaded</span>
+      </div>
+      <div class="panel-bd">
+        <p style="margin:0 0 12px;color:var(--text-2);font-size:13px" id="source-note">Looking for <span class="mono">results.json</span>…</p>
+        <dl class="kv" id="run-config"></dl>
+      </div>
+      <div class="dropzone" id="dropzone">Drop <b>results.json</b> here — or <button class="viz-btn" id="browse">browse files</button></div>
+      <input id="file-input" type="file" accept="application/json,.json" hidden>
+      <div class="panel-bd" style="padding-top:0">
+        <button class="viz-btn" id="use-sample">Load sample run</button>
+      </div>
+    </section>
+  </div>
+
+  <footer id="footer"></footer>
 </main>
+
+<!-- 8 · Category inspector slide-over -->
+<div class="scrim" id="scrim"></div>
+<aside class="inspector" id="inspector" aria-hidden="true">
+  <div class="insp-hd">
+    <div>
+      <h2 style="margin:0 0 2px;font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase">Category inspector</h2>
+      <h3 id="insp-name" style="margin:0;font-size:22px;font-family:var(--mono)">—</h3>
+    </div>
+    <button class="insp-close" id="insp-close" aria-label="Close inspector">✕</button>
+  </div>
+  <div class="insp-bd" id="insp-bd"></div>
+</aside>
+
 <script>
 (() => {
-  'use strict';
-  const sample = {meta:{backend:'sample',model:'sample',threshold:.5,n_prompts:18,wall_seconds:1.8,llm_calls:5},events:[],category_creations:[{step:4,name:'gardening',description:'Questions about plants and growing things.',from:['p0003']},{step:11,name:'music',description:'Questions about instruments and making music.',from:['p0009']}],registry_final:{backend:'sample',categories:['gardening','music'],llm_calls:5},growth_history:[{step:4,name:'gardening',from:['p0003']},{step:11,name:'music',from:['p0009']}],metrics:{accuracy_final:.83,other_rate_final:.11,novel_prompts:4,novel_final_other:1},latency:{p50:13.4,p95:19.2,mean:12.1}};
-  const choices=['coding_help','other','coding_help','other','coding_help','coding_help','other','coding_help'];
-  for(let i=0;i<18;i++){const n=i+1, choice=choices[i%choices.length], created=i===3||i===10; sample.events.push({id:'p'+String(n).padStart(4,'0'),text:['How do I refactor this function?','Tell me a quick fact about plants.','Why does my loop fail?','What soil should I use?','Explain this API error.','How can I test this module?','What is a good weekend hobby?','Help me fix this type error.'][i%8],laya_choice:created?(i===3?'gardening': 'music'):choice,route:choice,reason:created?'other_bucket':choice==='other'?'low_confidence':'classified',probs:{coding_help:choice==='coding_help'?.82:.18,other:choice==='other'?.72:.18},latency_ms:10+i%5,input_tokens:30+i,categories_at_route:i>10?2:i>3?1:0,ground_truth:choice,correct:choice!=='other'||created,rerouted:created});}
-  let data, current=0, timer=null, speed=1, selected=null;
-  const $=id=>document.getElementById(id), fmtPct=x=>`${(Number(x||0)*100).toFixed(1)}%`, fmtNum=x=>Number(x||0).toLocaleString();
-  function normalize(d){d.events=d.events||[];d.growth_history=d.growth_history||d.category_creations||[];d.category_creations=d.category_creations||d.growth_history;d.meta=d.meta||{};d.metrics=d.metrics||{};d.latency=d.latency||{};return d}
-  function render(){data=normalize(data);const events=data.events, max=Math.max(events.length,1);$('slider').max=max;$('slider').value=current;const m=data.meta, met=data.metrics, latency=data.latency, creations=data.category_creations;
-    $('meta').innerHTML=`<span class="chip">backend <b>${m.backend||'—'}</b></span><span class="chip">prompts <b>${fmtNum(m.n_prompts||events.length)}</b></span><span class="chip">LLM calls <b>${fmtNum(m.llm_calls)}</b></span><span class="chip">wall <b>${Number(m.wall_seconds||0).toFixed(1)}s</b></span>`;
-    $('metrics').innerHTML=`<div class="card"><div class="label">Final accuracy</div><div class="value accent">${fmtPct(met.accuracy_final)}</div></div><div class="card"><div class="label">Final other-rate</div><div class="value">${fmtPct(met.other_rate_final)}</div></div><div class="card"><div class="label">Created categories</div><div class="value">${creations.length}</div></div><div class="card"><div class="label">Latency p50</div><div class="value">${Number(latency.p50||0).toFixed(1)}<small> ms</small></div></div>`;
-    $('growth-count').textContent=`${creations.length} births`;renderGrowth(creations,max);renderChart(events,max);renderRegistry();renderEvents(events);$('step-readout').textContent=`STEP ${String(current).padStart(4,'0')} / ${max}`;
+'use strict';
+
+/* ============================== helpers ============================== */
+const $ = id => document.getElementById(id);
+const esc = v => String(v ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&quot;',"'":'&#39;'}[ch]));
+const pct = x => (Number(x || 0) * 100).toFixed(1) + '%';
+const num = x => Number(x || 0).toLocaleString();
+const f1 = x => Number(x || 0).toFixed(1);
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ============================== sample data ============================== */
+const SAMPLE = buildSample();
+function buildSample(){
+  const texts = [
+    'How do I memoize this recursive function in Python?',
+    'What soil works best for growing basil indoors?',
+    'Help me debug this off-by-one loop error.',
+    'Explain why my git rebase created duplicate commits.',
+    'Best way to propagate succulents from cuttings?',
+    'Recommend a chord progression for a lo-fi beat.',
+    'How do I unit-test an async API handler?',
+    'Why do my tomato leaves have yellow spots?',
+    'Explain this TypeScript generics compile error.',
+    'How should I tune a pentatonic guitar solo?',
+    'Refactor this 200-line function into modules.',
+    'How often should I water monsteras in winter?',
+    'What scale fits a neo-soul bassline?',
+    'Fix this CORS error on my Express endpoint.',
+    'When should I prune young apple trees?',
+    'How do I practice timing with a metronome?',
+    'Write a load test for my queue worker.',
+    'Difference between rebase and merge in practice?'
+  ];
+  const gens = [
+    'coding_help', 'cooking', 'coding_help', 'coding_help', 'cooking', 'music',
+    'coding_help', 'cooking', 'coding_help', 'music', 'coding_help', 'cooking',
+    'music', 'coding_help', 'cooking', 'music', 'coding_help', 'coding_help'
+  ];
+  const gt = ['coding_help','cooking','coding_help','coding_help','cooking','music','coding_help','cooking','coding_help','music','coding_help','cooking','music','coding_help','cooking','music','coding_help','coding_help'];
+  const events = [], N = 18;
+  for (let i = 0; i < N; i++){
+    const g = gt[i], genTop = gens[i] === 'coding_help' ? 0.86 : 0.62;
+    const isCookingBirth = i === 4, isMusicBirth = i === 9;
+    const created = isCookingBirth || isMusicBirth;
+    const top = created ? 0.44 : gens[i] === g ? genTop : 0.55;
+    const laya = created ? (isCookingBirth ? 'cooking' : 'music') : gens[i];
+    const route = created ? (isCookingBirth ? 'cooking' : 'music') : gens[i];
+    const reason = created ? 'other_bucket'
+      : (gens[i] === g ? 'classified' : 'low_confidence');
+    events.push({
+      id: 'p' + String(i + 1).padStart(4, '0'),
+      text: texts[i],
+      laya_choice: laya,
+      route,
+      reason,
+      probs: { coding_help: 0.05, cooking: 0.02, music: 0.01, other: Math.max(0.02, 1 - top) },
+      latency_ms: 9 + (i * 7) % 23,
+      input_tokens: 18 + (i * 13) % 40,
+      categories_at_route: i < 5 ? 1 : i < 10 ? 2 : 3,
+      ground_truth: g,
+      correct: route === g,
+      rerouted: created
+    });
+    const ev = events[events.length - 1];
+    ev.probs = { coding_help: 0.04, cooking: 0.03, music: 0.02, other: +(1 - top).toFixed(2) };
+    ev.probs[g === laya || created ? g : 'other'] = top;
   }
-  function renderGrowth(creations,max){const svg=$('growth-svg'), w=800,left=25,right=20,y=62, span=w-left-right;let s=`<line x1="${left}" y1="${y}" x2="${w-right}" y2="${y}" stroke="#33444e" stroke-width="2"/><text x="${left}" y="105">0</text><text x="${w-right-18}" y="105">${max}</text>`;creations.forEach((c,i)=>{const x=left+(c.step/max)*span;s+=`<line x1="${x}" y1="${y-28}" x2="${x}" y2="${y+4}" stroke="#376056"/><circle class="born" cx="${x}" cy="${y}" r="6"/><text x="${x}" y="${y-39}" text-anchor="middle" fill="#d9f8ef">${esc(c.name)}</text><text x="${x}" y="${y+25}" text-anchor="middle">${c.step}</text>`});svg.innerHTML=s}
-  function renderChart(events,max){const c=$('chart'),dpr=devicePixelRatio||1,rect=c.getBoundingClientRect();c.width=rect.width*dpr;c.height=rect.height*dpr;const x=c.getContext('2d');x.scale(dpr,dpr);const w=rect.width,h=rect.height,p={l:34,r:15,t:18,b:27};x.clearRect(0,0,w,h);x.strokeStyle='#273640';x.lineWidth=1;x.font='10px system-ui';x.fillStyle='#71818b';[0,25,50,75,100].forEach(v=>{const y=p.t+(100-v)/100*(h-p.t-p.b);x.beginPath();x.moveTo(p.l,y);x.lineTo(w-p.r,y);x.stroke();x.fillText(v+'%',3,y+3)});const pts=[];for(let step=0;step<=max;step++){const list=events.slice(0,step), acc=list.length?list.filter(e=>e.correct).length/list.length:0, other=list.length?list.filter(e=>e.laya_choice==='other').length/list.length:0, cats=(data.growth_history||[]).filter(g=>g.step<=step).length;pts.push([step,acc,other,cats])}const px=n=>p.l+n/max*(w-p.l-p.r),py=n=>p.t+(1-n)*(h-p.t-p.b);function line(idx,color,fill){x.beginPath();pts.forEach((v,i)=>{if(i)x.lineTo(px(v[0]),py(v[idx]));else x.moveTo(px(v[0]),py(v[idx]))});if(fill){x.lineTo(px(max),py(0));x.lineTo(px(0),py(0));x.closePath();x.fillStyle=fill;x.fill()}x.beginPath();pts.forEach((v,i)=>{if(i)x.lineTo(px(v[0]),py(v[idx]));else x.moveTo(px(v[0]),py(v[idx]))});x.strokeStyle=color;x.lineWidth=2;x.stroke()}line(3,'#55d6be','rgba(85,214,190,.08)');line(1,'#6da8ff');line(2,'#ffad67');x.strokeStyle='#fff';x.lineWidth=1;x.beginPath();x.moveTo(px(current),p.t);x.lineTo(px(current),h-p.b);x.stroke()}
-  function renderRegistry(){const list=(data.growth_history||[]).filter(c=>c.step<=current);$('registry-hint').textContent=`${list.length} categories · at step ${current}`;$('categories').innerHTML=list.length?list.map((c,i)=>`<button class="cat-btn ${selected===c.name?'selected':''}" data-cat="${esc(c.name)}">${esc(c.name)}<small>born at ${c.step}</small></button>`).join(''):'<div class="empty">No learned categories yet.</div>';document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{selected=b.dataset.cat;renderRegistry()});const c=list.find(x=>x.name===selected)||list[list.length-1];if(c){selected=c.name;const ids=c.from||[], all=Object.fromEntries((data.events||[]).map(e=>[e.id,e.text]));$('detail').innerHTML=`<h3>${esc(c.name)}</h3><p>${esc(c.description||'A category discovered during routing.')}</p><ul class="from-list">${ids.map(id=>`<li>${esc(id)} · ${esc(all[id]||'prompt text unavailable')}</li>`).join('')}</ul>`}else $('detail').innerHTML='<div class="empty">Select a category to inspect its origin prompts.</div>'}
-  function renderEvents(events){const shown=events.slice(Math.max(0,current-7),current).reverse();$('events').innerHTML=shown.length?shown.map(e=>{const made=e.reason==='other_bucket'||e.rerouted,badge=made?'created':e.laya_choice==='other'?'other':'classified', label=made?'other → created':badge;const probs=e.probs||{};const conf=Math.max(...Object.values(probs).map(Number).filter(Number.isFinite),0);return `<article class="event"><div class="event-top"><span class="event-id">${esc(e.id)} · step ${events.indexOf(e)+1}</span><span class="badge ${badge}">${label}</span></div><div class="prompt">${esc(e.text||'')}</div><div class="event-detail"><b>${esc(e.laya_choice||'—')}</b> → ${esc(e.route||'—')} · confidence <b>${fmtPct(conf)}</b></div></article>`}).join(''):'<div class="empty">Move the playhead to reveal events.</div>'}
-  function esc(v){return String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
-  function tick(){if(current>=Number($('slider').max)){pause();return}current++;render()}
-  function pause(){$('play').textContent='▶ Play';if(timer){clearInterval(timer);timer=null}}
-  function play(){if(timer){pause();return}$('play').textContent='Ⅱ Pause';timer=setInterval(tick,Math.max(70,500/speed))}
-  $('slider').oninput=e=>{current=Number(e.target.value);render()};$('play').onclick=play;document.querySelectorAll('[data-speed]').forEach(b=>b.onclick=()=>{speed=Number(b.dataset.speed);document.querySelectorAll('[data-speed]').forEach(x=>x.classList.toggle('active',x===b));if(timer){pause();play()}});window.onresize=()=>data&&render();
-  function load(d,note){data=d;current=0;selected=null;$('sample-note').textContent=note||'';$('drop').classList.remove('show');render()}
-  $('drop').onclick=()=>$('file').click();$('file').onchange=e=>{const f=e.target.files[0];if(f){const r=new FileReader();r.onload=()=>{try{load(JSON.parse(r.result),'Loaded local results.json.')}catch(_){$('sample-note').textContent='That file is not valid JSON.'}};r.readAsText(f)}};['dragenter','dragover'].forEach(ev=>document.body.addEventListener(ev,e=>{e.preventDefault();$('drop').classList.add('show')}));document.body.addEventListener('drop',e=>{e.preventDefault();const f=e.dataTransfer.files[0];if(f){$('file').files=e.dataTransfer.files;$('file').dispatchEvent(new Event('change'))}});
-  async function boot(){for(const url of ['../results/results.json','results/results.json']){try{const r=await fetch(url);if(r.ok){load(await r.json(),'Live results loaded.');return}}catch(_){} }load(sample,'Showing sample data — drop a results.json above to replace it.');$('drop').classList.add('show');}
-  boot();
+  // classify rate & correct flags sanity (already set above)
+  const creations = [
+    { step: 5, name: 'cooking', description: 'Questions about ingredients, cooking techniques, and growing edible plants.', from: ['p0002', 'p0005'] },
+    { step: 10, name: 'music', description: 'Questions about instruments, scales, and making music.', from: ['p0006', 'p0010'] }
+  ];
+  return {
+    meta: { backend: 'ollama-local', model: 'sample-model', threshold: 0.55, n_prompts: N, wall_seconds: 96.4, llm_calls: 6 },
+    events,
+    category_creations: creations,
+    registry_final: { backend: 'ollama-local', categories: ['cooking', 'music'], llm_calls: 6 },
+    growth_history: creations.map(c => ({ step: c.step, name: c.name, from: c.from })),
+    metrics: { accuracy_final: 0.722, other_rate_final: 0.167, novel_prompts: 4, novel_final_other: 1 },
+    latency: { p50: 14.2, p95: 27.8, mean: 15.9 }
+  };
+}
+
+/* ============================== state ============================== */
+let data = null;
+let current = 0;          // current step = number of events "revealed" (0..N)
+let playing = false;
+let timer = null;
+let speed = 1;
+let filter = 'all';
+let search = '';
+let exploredId = null;    // last id user expanded/inspected via events
+let series = null;        // cached per-step series
+let newestBirth = -1;     // step of most recent birth, for glow
+
+const PALETTE = ['var(--cyan)', 'var(--blue)', 'var(--violet)', 'var(--amber)', 'var(--orange)', 'var(--green)', 'var(--red)'];
+const catColor = (() => {
+  const memo = {};
+  let i = 0;
+  return name => (name in memo) ? memo[name] : (memo[name] = PALETTE[(i++) % PALETTE.length]);
+})();
+
+/* ============================== normalize ============================== */
+function normalize(d){
+  d.events = d.events || [];
+  d.category_creations = d.category_creations || [];
+  if (d.growth_history && !d.category_creations.length) d.category_creations = d.growth_history.map(g => ({ step: g.step, name: g.name, description: g.description || '', from: g.from || [] }));
+  d.growth_history = d.growth_history || d.category_creations.map(c => ({ step: c.step, name: c.name, from: c.from || [] }));
+  d.meta = d.meta || {};
+  d.metrics = d.metrics || {};
+  d.latency = d.latency || {};
+  d.registry_final = d.registry_final || { categories: [] };
+  return d;
+}
+
+/* ============================== series computation ============================== */
+function computeSeries(d){
+  const ev = d.events, N = ev.length, W = 20;
+  const acc = new Float64Array(N + 1), oth = new Float64Array(N + 1), cats = new Float64Array(N + 1), lat = new Float64Array(N + 1);
+  const births = (d.growth_history || []).slice().sort((a, b) => a.step - b.step);
+  acc[0] = NaN; oth[0] = NaN; lat[0] = NaN;
+  for (let t = 1; t <= N; t++){
+    const from = Math.max(0, t - W);
+    let c = 0, o = 0, L = 0;
+    for (let i = from; i < t; i++){
+      if (ev[i].correct) c++;
+      if (String(ev[i].laya_choice || '').toLowerCase() === 'other') o++;
+      L += Number(ev[i].latency_ms) || 0;
+    }
+    const n = t - from;
+    acc[t] = c / n;
+    oth[t] = o / n;
+    lat[t] = L / n;
+  }
+  cats[0] = 0;
+  for (let t = 1; t <= N; t++){
+    cats[t] = births.filter(b => b.step <= t).length;
+  }
+  return { acc, oth, cats, lat, N, W, births };
+}
+
+/* ============================== render: header + kpis ============================== */
+function renderHeader(){
+  const m = data.meta, live = data.sourceNote !== SAMPLE_NOTE;
+  $('hdr-chips').innerHTML = `
+    <span class="chip${live ? ' ok' : ''}"><span class="dot"></span>backend <b>${esc(m.backend || '—')}</b></span>
+    <span class="chip">model <b>${esc(m.model || '—')}</b></span>
+    <span class="chip">threshold <b class="mono">${f1(Number(m.threshold || 0) * 100)}%</b></span>
+    <span class="chip">wall <b>${f1(m.wall_seconds)}s</b></span>
+    <span class="chip">LLM calls <b>${num(m.llm_calls)}</b></span>`;
+  $('source-note').innerHTML = data.sourceNote;
+  $('run-config').innerHTML = `
+    <dt>Dataset</dt><dd>${esc(data.datasetPath || 'sample (embedded)')}</dd>
+    <dt>Prompts</dt><dd>${num(m.n_prompts || data.events.length)}</dd>
+    <dt>Threshold θ</dt><dd>${f1(Number(m.threshold || 0))}</dd>
+    <dt>Latency p50 / p95</dt><dd>${f1(data.latency.p50)} / ${f1(data.latency.p95)} ms</dd>`;
+  $('footer').innerHTML = `
+    <span>Run config: <span class="mono">${esc(m.backend || '?')} · ${esc(m.model || '?')} · θ=${f1(Number(m.threshold || 0))} · ${num(m.n_prompts || data.events.length)} prompts</span></span>
+    <span>Drop a <span class="mono">results.json</span> anywhere to inspect a real run. Rendering is fully offline.</span>`;
+}
+
+function renderKPIs(){
+  const met = data.metrics, created = data.category_creations.length;
+  const cards = [
+    { cls: 'k-cyan', lbl: 'Final accuracy', val: pct(met.accuracy_final), key: 'acc' },
+    { cls: 'k-amber', lbl: 'Other-rate at end', val: pct(met.other_rate_final), key: 'oth' },
+    { cls: 'k-blue', lbl: 'Categories born', val: String(created), key: 'cats' },
+    { cls: 'k-violet', lbl: 'Latency mean', val: f1(data.latency.mean), unit: 'ms', key: 'lat' }
+  ];
+  $('kpis').innerHTML = cards.map(c => `
+    <div class="kpi ${c.cls}">
+      <div class="lbl">${c.lbl}</div>
+      <div class="val">${esc(c.val)}${c.unit ? `<span class="unit">${c.unit}</span>` : ''}</div>
+      <canvas class="spark" data-key="${c.key}"></canvas>
+    </div>`).join('');
+  document.querySelectorAll('.spark').forEach(cv => drawSpark(cv, cv.dataset.key));
+}
+
+function drawSpark(cv, key){
+  const dpr = devicePixelRatio || 1;
+  const w = cv.clientWidth || 200, h = cv.clientHeight || 22;
+  cv.width = w * dpr; cv.height = h * dpr;
+  const x = cv.getContext('2d'); x.scale(dpr, dpr);
+  const color = { acc: '#6da2ff', oth: '#f5b45a', cats: '#4fd8c3', lat: '#a78bfa' }[key] || '#a78bfa';
+  let vals = Array.from(series[key] || []);
+  if (key === 'cats'){ vals = vals.slice(1); const max = Math.max(1, vals[vals.length - 1]); vals = vals.map(v => v / max); }
+  else vals = vals.filter(Number.isFinite).map(Number);
+  if (vals.length < 2) return;
+  x.beginPath();
+  vals.forEach((v, i) => {
+    const px = (i / (vals.length - 1)) * (w - 2) + 1;
+    const py = h - 3 - v * (h - 6);
+    i ? x.lineTo(px, py) : x.moveTo(px, py);
+  });
+  x.strokeStyle = color; x.lineWidth = 1.5; x.stroke();
+  x.lineTo(w - 1, h); x.lineTo(1, h); x.closePath();
+  x.fillStyle = color + '20'; x.fill();
+}
+
+/* ============================== chart ============================== */
+const chart = $('chart'), tipEl = $('tip');
+let chartGeom = null;
+
+function drawChart(){
+  const dpr = devicePixelRatio || 1;
+  const r = chart.getBoundingClientRect();
+  if (r.width < 10) return;
+  chart.width = r.width * dpr; chart.height = r.height * dpr;
+  const x = chart.getContext('2d');
+  x.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const w = r.width, h = r.height;
+  const p = { l: 46, r: 20, t: 16, b: 30 };
+  x.clearRect(0, 0, w, h);
+  const N = data.events.length;
+  const pw = w - p.l - p.r, ph = h - p.t - p.b;
+  const px = t => p.l + (N ? (t / N) * pw : 0);
+  const py = f => p.t + (1 - clamp(f, 0, 1)) * ph;
+  const cMax = Math.max(1, series.cats[series.cats.length - 1] || 1);
+  const pyC = c => p.t + (1 - clamp(c / cMax, 0, 1)) * ph;
+  chartGeom = { p, pw, ph, px, py, pyC, cMax };
+
+  // grid
+  x.strokeStyle = 'rgba(255,255,255,.05)'; x.lineWidth = 1;
+  x.fillStyle = '#68788e'; x.font = '10px ' + getComputedStyle(document.body).getPropertyValue('--mono');
+  for (let g = 0; g <= 4; g++){
+    const f = g / 4, y = py(f);
+    x.beginPath(); x.moveTo(p.l, y); x.lineTo(w - p.r, y); x.stroke();
+    x.textAlign = 'right';
+    x.fillText((f * 100).toFixed(0) + '%', p.l - 7, y + 3);
+  }
+  x.textAlign = 'center';
+  const tickStep = Math.max(1, Math.ceil(N / 10));
+  for (let t = 0; t <= N; t += tickStep) x.fillText(String(t), px(t), h - 10);
+  x.textAlign = 'right'; x.fillStyle = '#4fd8c3';
+  x.fillText(String(cMax), p.l - 7, p.t + 8);
+
+  // cumulative categories area + step line
+  x.beginPath();
+  x.moveTo(px(0), pyC(0));
+  for (let t = 1; t <= current; t++){
+    if (series.cats[t] !== series.cats[t - 1]) { x.lineTo(px(t), pyC(series.cats[t - 1])); }
+    x.lineTo(px(t), pyC(series.cats[t]));
+  }
+  x.strokeStyle = '#4fd8c3'; x.lineWidth = 2; x.stroke();
+  x.save(); x.lineTo(px(current), pyC(0)); x.lineTo(px(0), pyC(0)); x.closePath();
+  x.fillStyle = 'rgba(79,216,195,.09)'; x.fill(); x.restore();
+
+  // rolling lines
+  line(x, series.acc, '#6da2ff');
+  line(x, series.oth, '#f5b45a');
+
+  // birth markers
+  (data.growth_history || []).forEach(b => {
+    if (b.step <= current){
+      const bx = px(b.step), by = pyC(series.cats[clamp(b.step, 0, N)]);
+      x.beginPath(); x.arc(bx, by, 4.5, 0, Math.PI * 2);
+      x.fillStyle = '#0a0e14'; x.fill();
+      x.strokeStyle = b.step === newestBirth ? '#7defdd' : '#4fd8c3'; x.lineWidth = 2; x.stroke();
+    }
+  });
+
+  // playhead: moving highlight line tied to the scrubber
+  if (current > 0){
+    const cx = px(current);
+    const gph = x.createLinearGradient(cx - 14, 0, cx, 0);
+    gph.addColorStop(0, 'rgba(79,216,195,0)');
+    gph.addColorStop(1, 'rgba(79,216,195,.16)');
+    x.fillStyle = gph; x.fillRect(cx - 14, p.t, 14, ph);
+    x.beginPath(); x.moveTo(cx, p.t); x.lineTo(cx, p.t + ph);
+    x.strokeStyle = 'rgba(214,255,247,.85)'; x.lineWidth = 1.5; x.stroke();
+  }
+}
+function line(x, arr, color){
+  x.beginPath();
+  let started = false;
+  for (let t = 1; t <= current; t++){
+    if (!Number.isFinite(arr[t])) continue;
+    const cx = chartGeom.px(t), cy = chartGeom.py(arr[t]);
+    started ? x.lineTo(cx, cy) : x.moveTo(cx, cy);
+    started = true;
+  }
+  x.strokeStyle = color; x.lineWidth = 2; x.lineJoin = 'round'; x.stroke();
+}
+
+/* crosshair hover */
+chart.addEventListener('mousemove', ev => {
+  if (!data || !chartGeom || !data.events.length) return;
+  const r = chart.getBoundingClientRect();
+  const mx = ev.clientX - r.left, my = ev.clientY - r.top;
+  const g = chartGeom;
+  const t = clamp(Math.round(((mx - g.p.l) / g.pw) * data.events.length), 0, data.events.length);
+  if (mx < g.p.l - 6 || mx > r.width - g.p.r + 6 || my < g.p.t - 6 || my > r.height - g.p.b + 6){ tipEl.style.display = 'none'; return; }
+  const a = series.acc[t], o = series.oth[t], c = series.cats[t];
+  tipEl.innerHTML = `
+    <div class="t-hd"><span>step ${t}</span><span>${t} / ${data.events.length}</span></div>
+    <div class="t-row"><span><i class="sw" style="background:var(--blue)"></i>accuracy</span><b>${Number.isFinite(a) ? pct(a) : '—'}</b></div>
+    <div class="t-row"><span><i class="sw" style="background:var(--amber)"></i>other-rate</span><b>${Number.isFinite(o) ? pct(o) : '—'}</b></div>
+    <div class="t-row"><span><i class="sw" style="background:var(--cyan)"></i>categories</span><b>${c}</b></div>`;
+  tipEl.style.display = 'block';
+  const tx = clamp(mx + 16, 0, r.width - 200), ty = clamp(my - 20, 4, r.height - 120);
+  tipEl.style.left = tx + 'px'; tipEl.style.top = ty + 'px';
+  xhair(t);
+});
+chart.addEventListener('mouseleave', () => { tipEl.style.display = 'none'; });
+let xhairCanvas = null;
+function xhair(t){
+  drawChartWithXhair(t);
+}
+function drawChartWithXhair(t){
+  drawChart();
+  if (!t) return;
+  const x = chart.getContext('2d');
+  x.save(); x.globalAlpha = .5;
+  x.strokeStyle = '#ffffff'; x.setLineDash([3, 3]); x.lineWidth = 1;
+  x.beginPath(); x.moveTo(chartGeom.px(t), chartGeom.p.t); x.lineTo(chartGeom.px(t), chartGeom.p.t + chartGeom.ph); x.stroke();
+  x.restore();
+}
+
+/* ============================== registry panel ============================== */
+function birthCount(prefix){
+  let c = 0;
+  for (let i = 0; i < current; i++) if (data.events[i].route === prefix) c++;
+  return c;
+}
+function renderRegistry(){
+  const cats = (data.growth_history || []).filter(b => b.step <= current);
+  $('reg-hint').textContent = `${cats.length} categories · step ${current}`;
+  const maxCnt = Math.max(1, ...cats.map(c => birthCount(c.name)));
+  $('registry').innerHTML = cats.length ? cats.map(b => {
+    const c = data.category_creations.find(k => k.name === b.name) || {};
+    const cnt = birthCount(b.name);
+    return `<button class="cat ${b.step === newestBirth ? 'new' : ''}" data-cat="${esc(b.name)}">
+      <span class="swatch" style="background:${catColor(b.name)}"></span>
+      <span><span class="nm">${esc(b.name)}</span><small>born at step ${b.step} · signals: ${(c.from || []).length}</small></span>
+      <span class="cnt">${cnt} routed</span>
+      <span class="bar"><i style="width:${Math.min(100, (cnt / maxCnt) * 100)}%"></i></span>
+    </button>`;
+  }).join('') : '<div class="empty">No categories yet — the registry starts empty.</div>';
+  $('registry').querySelectorAll('[data-cat]').forEach(b => b.onclick = () => openInspector(b.dataset.cat));
+}
+
+/* ============================== event log ============================== */
+const BADGES = {
+  classified: ['classified', 'b-classified'],
+  other: ['other', 'b-other'],
+  low: ['low-confidence', 'b-low'],
+  rerouted: ['rerouted', 'b-rerouted']
+};
+function evBadge(e){
+  if (e.rerouted) return BADGES.rerouted;
+  if (String(e.reason).toLowerCase().includes('low')) return BADGES.low;
+  if (String(e.reason).toLowerCase().includes('other')) return BADGES.other;
+  return BADGES.classified;
+}
+function matchFilter(e){
+  const r = String(e.reason || '').toLowerCase();
+  const l = String(e.laya_choice || '').toLowerCase();
+  if (filter === 'classified' && !(r === 'classified')) return false;
+  if (filter === 'other' && !(r.includes('other') || l === 'other')) return false;
+  if (filter === 'rerouted' && !e.rerouted) return false;
+  if (filter === 'low' && !r.includes('low')) return false;
+  if (search && !(String(e.text || '').toLowerCase().includes(search) || String(e.route || '').toLowerCase().includes(search))) return false;
+  return true;
+}
+function renderEvents(){
+  const feed = $('evfeed');
+  const visible = [];
+  const BACK = 60;
+  for (let t = Math.max(1, current - BACK); t <= current; t++){
+    const e = data.events[t - 1];
+    if (e && matchFilter(e)) visible.push([t, e]);
+  }
+  $('ev-count').textContent = `${visible.length} shown · window ${Math.max(0, current - BACK)}–${current}`;
+  if (!visible.length){ feed.innerHTML = '<div class="empty">No matching events near this step.</div>'; return; }
+  feed.innerHTML = visible.map(([t, e]) => {
+    const [btxt, bcls] = evBadge(e);
+    const probs = e.probs || {};
+    let bestName = '—', bestP = 0;
+    Object.entries(probs).forEach(([k, v]) => {
+      if (k.toLowerCase() === 'other') return;
+      if (Number(v) > bestP){ bestP = Number(v); bestName = k; }
+    });
+    const conf = bestP;
+    const isCat = (data.registry_final.categories || []).includes(e.route);
+    return `<div class="ev ${t === current ? 'cur' : ''}" data-step="${t}">
+      <div class="id">${esc(e.id || ('#' + t))}<div class="stepn">step ${t}</div></div>
+      <div class="body"><div class="txt" title="click to expand">${esc(e.text || '')}</div>
+        <div class="sub">laya <b>${esc(e.laya_choice || '—')}</b> → route <b class="${isCat ? 'mono' : ''}" style="color:${isCat ? catColor(e.route) : 'var(--amber)'}">${esc(e.route || '—')}</b> · top: <b>${esc(bestName)}</b></div>
+      </div>
+      <div class="conf"><span class="badge ${bcls}" style="justify-self:start">${btxt}</span><div class="bar"><i style="width:${(bestP * 100).toFixed(0)}%"></i></div><span>${pct(conf)}</span></div>
+      <div class="lat">${f1(e.latency_ms)} ms<br><span style="color:#5a6a82">in:${num(e.input_tokens)}</span></div>
+    </div>`;
+  }).join('');
+  feed.querySelectorAll('.ev').forEach(row => { row.onclick = () => row.querySelector('.txt').classList.toggle('open'); });
+  feed.scrollTop = feed.scrollHeight;
+}
+
+/* ============================== inspector ============================== */
+function openInspector(name){
+  const c = data.category_creations.find(k => k.name === name) || { name, step: '—', description: '', from: [] };
+  const routed = data.events.filter(e => e.route === name);
+  const share = data.events.length ? routed.length / data.events.length : 0;
+  const idToText = Object.fromEntries(data.events.map(e => [e.id || '', e.text || '']));
+  $('insp-name').textContent = name;
+  $('insp-bd').innerHTML = `
+    <h4>Description</h4>
+    <p style="color:var(--text-2);margin:0">${esc(c.description || 'Discovered during routing.')}</p>
+    <h4>Vitals</h4>
+    <dl class="kv">
+      <dt>Born at step</dt><dd>${esc(String(c.step))}</dd>
+      <dt>Prompts routed</dt><dd>${routed.length} (${pct(share)} of traffic)</dd>
+      <dt>Originating signals</dt><dd>${(c.from || []).length}</dd>
+      <dt>Color code</dt><dd><span style="color:${catColor(name)}">■</span></dd>
+    </dl>
+    <h4>Traffic share</h4>
+    <div class="mini-bar"><i style="width:${(share * 100).toFixed(1)}%"></i></div>
+    <div style="color:var(--muted);font-size:11px;margin-top:5px">${pct(share)} of all prompts ended up here</div>
+    <h4>Born from these prompts</h4>
+    <ul class="fromlist">${(c.from && c.from.length ? c.from : ['(unspecified)']).map(id => `<li><span class="rid">${esc(id)}</span> ${esc(idToText[id] || '—')}</li>`).join('')}</ul>
+    <h4>Events routed here</h4>
+    <ul class="routed">${routed.length ? routed.map(e => `<li class="rid-row" data-jump="${esc(e.id || '')}"><span class="rid">${esc(e.id)}</span><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(e.text || '')}</span></li>`).join('') : '<li style="color:var(--faint);font-family:var(--sans);cursor:default">No events routed to this category yet.</li>'}</ul>`;
+  $('inspector').classList.add('open');
+  $('inspector').setAttribute('aria-hidden', 'false');
+  $('scrim').classList.add('show');
+}
+function closeInspector(){
+  $('inspector').classList.remove('open');
+  $('inspector').setAttribute('aria-hidden', 'true');
+  $('scrim').classList.remove('show');
+}
+$('insp-close').onclick = closeInspector;
+$('scrim').onclick = closeInspector;
+
+/* ============================== scrubber / playback ============================== */
+function setScrub(t){
+  current = clamp(t, 0, data.events.length);
+  const s = $('slider');
+  s.value = String(current);
+  s.style.setProperty('--fill', (data.events.length ? (current / data.events.length) * 100 : 0) + '%');
+  $('step-readout').textContent = `step ${String(current).padStart(3, '0')} / ${data.events.length}`;
+  renderAll(true);
+}
+function tick(){
+  if (current >= data.events.length){ setPlaying(false); return; }
+  setScrub(current + 1);
+}
+function setPlaying(p){
+  playing = p;
+  $('play').textContent = p ? '❚❚ Pause' : '▶ Play';
+  if (timer){ clearInterval(timer); timer = null; }
+  if (p && !reducedMotion){
+    timer = setInterval(tick, Math.max(60, 420 / speed));
+  } else if (p){
+    // reduced motion: still functional but less flashy — slower cadence
+    timer = setInterval(tick, 420);
+  }
+}
+$('slider').addEventListener('input', e => setScrub(Number(e.target.value)));
+$('play').onclick = () => {
+  if (!playing && current >= data.events.length) setScrub(0);
+  setPlaying(!playing);
+};
+document.querySelectorAll('[data-speed]').forEach(b => b.onclick = () => {
+  speed = Number(b.dataset.speed);
+  document.querySelectorAll('[data-speed]').forEach(x => x.classList.toggle('active', x === b));
+  if (playing) setPlaying(true);
+});
+
+/* ============================== filters ============================== */
+document.querySelectorAll('.fchip').forEach(b => b.onclick = () => {
+  filter = b.dataset.f;
+  document.querySelectorAll('.fchip').forEach(x => x.classList.toggle('active', x === b));
+  renderEvents();
+});
+$('ev-search').addEventListener('input', e => { search = e.target.value.toLowerCase().trim(); renderEvents(); });
+
+/* ============================== collapse toggle ============================== */
+$('how-toggle').onclick = () => $('how-panel').classList.toggle('collapsed');
+
+/* ============================== data loading ============================== */
+function load(rawDS, note, sample = false){
+  data = normalize(rawDS);
+  current = 0; newestBirth = -1; playing && setPlaying(false);
+  data.sourceNote = note;
+  data.datasetPath = sample ? null : (data.datasetPath || 'results.json');
+  series = computeSeries(data);
+  $('slider').max = String(data.events.length);
+  $('use-sample') && ($('use-sample').style.display = sample ? 'none' : '');
+  renderAll(false);
+  setScrub(sample ? 0 : Math.min(12, data.events.length));
+}
+function renderAll(keepScroll){
+  renderHeader();
+  renderKPIs();
+  drawChart();
+  renderRegistry();
+  renderEvents();
+}
+
+/* file + drag&drop */
+$('browse').onclick = () => $('file-input').click();
+$('file-input').onchange = e => { const f = e.target.files[0]; if (f) readFile(f); };
+function readFile(f){
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      load(JSON.parse(r.result), `Loaded <b>${esc(f.name)}</b> from disk.`, false);
+      data.datasetPath = f.name;
+      renderHeader();
+    } catch (err){
+      $('source-note').innerHTML = '<span style="color:var(--red)">That file is not valid JSON.</span>';
+    }
+  };
+  r.readAsText(f);
+}
+['dragenter', 'dragover'].forEach(evn => document.body.addEventListener(evn, e => {
+  e.preventDefault();
+  $('dropzone').classList.add('show', 'hot');
+}));
+['dragleave', 'drop'].forEach(evn => document.body.addEventListener(evn, e => {
+  e.preventDefault();
+  $('dropzone').classList.remove('hot');
+  if (evn === 'drop'){
+    const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f && f.name.endsWith('.json')) readFile(f);
+  }
+}));
+$('use-sample').onclick = () => { const d = buildSample(); load(d, 'Showing embedded <b>sample run</b>.', true); };
+
+/* boot: try relative fetch candidates, else sample */
+const SAMPLE_NOTE = 'Live results not found — showing an embedded <b>sample run</b>. Drop your own results.json to inspect it.';
+async function boot(){
+  const urls = ['results.json', '../results.json', '../results/results.json'];
+  for (const u of urls){
+    try {
+      const r = await fetch(u, { cache: 'no-store' });
+      if (!r.ok) continue;
+      const j = await r.json();
+      if (!Array.isArray(j.events)) continue;
+      load(j, `Loaded live results from <span class="mono">${u}</span>.`, false);
+      return;
+    } catch (_) { /* keep trying */ }
+  }
+  load(SAMPLE, SAMPLE_NOTE, true);
+  $('dropzone').classList.add('show');
+}
+let currentRun = null; // guards global name collisions
+window.addEventListener('resize', () => { if (data){ renderKPIs(); drawChart(); } });
+boot();
 })();
 </script>
 </body>

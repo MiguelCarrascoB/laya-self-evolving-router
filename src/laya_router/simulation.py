@@ -7,7 +7,7 @@ from __future__ import annotations
 import json
 import time
 
-from .router import SelfEvolvingRouter
+from .router import OTHER, SelfEvolvingRouter
 
 LEARN_BATCH = 10
 
@@ -26,6 +26,8 @@ def run_simulation(
     events: list[dict] = []
     creations: list[dict] = []
     pending_other: list[dict] = []  # events waiting for new categories
+    retry_guess: dict[str, int] = {}  # otherwise unbounded churn
+    max_reroutes = 2
 
     t_start = time.perf_counter()
     for i, p in enumerate(prompts):
@@ -37,20 +39,25 @@ def run_simulation(
             pending_other.append(ev)
             if len(pending_other) >= learn_interval:
                 creations.extend(router.learn_from_others(pending_other, step=i))
-                pending_other = _retry_pending(router, pending_other, i, events)
+                pending_other = _retry_pending(
+                    router, pending_other, i, events, retry_guess, max_reroutes
+                )
 
     # Final drain of leftovers
     leftovers = list(pending_other)
     while leftovers and not router.registry.is_full():
         before = router.registry.names()
         creations.extend(router.learn_from_others(leftovers, step=len(prompts)))
-        survivors = _retry_pending(router, leftovers, len(prompts), events)
+        survivors = _retry_pending(
+            router, leftovers, len(prompts), events, retry_guess, max_reroutes
+        )
         if router.registry.names() == before:  # LLM produced nothing new: stop
             break
         leftovers = survivors
 
     wall = time.perf_counter() - t_start
     latencies = [e["latency_ms"] for e in events]
+    seeded = {j["ground_truth"] for j in prompts if not j["ground_truth"].startswith("novel")}
     return {
         "meta": {
             "backend": router.backend,
@@ -64,7 +71,7 @@ def run_simulation(
         "category_creations": creations,
         "registry_final": router.stats(),
         "growth_history": router.registry.growth_history(),
-        "metrics": _summary_metrics(events, creations),
+        "metrics": _summary_metrics(events, creations, set(router.registry.names()), seeded),
         "latency": {
             "p50": _pct(latencies, 50),
             "p95": _pct(latencies, 95),
@@ -74,11 +81,19 @@ def run_simulation(
 
 
 def _retry_pending(
-    router: SelfEvolvingRouter, pending: list[dict], step: int, events: list[dict]
+    router: SelfEvolvingRouter,
+    pending: list[dict],
+    step: int,
+    events: list[dict],
+    retries: dict[str, int],
+    max_reroutes: int,
 ) -> list[dict]:
-    """Re-classify pending 'other' prompts; keep survivors as still-other."""
+    """Re-classify pending 'other' prompts; cap retries to avoid churn."""
     survivors = []
     for ev in pending:
+        if retries.get(ev["id"], 0) >= max_reroutes:
+            continue  # retry budget exhausted: accepted as permanent 'other'
+        retries[ev["id"]] = retries.get(ev["id"], 0) + 1
         rev = router.route(ev["id"], ev["text"], step=step)
         rev["ground_truth"] = ev["ground_truth"]
         rev["correct"] = rev["route"] == rev["ground_truth"]
@@ -97,7 +112,7 @@ def _pct(xs: list[float], p: int) -> float:
     return round(s[k], 2)
 
 
-def _summary_metrics(events: list[dict], creations: list[dict]) -> dict:
+def _summary_metrics(events: list[dict], creations: list[dict], registry_names: set, seeded: set) -> dict:
     final = {}
     for e in events:  # last routing decision wins (re-routes overwrite)
         final[e["id"]] = e
@@ -110,9 +125,14 @@ def _summary_metrics(events: list[dict], creations: list[dict]) -> dict:
     ]
     novel_other = [e for e in handled_ground_truth if e["route"] == OTHER]
     return {
-        "accuracy_final": round(correct / n, 4) if n else 0,
+        "accuracy_final": round(correct / n, 4) if n else 0,  # exact label match
+        "coverage_final": round((n - routed_other) / n, 4) if n else 0,  # routed to a real category
+        "label_match_rate_of_covered": round(
+            correct / (n - routed_other), 4
+        ) if routed_other < n else 0.0,
         "other_rate_final": round(routed_other / n, 4) if n else 0,
         "novel_prompts": len(handled_ground_truth),
         "novel_final_other": len(novel_other),
-        "modified_records": len(events) - len(final_events),  # re-route count
+        "seed_categories_recovered": round(len(registry_names & seeded) / len(seeded), 4) if seeded else 0,
+        "re_route_count": len(events) - len(final_events),
     }

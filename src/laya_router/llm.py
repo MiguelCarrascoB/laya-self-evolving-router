@@ -24,14 +24,18 @@ class ProposedCategory:
     description: str
 
 PROMPT_TEMPLATE = """You are designing categories for a prompt router.
-Below are user prompts the router could not classify. Propose 1-2 broad, reusable
-intent categories that cover them (a category can cover multiple prompts in the batch).
+Below are user prompts the router could not classify. Propose concrete, *specific*
+intent categories that cover them.
 Rules:
 - name: 1-3 words, lowercase, underscores.
 - description: max 12 words explaining what belongs in it.
+- Each category must describe a DISTINCT concrete intent (e.g. "translation",
+  "scheduling", "data_analysis"), NOT a catch-all like "general help",
+  "recommendations", "practical guidance", "information" or "requests for ...".
+- If you would need more than 2 categories to cover the batch, cover the two
+  biggest coherent groups only; leave the rest to 'other'.
 - NOT a near-duplicate of these existing categories: {existing}
-- Categories must be intent kinds (like coding help, translation), not specific topics.
-Return ONLY JSON: [{{\"name\": \"...\", \"description\": \"...\"}}]
+Return ONLY JSON: [{{\\\"name\\\": \\\"...\\\", \\\"description\\\": \\\"...\\\"}}]
 
 Prompts:
 {prompts}
@@ -55,30 +59,32 @@ class LLMCategoryProposer:
                 api_key=fallback_cfg.get("api_key", "lm-studio"),
             )
 
-    def propose(self, prompts: list[str], existing: list[str], mask: str = "") -> list[ProposedCategory]:
+    def propose(self, prompts: list[str], existing: list[str]) -> list[ProposedCategory]:
         prompt = PROMPT_TEMPLATE.format(existing=", ".join(existing), prompts="\n".join(prompts))
+
+        # (client, cfg, label) chain: primary → primary retry → fallback → primary
+        attempts = [("primary", self._client, self._primary)] * 2
+        if self._fallback_client:
+            attempts.append(("fallback", self._fallback_client, self._fallback))
+            attempts.append(("primary", self._client, self._primary))
+
         last_err: Exception | None = None
-        client = self._client
-        cfg = self._primary
-        for attempt in (0, 1):
+        for label, client, cfg in attempts:
+            import sys
             try:
-                try:
-                    resp = client.chat.completions.create(
-                        model=cfg["model"],
-                        messages=[{"role": "user", "content": prompt}],
-                        temperature=0.2,
-                        max_tokens=400,
-                    )
-                except Exception as e:  # network/500 — try fallback client on second attempt
-                    raise RuntimeError(f"primary failed: {e}") from e
-                return self._parse(resp.choices[0].message.content or "")
+                resp = client.chat.completions.create(
+                    model=cfg["model"],
+                    messages=[{"role": "user", "content": prompt}],
+                    max_completion_tokens=1200,
+                )
+                out = self._parse(resp.choices[0].message.content or "")
+                if label != "primary":
+                    print(f"[llm] primary failed; recovered via {label}", file=sys.stderr)
+                return out
             except Exception as e:  # noqa: BLE001
                 last_err = e
-                if self._fallback_client and attempt == 0:
-                    client, cfg = self._fallback_client, self._fallback or cfg
-                    continue
-                break
-        raise RuntimeError(f"category proposal failed: {last_err}")
+                print(f"[llm] {label} attempt failed: {e}", file=sys.stderr)
+        raise RuntimeError(f"category proposal failed after all attempts: {last_err}")
 
     @staticmethod
     def _parse(text: str) -> list[ProposedCategory]:
