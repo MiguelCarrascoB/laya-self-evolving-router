@@ -127,6 +127,8 @@ h2 .tickle{width:8px;height:8px;border-radius:2px;display:inline-block}
 .kpi .spark{margin-top:10px;height:22px;display:block;width:100%}
 .k-cyan .val{color:var(--cyan)} .k-amber .val{color:var(--amber)}
 .k-blue .val{color:var(--blue)} .k-violet .val{color:var(--violet)}
+.k-acc .val{color:#56B4E9} .k-oth .val{color:#E69F00}
+.k-cats .val{color:#009E73} .k-lat .val{color:#CC79A7}
 
 /* ---------- main grid ---------- */
 .row{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(320px,1fr);gap:16px;align-items:start}
@@ -313,6 +315,60 @@ footer .mono{font-family:var(--mono)}
 @media (prefers-reduced-motion: reduce){
   *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 }
+
+/* ---------- dataset toggle ---------- */
+.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.ds-toggle{display:flex;gap:0;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.ds-toggle button{
+  border:0;background:transparent;color:var(--muted);padding:6px 12px;font-size:12px;cursor:pointer;
+  border-right:1px solid var(--line-soft);font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.ds-toggle button:last-child{border-right:0}
+.ds-toggle button.active{background:rgba(79,216,195,.14);color:var(--cyan);font-weight:650}
+.ds-toggle button:hover{color:var(--text-2)}
+
+/* ---------- section divider ---------- */
+.sec{display:flex;align-items:center;gap:14px;margin:26px 2px 13px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.sec .n{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:7px;background:var(--panel-2);border:1px solid var(--line);color:var(--cyan);font-size:11px;font-family:var(--mono);letter-spacing:0}
+
+/* ---------- story mode ---------- */
+.story .panel-bd{padding:16px 20px 18px}
+.story-controls{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.scap{flex:1;min-width:260px}
+.scap-hd{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.scap-hd b{font-size:15px;font-weight:650;letter-spacing:-.01em}
+.scap-ts{font-family:var(--mono);font-size:11px;color:var(--cyan);font-variant-numeric:tabular-nums;white-space:nowrap}
+.scap-body{color:var(--text-2);font-size:13px;margin-top:5px;line-height:1.55}
+.story-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.schip{
+  display:flex;flex-direction:column;gap:3px;text-align:left;min-width:150px;
+  background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;
+  cursor:pointer;transition:border-color .15s, background .15s;
+}
+.schip:hover{border-color:#3a5670}
+.schip.active{border-color:var(--cyan);box-shadow:var(--glow);background:rgba(79,216,195,.06)}
+.schip-t{font-size:12.5px;font-weight:600;color:var(--text)}
+.schip-step{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* ---------- category discovery table ---------- */
+.tbl-wrap{overflow-x:auto}
+.ctable{width:100%;border-collapse:collapse;font-size:12.5px}
+.ctable th{
+  text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:650;
+  padding:11px 16px;border-bottom:1px solid var(--line);cursor:pointer;user-select:none;white-space:nowrap;
+  position:sticky;top:0;background:var(--panel);
+}
+.ctable th:hover{color:var(--text-2)}
+.ctable th.num,.ctable td.num{text-align:right;font-variant-numeric:tabular-nums}
+.ctable td{padding:10px 16px;border-bottom:1px solid var(--line-soft);color:var(--text-2);vertical-align:top}
+.ctable td.num{color:var(--text);font-family:var(--mono);font-size:12px}
+.ctable td.desc{color:var(--muted);font-size:12px}
+.ctable tbody tr:hover{background:rgba(109,162,255,.04)}
+.ctable .swatch{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+.ctable .nm{color:var(--text);font-weight:600;font-family:var(--mono);font-size:12.5px}
+.ctable th .srt{color:var(--cyan);margin-left:4px}
+
 ::-webkit-scrollbar{width:9px;height:9px}
 ::-webkit-scrollbar-thumb{background:#233448;border-radius:99px;border:2px solid var(--bg)}
 ::-webkit-scrollbar-track{background:transparent}
@@ -330,7 +386,10 @@ footer .mono{font-family:var(--mono)}
         <div class="sub">Adaptive category registry · simulation observatory</div>
       </div>
     </div>
-    <div class="chips" id="hdr-chips"></div>
+    <div class="hdr-right">
+      <div class="ds-toggle" id="ds-toggle" role="group" aria-label="Switch dataset"></div>
+      <div class="chips" id="hdr-chips"></div>
+    </div>
   </header>
 
   <!-- 2 · How it works -->
@@ -408,9 +467,11 @@ footer .mono{font-family:var(--mono)}
   </section>
 
   <!-- 3 · KPI cards -->
+  <div class="sec"><span class="n">1</span>Overview</div>
   <section class="kpis" id="kpis"></section>
 
   <!-- 4+5 · Chart + registry / scrubber -->
+  <div class="sec"><span class="n">2</span>Run dynamics</div>
   <div class="row">
     <section class="panel">
       <div class="panel-hd no-toggle">
@@ -424,9 +485,9 @@ footer .mono{font-family:var(--mono)}
         </div>
       </div>
       <div class="legend">
-        <span><i class="sw" style="background:var(--cyan)"></i>Cumulative categories</span>
-        <span><i class="sw" style="background:var(--blue)"></i>Rolling accuracy (w=20)</span>
-        <span><i class="sw" style="background:var(--amber)"></i>Rolling other-rate (w=20)</span>
+        <span><i class="sw" style="background:#009E73"></i>Cumulative categories</span>
+        <span><i class="sw" style="background:#56B4E9"></i>Rolling accuracy (w=20)</span>
+        <span><i class="sw" style="background:#E69F00"></i>Rolling other-rate (w=20)</span>
       </div>
     </section>
 
@@ -455,6 +516,43 @@ footer .mono{font-family:var(--mono)}
           <button data-speed="4">4×</button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- 6 · Story mode -->
+  <section class="panel story" id="story-panel">
+    <div class="panel-hd no-toggle">
+      <h2><span class="tickle" style="background:var(--green)"></span>Story mode</h2>
+      <span class="hint" id="story-hint">key moments</span>
+    </div>
+    <div class="panel-bd">
+      <div class="story-controls">
+        <button class="btn primary" id="story-play">▶ Play story</button>
+        <div class="scap" id="story-caption"></div>
+      </div>
+      <div class="story-chips" id="story-chips"></div>
+    </div>
+  </section>
+
+  <!-- 6b · Category discovery table -->
+  <div class="sec"><span class="n">3</span>Category discovery</div>
+  <section class="panel" id="table-panel">
+    <div class="panel-hd no-toggle">
+      <h2><span class="tickle" style="background:var(--orange)"></span>Categories discovered</h2>
+      <span class="hint" id="table-hint"></span>
+    </div>
+    <div class="tbl-wrap">
+      <table class="ctable" id="ctable">
+        <thead><tr>
+          <th data-k="step" class="num">Step</th>
+          <th data-k="name">Name</th>
+          <th data-k="description">Description</th>
+          <th data-k="size" class="num">Routed</th>
+          <th data-k="share" class="num">Share</th>
+          <th data-k="from" class="num">From</th>
+        </tr></thead>
+        <tbody id="ctable-body"></tbody>
+      </table>
     </div>
   </section>
 
@@ -496,7 +594,8 @@ footer .mono{font-family:var(--mono)}
     </section>
   </div>
 
-  <!-- 7 · Event log -->
+  <!-- 8 · Event log -->
+  <div class="sec"><span class="n">4</span>Event log &amp; source</div>
   <div class="lower">
     <section class="panel">
       <div class="panel-hd no-toggle">
@@ -645,8 +744,16 @@ let search = '';
 let exploredId = null;    // last id user expanded/inspected via events
 let series = null;        // cached per-step series
 let newestBirth = -1;     // step of most recent birth, for glow
+let storyMoments = [];    // key-moment captions for story mode
+let storyIdx = -1;        // active story moment index
+let storyTimer = null;    // auto-advance timer for story mode
+let sortKey = 'step';     // category table sort key
+let sortDir = 1;          // category table sort direction
+let sources = {};         // fetchable datasets keyed by name {label, data, path}
+let activeSource = null;  // dataset currently shown
 
-const PALETTE = ['var(--cyan)', 'var(--blue)', 'var(--violet)', 'var(--amber)', 'var(--orange)', 'var(--green)', 'var(--red)'];
+const PALETTE = ['#56B4E9','#E69F00','#009E73','#CC79A7','#D55E00','#0072B2','#F0E442','#999999'];
+const CHART_COLORS = { cats:'#009E73', acc:'#56B4E9', oth:'#E69F00' };
 const catColor = (() => {
   const memo = {};
   let i = 0;
@@ -715,10 +822,10 @@ function renderHeader(){
 function renderKPIs(){
   const met = data.metrics, created = data.category_creations.length;
   const cards = [
-    { cls: 'k-cyan', lbl: 'Final accuracy', val: pct(met.accuracy_final), key: 'acc' },
-    { cls: 'k-amber', lbl: 'Other-rate at end', val: pct(met.other_rate_final), key: 'oth' },
-    { cls: 'k-blue', lbl: 'Categories born', val: String(created), key: 'cats' },
-    { cls: 'k-violet', lbl: 'Latency mean', val: f1(data.latency.mean), unit: 'ms', key: 'lat' }
+    { cls: 'k-acc', lbl: 'Final accuracy', val: pct(met.accuracy_final), key: 'acc' },
+    { cls: 'k-oth', lbl: 'Other-rate at end', val: pct(met.other_rate_final), key: 'oth' },
+    { cls: 'k-cats', lbl: 'Categories born', val: String(created), key: 'cats' },
+    { cls: 'k-lat', lbl: 'Latency mean', val: f1(data.latency.mean), unit: 'ms', key: 'lat' }
   ];
   $('kpis').innerHTML = cards.map(c => `
     <div class="kpi ${c.cls}">
@@ -734,7 +841,7 @@ function drawSpark(cv, key){
   const w = cv.clientWidth || 200, h = cv.clientHeight || 22;
   cv.width = w * dpr; cv.height = h * dpr;
   const x = cv.getContext('2d'); x.scale(dpr, dpr);
-  const color = { acc: '#6da2ff', oth: '#f5b45a', cats: '#4fd8c3', lat: '#a78bfa' }[key] || '#a78bfa';
+  const color = { acc: '#56B4E9', oth: '#E69F00', cats: '#009E73', lat: '#CC79A7' }[key] || '#CC79A7';
   let vals = Array.from(series[key] || []);
   if (key === 'cats'){ vals = vals.slice(1); const max = Math.max(1, vals[vals.length - 1]); vals = vals.map(v => v / max); }
   else vals = vals.filter(Number.isFinite).map(Number);
@@ -762,7 +869,7 @@ function drawChart(){
   const x = chart.getContext('2d');
   x.setTransform(dpr, 0, 0, dpr, 0, 0);
   const w = r.width, h = r.height;
-  const p = { l: 46, r: 20, t: 16, b: 30 };
+  const p = { l: 46, r: 40, t: 22, b: 30 };
   x.clearRect(0, 0, w, h);
   const N = data.events.length;
   const pw = w - p.l - p.r, ph = h - p.t - p.b;
@@ -772,20 +879,39 @@ function drawChart(){
   const pyC = c => p.t + (1 - clamp(c / cMax, 0, 1)) * ph;
   chartGeom = { p, pw, ph, px, py, pyC, cMax };
 
-  // grid
+  const mono = '10px ' + getComputedStyle(document.body).getPropertyValue('--mono');
+  const sans = '10px ' + getComputedStyle(document.body).getPropertyValue('--sans');
+
+  // grid + left axis (% for accuracy & other-rate)
   x.strokeStyle = 'rgba(255,255,255,.05)'; x.lineWidth = 1;
-  x.fillStyle = '#68788e'; x.font = '10px ' + getComputedStyle(document.body).getPropertyValue('--mono');
+  x.fillStyle = '#68788e'; x.font = mono;
   for (let g = 0; g <= 4; g++){
     const f = g / 4, y = py(f);
     x.beginPath(); x.moveTo(p.l, y); x.lineTo(w - p.r, y); x.stroke();
     x.textAlign = 'right';
-    x.fillText((f * 100).toFixed(0) + '%', p.l - 7, y + 3);
+    x.fillText((f * 100).toFixed(0), p.l - 7, y + 3);
   }
+  // axis titles
+  x.fillStyle = '#5a6a80'; x.font = sans;
+  x.textAlign = 'left'; x.fillText('acc · other (%)', p.l, 11);
+  x.textAlign = 'right'; x.fillText('categories', w - p.r, 11);
+
+  // right axis (category count)
+  x.fillStyle = '#68788e'; x.font = mono;
+  x.textAlign = 'left';
+  const cTicks = [0, Math.round(cMax / 2), cMax].filter((v, i, a) => a.indexOf(v) === i);
+  cTicks.forEach(c => {
+    const y = pyC(c);
+    x.fillText(String(c), w - p.r + 6, y + 3);
+    x.strokeStyle = 'rgba(255,255,255,.04)';
+    x.beginPath(); x.moveTo(w - p.r, y); x.lineTo(w - p.r + 3, y); x.stroke();
+  });
+
+  // x axis (steps)
   x.textAlign = 'center';
+  x.fillStyle = '#68788e'; x.font = mono;
   const tickStep = Math.max(1, Math.ceil(N / 10));
   for (let t = 0; t <= N; t += tickStep) x.fillText(String(t), px(t), h - 10);
-  x.textAlign = 'right'; x.fillStyle = '#4fd8c3';
-  x.fillText(String(cMax), p.l - 7, p.t + 8);
 
   // cumulative categories area + step line
   x.beginPath();
@@ -794,13 +920,13 @@ function drawChart(){
     if (series.cats[t] !== series.cats[t - 1]) { x.lineTo(px(t), pyC(series.cats[t - 1])); }
     x.lineTo(px(t), pyC(series.cats[t]));
   }
-  x.strokeStyle = '#4fd8c3'; x.lineWidth = 2; x.stroke();
+  x.strokeStyle = CHART_COLORS.cats; x.lineWidth = 2; x.stroke();
   x.save(); x.lineTo(px(current), pyC(0)); x.lineTo(px(0), pyC(0)); x.closePath();
-  x.fillStyle = 'rgba(79,216,195,.09)'; x.fill(); x.restore();
+  x.fillStyle = CHART_COLORS.cats + '1a'; x.fill(); x.restore();
 
   // rolling lines
-  line(x, series.acc, '#6da2ff');
-  line(x, series.oth, '#f5b45a');
+  line(x, series.acc, CHART_COLORS.acc);
+  line(x, series.oth, CHART_COLORS.oth);
 
   // birth markers
   (data.growth_history || []).forEach(b => {
@@ -808,7 +934,7 @@ function drawChart(){
       const bx = px(b.step), by = pyC(series.cats[clamp(b.step, 0, N)]);
       x.beginPath(); x.arc(bx, by, 4.5, 0, Math.PI * 2);
       x.fillStyle = '#0a0e14'; x.fill();
-      x.strokeStyle = b.step === newestBirth ? '#7defdd' : '#4fd8c3'; x.lineWidth = 2; x.stroke();
+      x.strokeStyle = b.step === newestBirth ? '#7defdd' : CHART_COLORS.cats; x.lineWidth = 2; x.stroke();
     }
   });
 
@@ -846,9 +972,9 @@ chart.addEventListener('mousemove', ev => {
   const a = series.acc[t], o = series.oth[t], c = series.cats[t];
   tipEl.innerHTML = `
     <div class="t-hd"><span>step ${t}</span><span>${t} / ${data.events.length}</span></div>
-    <div class="t-row"><span><i class="sw" style="background:var(--blue)"></i>accuracy</span><b>${Number.isFinite(a) ? pct(a) : '—'}</b></div>
-    <div class="t-row"><span><i class="sw" style="background:var(--amber)"></i>other-rate</span><b>${Number.isFinite(o) ? pct(o) : '—'}</b></div>
-    <div class="t-row"><span><i class="sw" style="background:var(--cyan)"></i>categories</span><b>${c}</b></div>`;
+    <div class="t-row"><span><i class="sw" style="background:#56B4E9"></i>accuracy</span><b>${Number.isFinite(a) ? pct(a) : '—'}</b></div>
+    <div class="t-row"><span><i class="sw" style="background:#E69F00"></i>other-rate</span><b>${Number.isFinite(o) ? pct(o) : '—'}</b></div>
+    <div class="t-row"><span><i class="sw" style="background:#009E73"></i>categories</span><b>${c}</b></div>`;
   tipEl.style.display = 'block';
   const tx = clamp(mx + 16, 0, r.width - 200), ty = clamp(my - 20, 4, r.height - 120);
   tipEl.style.left = tx + 'px'; tipEl.style.top = ty + 'px';
@@ -1030,16 +1156,170 @@ $('ev-search').addEventListener('input', e => { search = e.target.value.toLowerC
 /* ============================== collapse toggle ============================== */
 $('how-toggle').onclick = () => $('how-panel').classList.toggle('collapsed');
 
+/* ============================== story mode ============================== */
+const fmtT = s => {
+  s = Math.max(0, Number(s) || 0);
+  const m = Math.floor(s / 60), sec = Math.round(s % 60);
+  return m > 0 ? `${m}m ${sec}s` : `${sec}s`;
+};
+function buildStory(){
+  const d = data, N = d.events.length || 1;
+  const wall = Number(d.meta && d.meta.wall_seconds) || 0;
+  const gh = (d.growth_history || []).slice().sort((a, b) => a.step - b.step);
+  const total = (d.registry_final && d.registry_final.categories ? d.registry_final.categories.length : 0) || gh.length || 0;
+  const at = step => ({ t: fmtT((step / N) * wall) });
+  const moments = [];
+  moments.push({ step: 0, title: 'Cold start', body: 'The registry is empty, so every prompt falls into “other”.', ...at(0) });
+  if (gh.length){
+    const s = gh[0].step;
+    const names = gh.filter(b => b.step === s).map(b => b.name);
+    moments.push({ step: s, title: 'First categories born', body: `“${names.slice(0, 2).join('”, “')}”${names.length > 2 ? ` (+${names.length - 2} more)` : ''} proposed from the first batch of “other” prompts.`, ...at(s) });
+  }
+  let seen = 0, fillStep = null;
+  for (const b of gh){ seen++; if (seen >= Math.ceil(total / 2)){ fillStep = b.step; break; } }
+  if (fillStep != null && fillStep !== (gh[0] && gh[0].step)){
+    const atStep = gh.filter(b => b.step <= fillStep).length;
+    moments.push({ step: fillStep, title: 'Registry filling', body: `${atStep} of ${total} categories now exist — confidence climbs as “other” shrinks.`, ...at(fillStep) });
+  }
+  const rer = d.events.findIndex(e => e.rerouted);
+  if (rer >= 0){
+    moments.push({ step: rer + 1, title: 'Re-routing wave', body: 'Held “other” prompts are re-classified against the grown registry.', ...at(rer + 1) });
+  }
+  const seenSteps = new Set(), out = [];
+  for (const m of moments){ if (!seenSteps.has(m.step)){ seenSteps.add(m.step); out.push(m); } }
+  out.sort((a, b) => a.step - b.step);
+  storyMoments = out;
+}
+function renderStory(){
+  const el = $('story-caption'), chips = $('story-chips');
+  if (!storyMoments.length){
+    chips.innerHTML = ''; el.innerHTML = '<div class="scap-body" style="color:var(--muted)">No story moments to narrate for this dataset.</div>';
+    $('story-play').textContent = '▶ Play story';
+    return;
+  }
+  chips.innerHTML = storyMoments.map((m, i) => `
+    <button class="schip ${i === storyIdx ? 'active' : ''}" data-i="${i}">
+      <span class="schip-t">${esc(m.title)}</span>
+      <span class="schip-step">step ${m.step} · ${esc(m.t)}</span>
+    </button>`).join('');
+  chips.querySelectorAll('.schip').forEach(b => b.onclick = () => { storyIdx = Number(b.dataset.i); showMoment(storyIdx); });
+  const m = storyIdx >= 0 ? storyMoments[storyIdx] : null;
+  el.innerHTML = m
+    ? `<div class="scap-hd"><b>${esc(m.title)}</b><span class="scap-ts">${esc(m.t)} · step ${m.step}</span></div><div class="scap-body">${esc(m.body)}</div>`
+    : '<div class="scap-body" style="color:var(--muted)">Press <b>Play story</b> to walk through the key moments of this run.</div>';
+  $('story-play').textContent = storyTimer ? '❚❚ Stop story' : (reducedMotion ? 'Next moment ▸' : '▶ Play story');
+  $('story-hint').textContent = `${storyMoments.length} key moments`;
+}
+function showMoment(i){
+  if (!storyMoments.length) return;
+  storyIdx = clamp(i, 0, storyMoments.length - 1);
+  setScrub(storyMoments[storyIdx].step);
+}
+function nextMoment(){
+  if (storyIdx >= storyMoments.length - 1) storyIdx = -1;
+  storyIdx++;
+  showMoment(storyIdx);
+}
+function startStoryTimer(){
+  if (storyTimer) clearInterval(storyTimer);
+  storyTimer = setInterval(() => {
+    if (storyIdx >= storyMoments.length - 1){ stopStory(); return; }
+    storyIdx++;
+    showMoment(storyIdx);
+  }, 2600);
+}
+function stopStory(){
+  if (storyTimer){ clearInterval(storyTimer); storyTimer = null; }
+  renderStory();
+}
+$('story-play').onclick = () => {
+  if (!storyMoments.length){ buildStory(); renderStory(); }
+  if (storyTimer){ stopStory(); return; }
+  if (reducedMotion){ nextMoment(); renderStory(); return; }
+  nextMoment();
+  startStoryTimer();
+};
+
+/* ============================== category discovery table ============================== */
+const TABLE_HEADERS = { step: 'Step', name: 'Name', description: 'Description', size: 'Routed', share: 'Share', from: 'From' };
+function uniquePromptCount(){
+  const ids = new Set(data.events.map(e => e.id));
+  return ids.size || data.events.length;
+}
+function categoryStats(){
+  const final = {};
+  for (const e of data.events) final[e.id] = e;
+  const total = uniquePromptCount() || 1;
+  return (data.category_creations || []).map(c => {
+    const size = Object.values(final).filter(e => e.route === c.name).length;
+    return {
+      step: Number(c.step) || 0,
+      name: String(c.name || ''),
+      description: String(c.description || ''),
+      size,
+      share: size / total,
+      from: (c.from || []).length,
+    };
+  });
+}
+function renderCategoryTable(){
+  const rows = categoryStats();
+  rows.sort((a, b) => {
+    let av = a[sortKey], bv = b[sortKey];
+    if (typeof av === 'string'){ av = av.toLowerCase(); bv = bv.toLowerCase(); }
+    if (av < bv) return -1 * sortDir;
+    if (av > bv) return 1 * sortDir;
+    return 0;
+  });
+  $('table-hint').textContent = `${rows.length} categories · click a column to sort`;
+  $('ctable-body').innerHTML = rows.map(r => `
+    <tr>
+      <td class="num">${r.step}</td>
+      <td><span class="swatch" style="background:${catColor(r.name)}"></span><span class="nm">${esc(r.name)}</span></td>
+      <td class="desc">${esc(r.description)}</td>
+      <td class="num">${num(r.size)}</td>
+      <td class="num">${pct(r.share)}</td>
+      <td class="num">${num(r.from)}</td>
+    </tr>`).join('') || '<tr><td colspan="6" style="color:var(--faint);text-align:center;padding:26px 0">No categories discovered in this run.</td></tr>';
+  document.querySelectorAll('#ctable thead th').forEach(th => {
+    const k = th.dataset.k;
+    th.innerHTML = `${TABLE_HEADERS[k]}${k === sortKey ? `<span class="srt">${sortDir === 1 ? '▲' : '▼'}</span>` : ''}`;
+  });
+}
+document.querySelectorAll('#ctable thead th').forEach(th => th.onclick = () => {
+  const k = th.dataset.k;
+  if (sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = 1; }
+  renderCategoryTable();
+});
+
+/* ============================== dataset toggle ============================== */
+function renderDsToggle(){
+  const keys = Object.keys(sources);
+  const el = $('ds-toggle');
+  if (keys.length < 2){ el.style.display = 'none'; return; }
+  el.style.display = 'flex';
+  el.innerHTML = keys.map(k => `<button data-src="${k}" class="${k === activeSource ? 'active' : ''}">${esc(sources[k].label)}</button>`).join('');
+  el.querySelectorAll('button').forEach(b => b.onclick = () => {
+    const k = b.dataset.src;
+    if (k === activeSource) return;
+    const s = sources[k];
+    load(s.data, `Loaded live results from <span class="mono">${esc(s.path)}</span>.`, false, s.path);
+  });
+}
+
 /* ============================== data loading ============================== */
-function load(rawDS, note, sample = false){
+function load(rawDS, note, sample = false, dsPath = null){
   data = normalize(rawDS);
-  current = 0; newestBirth = -1; playing && setPlaying(false);
+  current = 0; newestBirth = -1; storyIdx = -1; playing && setPlaying(false);
   data.sourceNote = note;
-  data.datasetPath = sample ? null : (data.datasetPath || 'results.json');
+  data.datasetPath = sample ? null : (dsPath || data.datasetPath || 'results.json');
   series = computeSeries(data);
+  buildStory();
   $('slider').max = String(data.events.length);
   $('use-sample') && ($('use-sample').style.display = sample ? 'none' : '');
   renderAll(false);
+  renderCategoryTable();
+  renderDsToggle();
   setScrub(sample ? 0 : Math.min(12, data.events.length));
 }
 function renderAll(keepScroll){
@@ -1048,6 +1328,7 @@ function renderAll(keepScroll){
   drawChart();
   renderRegistry();
   renderEvents();
+  renderStory();
 }
 
 /* file + drag&drop */
@@ -1057,7 +1338,7 @@ function readFile(f){
   const r = new FileReader();
   r.onload = () => {
     try {
-      load(JSON.parse(r.result), `Loaded <b>${esc(f.name)}</b> from disk.`, false);
+      load(JSON.parse(r.result), `Loaded <b>${esc(f.name)}</b> from disk.`, false, f.name);
       data.datasetPath = f.name;
       renderHeader();
     } catch (err){
@@ -1080,19 +1361,34 @@ function readFile(f){
 }));
 $('use-sample').onclick = () => { const d = buildSample(); load(d, 'Showing embedded <b>sample run</b>.', true); };
 
-/* boot: try relative fetch candidates, else sample */
+/* boot: fetch both known datasets in parallel, fail-soft to whichever loads */
 const SAMPLE_NOTE = 'Live results not found — showing an embedded <b>sample run</b>. Drop your own results.json to inspect it.';
-async function boot(){
-  const urls = ['results.json', '../results.json', '../results/results.json'];
-  for (const u of urls){
+const SOURCES = [
+  { key: 'mlx', label: 'MLX', candidates: ['results.json', '../results.json', '../results/results.json'] },
+  { key: 'coreml', label: 'Core ML', candidates: ['results-coreml.json', '../results-coreml.json', '../results/results-coreml.json'] },
+];
+async function fetchSource(src){
+  for (const u of src.candidates){
     try {
       const r = await fetch(u, { cache: 'no-store' });
       if (!r.ok) continue;
       const j = await r.json();
       if (!Array.isArray(j.events)) continue;
-      load(j, `Loaded live results from <span class="mono">${u}</span>.`, false);
-      return;
+      j.__path = u;
+      return j;
     } catch (_) { /* keep trying */ }
+  }
+  return null;
+}
+async function boot(){
+  const loaded = await Promise.all(SOURCES.map(async src => ({ ...src, data: await fetchSource(src) })));
+  loaded.forEach(s => { if (s.data) sources[s.key] = { label: s.label, data: s.data, path: s.data.__path }; });
+  const keys = Object.keys(sources);
+  if (keys.length){
+    activeSource = keys.includes('mlx') ? 'mlx' : keys[0];
+    const s = sources[activeSource];
+    load(s.data, `Loaded live results from <span class="mono">${esc(s.path)}</span>.`, false, s.path);
+    return;
   }
   load(SAMPLE, SAMPLE_NOTE, true);
   $('dropzone').classList.add('show');
