@@ -95,19 +95,22 @@ uv run laya-router simulate --backend coreml --model aac6fef/laya-coreml --out r
 
 Every run discovers its own 30-category taxonomy from a cold start, on an Apple M4 Pro.
 
-### Best variant — MLX · few-shot proposer (`results/results-v1-full.json`)
+### Best variant — MLX · few-shot proposer (`results/results-v3-full.json`)
+
+System-prompt with canonical seed names + per-category descriptions, up-to-3 proposals, `[]` is valid. Ablated across four variants (`results-v1..v4-full.json`) — v3 won: it gained exact-label accuracy (+19 pt) and seed recovery (+50 pt) for a 2 pt coverage cost.
 
 | Metric | Value |
 |---|---:|
 | Seed categories recovered | **10 / 10** |
-| Label-match rate (of covered) | **60.6%** |
-| Accuracy (exact label) | 38.8% |
-| Coverage (routed out of `other`) | 64.0% |
-| Other-rate at end | 36.0% |
-| Novel prompts absorbed (of 100) | 82 |
-| Re-routed prompts | 516 |
-| Decision latency p50 / p95 / mean | 35.3 / 52.4 / 36.4 ms |
-| LLM calls / wall time | 68 / 194 s |
+| Label-match rate (of covered) | **62.1%** |
+| Accuracy (exact label) | **40.6%** |
+| Coverage (routed out of `other`) | 65.4% |
+| Other-rate at end | 34.6% |
+| Novel prompts absorbed (of 100) | 79 |
+| Re-routed prompts | 486 |
+| LLM calls / wall time | 39 / 133 s |
+
+> Coverage ≈65% is the honest ceiling for single-label routing here: 97–99% of residual "other" events are genuine "no single category fits" choices by Laya (not threshold artifacts). Fixing coverage further means changing routing policy (threshold, bucketing, hierarchy), not proposers.
 
 ### Cross-backend — base proposer
 

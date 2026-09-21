@@ -87,9 +87,8 @@ class SelfEvolvingRouter:
         if self.registry.is_full() or not others:
             return []
         batch = others[: self.proposer.batch_size]
-        proposals = self.proposer.propose(
-            [o["text"] for o in batch], self.registry.names()
-        )
+        existing = [{"name": c.name, "description": c.description} for c in self.registry.all()]
+        proposals = self.proposer.propose([o["text"] for o in batch], existing)
         self.llm_calls += 1
         created = []
         for p in proposals:
