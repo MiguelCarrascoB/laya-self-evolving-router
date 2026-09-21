@@ -1,7 +1,7 @@
 # Laya Self-Evolving Router
 
 <p align="center">
-  <svg width="520" height="76" viewBox="0 0 520 76" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated router flow: prompt to laya to category">
+  <svg width="520" height="60" viewBox="0 0 520 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated router flow: prompt, Laya decision, category">
     <defs>
       <linearGradient id="lg" x1="0" y1="0" x2="1" y2="0">
         <stop offset="0" stop-color="#0e2233"/>
@@ -9,18 +9,15 @@
         <stop offset="1" stop-color="#0e2233"/>
       </linearGradient>
     </defs>
-    <line x1="30" y1="38" x2="490" y2="38" stroke="url(#lg)" stroke-width="2"/>
-    <circle cx="30" cy="38" r="4.5" fill="#4fd8c3">
-      <animateMotion dur="3.2s" repeatCount="indefinite" path="M30,38 L490,38"/>
-    </circle>
-    <circle cx="70" cy="38" r="11" fill="#0d1219" stroke="#6da2ff" stroke-width="2"/>
-    <text x="70" y="42" text-anchor="middle" font-size="11" fill="#6da2ff">p</text>
-    <circle cx="260" cy="38" r="16" fill="#0d1219" stroke="#4fd8c3" stroke-width="2">
+    <line x1="40" y1="30" x2="480" y2="30" stroke="url(#lg)" stroke-width="2"/>
+    <circle cx="40" cy="30" r="10" fill="#0d1219" stroke="#6da2ff" stroke-width="2"/>
+    <circle cx="260" cy="30" r="16" fill="#0d1219" stroke="#4fd8c3" stroke-width="2">
       <animate attributeName="r" values="14;17;14" dur="3.2s" repeatCount="indefinite"/>
     </circle>
-    <text x="260" y="42" text-anchor="middle" font-size="12" fill="#4fd8c3">laya</text>
-    <circle cx="450" cy="38" r="11" fill="#0d1219" stroke="#4ade80" stroke-width="2"/>
-    <text x="450" y="42" text-anchor="middle" font-size="11" fill="#4ade80">cat</text>
+    <circle cx="480" cy="30" r="10" fill="#0d1219" stroke="#4ade80" stroke-width="2"/>
+    <text x="40" y="52" text-anchor="middle" font-size="10" fill="#6da2ff">prompt</text>
+    <text x="260" y="52" text-anchor="middle" font-size="10" fill="#4fd8c3">laya choice</text>
+    <text x="480" y="52" text-anchor="middle" font-size="10" fill="#4ade80">category</text>
   </svg>
 </p>
 
@@ -97,7 +94,7 @@ Every run discovers its own 30-category taxonomy from a cold start, on an Apple 
 
 ### Best variant — MLX · few-shot proposer (`results/results-v3-full.json`)
 
-System-prompt with canonical seed names + per-category descriptions, up-to-3 proposals, `[]` is valid. Ablated across four variants (`results-v1..v4-full.json`) — v3 won: it gained exact-label accuracy (+19 pt) and seed recovery (+50 pt) for a 2 pt coverage cost.
+System-prompt with canonical seed names + per-category descriptions, up-to-3 proposals, `[]` is valid. This is the winning variant of a four-way ablation: it gained exact-label accuracy (+19 pt) and seed recovery (+50 pt) for a 2 pt coverage cost.
 
 | Metric | Value |
 |---|---:|
@@ -132,7 +129,7 @@ Sample discovered categories — MLX: `math_fundamentals`, `web_layout`, `geneal
 ## What this taught us
 
 - **Cold start works.** 0 categories → `other` → batched LLM proposals → Laya routes with the grown registry within the first ~15% of the stream.
-- **Taxonomy quality is the real lever, not Laya.** The base proposer coins *valid but differently-named* intents, so it only recovers 5/10 seed categories and 32% label-match. Feeding it canonical few-shot names + full descriptions jumps to **10/10 seeds recovered and 60.6% label-match** — the router's value is gated by how well the LLM names categories, not by Laya's ~27 ms decision speed.
+- **Taxonomy quality is the real lever, not Laya.** The base proposer coins *valid but differently-named* intents, so it only recovers 5/10 seed categories and 32% label-match. Feeding it canonical few-shot names + full descriptions jumps to **10/10 seeds recovered and 62.1% label-match** — the router's value is gated by how well the LLM names categories, not by Laya's ~27 ms decision speed.
 - **Core ML ≈ MLX on accuracy**, similar p50, with a heavier tail from Core ML pipeline initialization on first long inputs.
 - **Re-routing is where coverage is won**: hundreds of held prompts get a second chance once new categories exist.
 
@@ -147,4 +144,5 @@ Sample discovered categories — MLX: `math_fundamentals`, `web_layout`, `geneal
 
 ## License
 
-Apache-2.0, like `laya-mlx` / `laya-coreml`.
+Apache-2.0, like `laya-mlx` / `laya-coreml`. See [LICENSE](LICENSE) for the full
+text and [NOTICE.md](NOTICE.md) for upstream attribution.
