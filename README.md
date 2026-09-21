@@ -1,8 +1,20 @@
 # Laya Self-Evolving Router
 
+[![CI](https://github.com/MiguelCarrascoB/laya-self-evolving-router/actions/workflows/ci.yml/badge.svg)](https://github.com/MiguelCarrascoB/laya-self-evolving-router/actions/workflows/ci.yml)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](pyproject.toml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
+
 A prompt-intent router that starts with no categories and grows its own taxonomy as traffic arrives. Each prompt is classified on-device by Laya against the current registry plus an `other` fallback. Prompts that land in `other`, or below the confidence threshold, are held; an LLM proposes new categories from that batch, and Laya re-routes the held prompts against the larger registry.
 
 Routing is local and generates no tokens: a single Laya `choice` call, 27–32 ms median on an M4 Pro. Category discovery is the only step that needs an LLM endpoint, and it runs once per 10 accumulated `other` prompts (39 calls over 650 prompts in the best run).
+
+![Other-rate against registry size over the prompt stream](docs/growth.svg)
+
+One run, cold start, first pass only. Everything lands in `other` until categories exist. By prompt
+100 the registry holds 21 of its eventual 30 and the `other`-rate has fallen from 100% to 38% across
+the rest of the stream, which is the coverage ceiling discussed under [Results](#results). The band
+stays wide (20-52%) because it is a 50-prompt rolling window over a shuffled stream. Regenerate with
+`python scripts/plot_growth.py`.
 
 ---
 
@@ -53,6 +65,12 @@ uv run laya-router live      # type prompts, watch categories appear
 python -m http.server 8787
 # open http://localhost:8787/visualizer/visualizer.html
 ```
+
+The dashboard replays a run step by step: category births, rolling accuracy and `other`-rate, and
+where each prompt ended up. It reads `results/results.json` and `results/results-coreml.json`, or any
+results file you drop onto it.
+
+![The visualizer at the end of an MLX run](docs/visualizer.png)
 
 Core ML backend (Python ≤ 3.13; `laya-coreml` requires `<3.14`):
 
@@ -112,6 +130,18 @@ Taxonomy quality is the limiting factor, not Laya. The base proposer coins valid
 Core ML keeps up with MLX on coverage (63.2% against 67.4%) but not on label quality: 12.7% label-match against 32.4%, and 2 of 10 seed categories against 5. Its p50 is comparable; its tail is far heavier, 365 ms at p95, from Core ML pipeline initialization on the first long input.
 
 Re-routing is where coverage comes from. 486 held prompts get a second pass once the categories they needed exist.
+
+## Limits
+
+- One label per prompt. A prompt spanning two intents has to lose one of them, which is most of the
+  residual `other`-rate.
+- The registry stops at 30 categories, because the option list shares Laya's 512-token context.
+- The registry only grows. Nothing merges near-duplicates or retires a category that stops earning
+  its slot, and nothing persists across runs.
+- In `live` mode the proposer runs after every `other` prompt rather than in batches of 10, so it
+  makes far more LLM calls per prompt than `simulate` does.
+- Results come from 650 synthetic English prompts whose ground-truth labels were written alongside
+  them. Accuracy against real traffic is unmeasured.
 
 ## Roadmap
 
