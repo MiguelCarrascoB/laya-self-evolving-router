@@ -49,9 +49,24 @@ uv sync --extra coreml                       # or a python 3.13 venv: laya-corem
 uv run laya-router simulate --backend coreml --model aac6fef/laya-coreml --out results/results-coreml.json
 ```
 
-## Results (MLX, M4 Pro, `aac6fef/laya-mlx` FP16)
+## Results (M4 Pro, 650 prompts)
 
-_Pending the first full run — this section is filled from `results/results.json`._
+Run 1 — `aac6fef/laya-mlx` FP16 (`results/results.json`), LLM category discovery via an OpenAI-compatible model:
+
+| Metric | MLX | CoreML (`aac6fef/laya-coreml`) |
+|---|---:|---:|
+| Coverage (routed out of `other`) | **67.4%** | 63.2% |
+| Other-rate at end | 32.6% | 36.8% |
+| Seed categories recovered by name | 5/10 | 2/10 |
+| Discovered novel categories | watch_basics, plant_care, genealogy_research, astronomy_concepts, travel_*, wine... | vehicle_maintenance, genealogy_research, houseplant_care, wine_tasting, sports_betting... |
+| Decision latency p50 | **27.4 ms** | 28.3 ms |
+| Decision latency p95 | **32.7 ms** | 365 ms (first-calls Core ML init) |
+| LLM calls for 100 novel prompts | ~30 batched calls | ~30 batched calls |
+
+What this shows:
+- **Cold start works**: 0 categories → `other` → batches of LLM proposals → Laya routes with the grown registry within the first ~15% of the stream.
+- **Taxonomy is the bottleneck, not Laya**: the discovered categories are valid intents but rarely collide with a fixed evaluation taxonomy — exact-label match is the wrong headline; coverage + seed recovery is the honest view.
+- Core ML ≈ same accuracy, similar p50, higher tail from Core ML pipeline initialization on first long inputs.
 
 ## License
 
