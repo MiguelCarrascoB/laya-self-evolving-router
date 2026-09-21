@@ -1,0 +1,27 @@
+[project]
+name = "laya-self-evolving-router"
+version = "0.1.0"
+description = "Poc: self-evolving prompt-intent router using laya-mlx / laya-coreml decisions plus LLM category discovery."
+requires-python = ">=3.11"
+dependencies = [
+    "laya-mlx>=0.1.0",
+    "openai>=1.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+coreml = ["laya-coreml>=0.1.0"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+laya-router = "laya_router.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.7,<1"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "laya_router"
+
+[tool.uv]
+package = true

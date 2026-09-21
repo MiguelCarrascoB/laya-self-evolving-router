@@ -1,0 +1,650 @@
+{"id":"p0001","text":"what's the best way to organize my study blocks","ground_truth":"scheduling"}
+{"id":"p0002","text":"Could you take a look? How do I center this div without breaking the layout?","ground_truth":"coding_help"}
+{"id":"p0003","text":"Are head-to-head records useful when the players have changed? I’m trying to learn the basics.","ground_truth":"novel_esports_betting"}
+{"id":"p0004","text":"What is the difference between a list and a tuple here?","ground_truth":"coding_help"}
+{"id":"p0005","text":"what are some gentle stretches for a stiff neck","ground_truth":"fitness_health"}
+{"id":"p0006","text":"can you explain matrix multiplication","ground_truth":"math_homework"}
+{"id":"p0007","text":"How do beekeepers reduce the risk of swarming?","ground_truth":"novel_beekeeping"}
+{"id":"p0008","text":"help me choose between Crete and Cyprus for beaches","ground_truth":"travel_planning"}
+{"id":"p0009","text":"Can you help me with this? help me identify whether this sequence is arithmetic","ground_truth":"math_homework"}
+{"id":"p0010","text":"help me choose a birthday gift for my sister who likes gardening","ground_truth":"shopping"}
+{"id":"p0011","text":"help me pick a raincoat that packs small","ground_truth":"shopping"}
+{"id":"p0012","text":"what side dish goes with grilled fish","ground_truth":"cooking_recipes"}
+{"id":"p0013","text":"Can you explain the opening rules for Wingspan?","ground_truth":"novel_board_games"}
+{"id":"p0014","text":"Could you help? What is the best way to organize names from an old family tree?","ground_truth":"novel_genealogy_research"}
+{"id":"p0015","text":"make my LinkedIn post sound less salesy","ground_truth":"writing_editing"}
+{"id":"p0016","text":"please refactor this function so it is easier to test","ground_truth":"coding_help"}
+{"id":"p0017","text":"which columns are most correlated","ground_truth":"data_analysis"}
+{"id":"p0018","text":"Can you help me with this? remind me at 6 pm to take the chicken out","ground_truth":"scheduling"}
+{"id":"p0019","text":"translate this Dutch product description into English","ground_truth":"translation"}
+{"id":"p0020","text":"what should I check before buying a used bicycle","ground_truth":"shopping"}
+{"id":"p0021","text":"what are signs I am overtraining","ground_truth":"fitness_health"}
+{"id":"p0022","text":"How should I store watches that I do not wear often?","ground_truth":"novel_watch_collecting"}
+{"id":"p0023","text":"help me spread these chores across the week","ground_truth":"scheduling"}
+{"id":"p0024","text":"give me a simple recipe for banana bread","ground_truth":"cooking_recipes"}
+{"id":"p0025","text":"find the top five products by revenue","ground_truth":"data_analysis"}
+{"id":"p0026","text":"how do you say 'no worries' in French without sounding too formal","ground_truth":"translation"}
+{"id":"p0027","text":"help me find the trend in these monthly sales numbers","ground_truth":"data_analysis"}
+{"id":"p0028","text":"how would a Canadian French speaker phrase this","ground_truth":"translation"}
+{"id":"p0029","text":"translate this short bio into professional English","ground_truth":"translation"}
+{"id":"p0030","text":"turn this English sentence into formal Korean","ground_truth":"translation"}
+{"id":"p0031","text":"How would you say this politely in Mandarin?","ground_truth":"translation"}
+{"id":"p0032","text":"plan a three-day visit to Lisbon for someone who likes museums","ground_truth":"travel_planning"}
+{"id":"p0033","text":"Can you help me with this? compare these two groups and tell me if the difference matters","ground_truth":"data_analysis"}
+{"id":"p0034","text":"where can I buy a replacement filter for this model","ground_truth":"shopping"}
+{"id":"p0035","text":"the Docker build fails saying it cannot find package.json","ground_truth":"coding_help"}
+{"id":"p0036","text":"What is the difference between a chronograph and a regular watch? I’m trying to learn the basics.","ground_truth":"novel_watch_collecting"}
+{"id":"p0037","text":"make a 15-minute morning movement routine","ground_truth":"fitness_health"}
+{"id":"p0038","text":"What is a light-year actually measuring?","ground_truth":"novel_astronomy"}
+{"id":"p0039","text":"how do I set an environment variable for a Node app","ground_truth":"coding_help"}
+{"id":"p0040","text":"which neighborhoods are convenient for a first visit to Seoul","ground_truth":"travel_planning"}
+{"id":"p0041","text":"can you explain how to multiply these fractions","ground_truth":"math_homework"}
+{"id":"p0042","text":"I’m stuck: is public transport easy to use in Singapore","ground_truth":"travel_planning"}
+{"id":"p0043","text":"I need to split one address column into several fields","ground_truth":"data_analysis"}
+{"id":"p0044","text":"how do I travel between islands in Greece","ground_truth":"travel_planning"}
+{"id":"p0045","text":"I need a bilingual version with the original beside the translation","ground_truth":"translation"}
+{"id":"p0046","text":"How much light does a snake plant need in winter?","ground_truth":"novel_home_plants"}
+{"id":"p0047","text":"I have three deadlines next month; lay out a timeline","ground_truth":"scheduling"}
+{"id":"p0048","text":"please help me plan errands around a 2 pm meeting","ground_truth":"scheduling"}
+{"id":"p0049","text":"How often should the transmission fluid be inspected?","ground_truth":"novel_car_maintenance"}
+{"id":"p0050","text":"I need to merge two arrays and remove duplicates","ground_truth":"coding_help"}
+{"id":"p0051","text":"find an itinerary for a week in New Zealand","ground_truth":"travel_planning"}
+{"id":"p0052","text":"Could you take a look? can you compare these three internet offers","ground_truth":"shopping"}
+{"id":"p0053","text":"what temperature should salmon reach","ground_truth":"cooking_recipes"}
+{"id":"p0054","text":"Quick question: my HTML form reloads the page instead of submitting with fetch","ground_truth":"coding_help"}
+{"id":"p0055","text":"How can I search newspapers for an unusual family name?","ground_truth":"novel_genealogy_research"}
+{"id":"p0056","text":"find the area between these curves","ground_truth":"math_homework"}
+{"id":"p0057","text":"I want a not-too-sweet apple dessert","ground_truth":"cooking_recipes"}
+{"id":"p0058","text":"I’m stuck: what does a p-value of 0.03 mean here","ground_truth":"data_analysis"}
+{"id":"p0059","text":"What clues can a passenger list give me about an ancestor?","ground_truth":"novel_genealogy_research"}
+{"id":"p0060","text":"compare these meal-kit subscription prices","ground_truth":"shopping"}
+{"id":"p0061","text":"can you translate a legal paragraph without changing its meaning","ground_truth":"translation"}
+{"id":"p0062","text":"Could you help? Why did the odds move so much after the roster announcement?","ground_truth":"novel_esports_betting"}
+{"id":"p0063","text":"what documents do I need for a short trip to Canada","ground_truth":"travel_planning"}
+{"id":"p0064","text":"can I use my phone roaming in Switzerland Please show the steps if there are any.","ground_truth":"travel_planning"}
+{"id":"p0065","text":"How should I taste three red wines side by side?","ground_truth":"novel_wine_tasting"}
+{"id":"p0066","text":"Can you explain how to check tire pressure correctly?","ground_truth":"novel_car_maintenance"}
+{"id":"p0067","text":"translate my Italian restaurant review into English","ground_truth":"translation"}
+{"id":"p0068","text":"how often should I take rest days","ground_truth":"fitness_health"}
+{"id":"p0069","text":"my Kubernetes pod keeps restarting with no useful message","ground_truth":"coding_help"}
+{"id":"p0070","text":"find rows where the total does not equal the item sum","ground_truth":"data_analysis"}
+{"id":"p0071","text":"what is a safe way to increase lifting weight","ground_truth":"fitness_health"}
+{"id":"p0072","text":"how do I get around without renting a car","ground_truth":"travel_planning"}
+{"id":"p0073","text":"which laptop is better for photo editing, A or B","ground_truth":"shopping"}
+{"id":"p0074","text":"the meeting time changed; write an update to attendees","ground_truth":"scheduling"}
+{"id":"p0075","text":"I have a six-hour layover in Doha; can I leave the airport","ground_truth":"travel_planning"}
+{"id":"p0076","text":"how can I fix a sauce that split","ground_truth":"cooking_recipes"}
+{"id":"p0077","text":"what herbs go well with roasted carrots","ground_truth":"cooking_recipes"}
+{"id":"p0078","text":"Why are my bees clustering at the entrance on a warm day?","ground_truth":"novel_beekeeping"}
+{"id":"p0079","text":"help me sort these objects by date in TypeScript","ground_truth":"coding_help"}
+{"id":"p0080","text":"which suitcase wheels are least likely to break","ground_truth":"shopping"}
+{"id":"p0081","text":"can you show me how to stream a large file","ground_truth":"coding_help"}
+{"id":"p0082","text":"suggest a train route between Vienna and Budapest","ground_truth":"travel_planning"}
+{"id":"p0083","text":"can you adapt this pasta recipe for four people","ground_truth":"cooking_recipes"}
+{"id":"p0084","text":"what is the derivative of x squared times sin x","ground_truth":"math_homework"}
+{"id":"p0085","text":"help me convert 0.375 into a fraction","ground_truth":"math_homework"}
+{"id":"p0086","text":"my unit test passes locally but fails in CI","ground_truth":"coding_help"}
+{"id":"p0087","text":"I need walking shoes for wide feet and rainy weather","ground_truth":"shopping"}
+{"id":"p0088","text":"please translate this text, but don't translate the person's name","ground_truth":"translation"}
+{"id":"p0089","text":"can you turn these raw logs into hourly counts","ground_truth":"data_analysis"}
+{"id":"p0090","text":"solve the inequality 4x - 1 > 11","ground_truth":"math_homework"}
+{"id":"p0091","text":"suggest a nature-focused trip near Sydney","ground_truth":"travel_planning"}
+{"id":"p0092","text":"can you make a two-day itinerary for Kyoto","ground_truth":"travel_planning"}
+{"id":"p0093","text":"rewrite this cover letter for a product role","ground_truth":"writing_editing"}
+{"id":"p0094","text":"what should I do first if everything is due tomorrow","ground_truth":"scheduling"}
+{"id":"p0095","text":"help me choose between a tablet and a small laptop","ground_truth":"shopping"}
+{"id":"p0096","text":"why does the graph have an asymptote here","ground_truth":"math_homework"}
+{"id":"p0097","text":"I want a quiet beach destination in September","ground_truth":"travel_planning"}
+{"id":"p0098","text":"I need to identify outliers in this dataset","ground_truth":"data_analysis"}
+{"id":"p0099","text":"how early should I arrive for an international flight","ground_truth":"travel_planning"}
+{"id":"p0100","text":"Why is my C# program throwing a null reference exception?","ground_truth":"coding_help"}
+{"id":"p0101","text":"I want to group transactions by week","ground_truth":"data_analysis"}
+{"id":"p0102","text":"what does this Arabic expression imply emotionally","ground_truth":"translation"}
+{"id":"p0103","text":"Please help — please create a summary of this dataset","ground_truth":"data_analysis"}
+{"id":"p0104","text":"Could you help? What kind of soil is best for a fiddle-leaf fig?","ground_truth":"novel_home_plants"}
+{"id":"p0105","text":"please block two hours for deep work on Thursday","ground_truth":"scheduling"}
+{"id":"p0106","text":"make this German email sound polite in English","ground_truth":"translation"}
+{"id":"p0107","text":"I’m stuck: what is the least common multiple of 18 and 24","ground_truth":"math_homework"}
+{"id":"p0108","text":"How do I say 'I forgot my keys' in German?","ground_truth":"translation"}
+{"id":"p0109","text":"What does this Italian phrase mean in context?","ground_truth":"translation"}
+{"id":"p0110","text":"make the tone confident, not arrogant","ground_truth":"writing_editing"}
+{"id":"p0111","text":"Quick question: my percentages add up to more than 100; what happened","ground_truth":"data_analysis"}
+{"id":"p0112","text":"Can you help me with this? what's the difference between these two English translations","ground_truth":"translation"}
+{"id":"p0113","text":"Could you take a look? find the limit as x approaches 2","ground_truth":"math_homework"}
+{"id":"p0114","text":"edit this text for British English","ground_truth":"writing_editing"}
+{"id":"p0115","text":"calculate the surface area of a rectangular prism","ground_truth":"math_homework"}
+{"id":"p0116","text":"can you suggest low-impact cardio for bad ankles","ground_truth":"fitness_health"}
+{"id":"p0117","text":"Can you help me make a low-light plant shelf?","ground_truth":"novel_home_plants"}
+{"id":"p0118","text":"what does this TypeScript generic mean","ground_truth":"coding_help"}
+{"id":"p0119","text":"help me build a road trip through southern Italy","ground_truth":"travel_planning"}
+{"id":"p0120","text":"can you flag impossible ages and negative amounts","ground_truth":"data_analysis"}
+{"id":"p0121","text":"what is the mean and standard deviation of these numbers","ground_truth":"math_homework"}
+{"id":"p0122","text":"help me set realistic fitness goals","ground_truth":"fitness_health"}
+{"id":"p0123","text":"find a comfortable office chair for a short person","ground_truth":"shopping"}
+{"id":"p0124","text":"I want to exercise while traveling without equipment","ground_truth":"fitness_health"}
+{"id":"p0125","text":"Could you translate this Turkish message for a hotel?","ground_truth":"translation"}
+{"id":"p0126","text":"What is the median for this column and how should I handle blanks?","ground_truth":"data_analysis"}
+{"id":"p0127","text":"write a small script to rename files based on their extension","ground_truth":"coding_help"}
+{"id":"p0128","text":"remove accidental whitespace from all text columns","ground_truth":"data_analysis"}
+{"id":"p0129","text":"Could you take a look? please check my French homework sentence","ground_truth":"translation"}
+{"id":"p0130","text":"Help me write a four-part harmony for this chord progression.","ground_truth":"novel_music_theory"}
+{"id":"p0131","text":"I keep waking up tired even after eight hours","ground_truth":"fitness_health"}
+{"id":"p0132","text":"please rewrite this policy in plain language","ground_truth":"writing_editing"}
+{"id":"p0133","text":"what local customs should I know in Morocco A short explanation would help.","ground_truth":"travel_planning"}
+{"id":"p0134","text":"make this recipe gluten-free without making it dry","ground_truth":"cooking_recipes"}
+{"id":"p0135","text":"I need a one-sentence summary of this report","ground_truth":"writing_editing"}
+{"id":"p0136","text":"can I replace fresh yeast with instant yeast","ground_truth":"cooking_recipes"}
+{"id":"p0137","text":"Could you take a look? remind me one week before the insurance renewal","ground_truth":"scheduling"}
+{"id":"p0138","text":"help me return to exercise after a long break","ground_truth":"fitness_health"}
+{"id":"p0139","text":"I’m stuck: I need a packed lunch that will not get soggy","ground_truth":"cooking_recipes"}
+{"id":"p0140","text":"solve 3x + 7 = 22 and show the steps","ground_truth":"math_homework"}
+{"id":"p0141","text":"Quick question: rewrite this message so it doesn't sound angry","ground_truth":"writing_editing"}
+{"id":"p0142","text":"can you move my appointment from Tuesday to Thursday","ground_truth":"scheduling"}
+{"id":"p0143","text":"Why are the leaves on my monstera turning yellow?","ground_truth":"novel_home_plants"}
+{"id":"p0144","text":"my CSV has inconsistent dates; how can I clean them","ground_truth":"data_analysis"}
+{"id":"p0145","text":"write a regular expression for a US ZIP code","ground_truth":"coding_help"}
+{"id":"p0146","text":"convert these wide columns into a long format","ground_truth":"data_analysis"}
+{"id":"p0147","text":"set a reminder for my prescription refill in 28 days","ground_truth":"scheduling"}
+{"id":"p0148","text":"can you improve the flow between these paragraphs I’m not sure where to start.","ground_truth":"writing_editing"}
+{"id":"p0149","text":"what should I do for recovery after a hard workout","ground_truth":"fitness_health"}
+{"id":"p0150","text":"can you calculate the percentage change between these two columns","ground_truth":"data_analysis"}
+{"id":"p0151","text":"how can I end this email politely","ground_truth":"writing_editing"}
+{"id":"p0152","text":"Quick question: fit these four tasks into my afternoon","ground_truth":"scheduling"}
+{"id":"p0153","text":"find black jeans that are not skinny fit","ground_truth":"shopping"}
+{"id":"p0154","text":"Why does this Python loop never stop?","ground_truth":"coding_help"}
+{"id":"p0155","text":"I need to rank customers by lifetime value","ground_truth":"data_analysis"}
+{"id":"p0156","text":"rewrite this review so it is specific rather than vague","ground_truth":"writing_editing"}
+{"id":"p0157","text":"My car makes a clicking noise when I turn sharply.","ground_truth":"novel_car_maintenance"}
+{"id":"p0158","text":"how can I avoid blisters when hiking","ground_truth":"fitness_health"}
+{"id":"p0159","text":"What is the French equivalent of 'that makes sense' in a casual chat?","ground_truth":"translation"}
+{"id":"p0160","text":"I need a natural translation of this poem into Spanish","ground_truth":"translation"}
+{"id":"p0161","text":"how do I make a basic white sauce","ground_truth":"cooking_recipes"}
+{"id":"p0162","text":"is there a better English word for this French expression","ground_truth":"translation"}
+{"id":"p0163","text":"turn this long message into three readable paragraphs","ground_truth":"writing_editing"}
+{"id":"p0164","text":"git says my branches have diverged, what should I do?","ground_truth":"coding_help"}
+{"id":"p0165","text":"compare the warranties on these appliances","ground_truth":"shopping"}
+{"id":"p0166","text":"Quick question: help me with this word problem about speed and distance","ground_truth":"math_homework"}
+{"id":"p0167","text":"turn my bullet points into a natural paragraph","ground_truth":"writing_editing"}
+{"id":"p0168","text":"please translate this invitation into Romanian","ground_truth":"translation"}
+{"id":"p0169","text":"I found a DNA match with no shared surname. How do I investigate? I’m trying to learn the basics.","ground_truth":"novel_genealogy_research"}
+{"id":"p0170","text":"calculate the weighted average using these counts","ground_truth":"data_analysis"}
+{"id":"p0171","text":"how do I stay consistent with a workout plan","ground_truth":"fitness_health"}
+{"id":"p0172","text":"Could you help? How do tournament formats affect a team's chances?","ground_truth":"novel_esports_betting"}
+{"id":"p0173","text":"what are good toppings for a baked potato bar","ground_truth":"cooking_recipes"}
+{"id":"p0174","text":"What does a squealing sound from the brakes usually indicate?","ground_truth":"novel_car_maintenance"}
+{"id":"p0175","text":"I want a honeymoon itinerary that is relaxed, not rushed","ground_truth":"travel_planning"}
+{"id":"p0176","text":"Can you help me with this? which earbuds stay in during commuting","ground_truth":"shopping"}
+{"id":"p0177","text":"what is the pronunciation and meaning of this Greek phrase","ground_truth":"translation"}
+{"id":"p0178","text":"Can you help me with this? remind me two days before my passport expires","ground_truth":"scheduling"}
+{"id":"p0179","text":"help me choose a coffee grinder for one person","ground_truth":"shopping"}
+{"id":"p0180","text":"please clean up these meeting notes","ground_truth":"writing_editing"}
+{"id":"p0181","text":"Can you help me with this? how do I improve my balance","ground_truth":"fitness_health"}
+{"id":"p0182","text":"my calendar is packed; where can I fit a one-hour workout","ground_truth":"scheduling"}
+{"id":"p0183","text":"does this sentence sound too passive","ground_truth":"writing_editing"}
+{"id":"p0184","text":"I need curtains for a 140 cm window","ground_truth":"shopping"}
+{"id":"p0185","text":"why do my pivot table totals not match the source","ground_truth":"data_analysis"}
+{"id":"p0186","text":"Could you help? Why do some wines smell like pencil shavings?","ground_truth":"novel_wine_tasting"}
+{"id":"p0187","text":"what should I eat after a morning workout","ground_truth":"fitness_health"}
+{"id":"p0188","text":"what can replace butter in these cookies","ground_truth":"cooking_recipes"}
+{"id":"p0189","text":"help me make crispy chicken without deep frying","ground_truth":"cooking_recipes"}
+{"id":"p0190","text":"what is the probability of at least one six","ground_truth":"math_homework"}
+{"id":"p0191","text":"Could you help? How often should a hand-wound movement be serviced?","ground_truth":"novel_watch_collecting"}
+{"id":"p0192","text":"the transitions in my essay feel clunky","ground_truth":"writing_editing"}
+{"id":"p0193","text":"which USB hub works with this laptop","ground_truth":"shopping"}
+{"id":"p0194","text":"what should I look for in a budget espresso machine","ground_truth":"shopping"}
+{"id":"p0195","text":"the API returns JSON but my decoder says invalid character","ground_truth":"coding_help"}
+{"id":"p0196","text":"summarize the responses to this open-ended survey","ground_truth":"data_analysis"}
+{"id":"p0197","text":"What glass shape is useful for aromatic white wines?","ground_truth":"novel_wine_tasting"}
+{"id":"p0198","text":"Can you help me with this? plan a budget weekend in Amsterdam","ground_truth":"travel_planning"}
+{"id":"p0199","text":"how do I handle a missed connection","ground_truth":"travel_planning"}
+{"id":"p0200","text":"Why is the seventh chord in this song called half-diminished?","ground_truth":"novel_music_theory"}
+{"id":"p0201","text":"I’m stuck: I need help interpreting this scatterplot for class","ground_truth":"math_homework"}
+{"id":"p0202","text":"which blender can handle frozen fruit without costing a fortune","ground_truth":"shopping"}
+{"id":"p0203","text":"find duplicate customer records in this table","ground_truth":"data_analysis"}
+{"id":"p0204","text":"I’m stuck: is walking enough exercise to improve fitness","ground_truth":"fitness_health"}
+{"id":"p0205","text":"please suggest a time for a call across New York and London","ground_truth":"scheduling"}
+{"id":"p0206","text":"How should I teach a complex board game to new players?","ground_truth":"novel_board_games"}
+{"id":"p0207","text":"How often should I repot a plant that is root-bound?","ground_truth":"novel_home_plants"}
+{"id":"p0208","text":"How do I read a JSON file in Go and handle missing fields?","ground_truth":"coding_help"}
+{"id":"p0209","text":"help me turn this spreadsheet export into a dictionary","ground_truth":"coding_help"}
+{"id":"p0210","text":"can you recommend a simple alarm clock without apps","ground_truth":"shopping"}
+{"id":"p0211","text":"write a friendly reminder about an overdue form","ground_truth":"writing_editing"}
+{"id":"p0212","text":"How can I photograph the Milky Way with a basic camera? I’m trying to learn the basics.","ground_truth":"novel_astronomy"}
+{"id":"p0213","text":"calculate the volume of a cylinder","ground_truth":"math_homework"}
+{"id":"p0214","text":"I need a reminder every first business day","ground_truth":"scheduling"}
+{"id":"p0215","text":"How should honey frames be stored before extraction? I’m trying to learn the basics.","ground_truth":"novel_beekeeping"}
+{"id":"p0216","text":"I need an ending for this personal statement","ground_truth":"writing_editing"}
+{"id":"p0217","text":"I need a trip itinerary with vegetarian food options","ground_truth":"travel_planning"}
+{"id":"p0218","text":"how do you say 'I appreciate your help' in Spanish","ground_truth":"translation"}
+{"id":"p0219","text":"how do I normalize these values before comparing them","ground_truth":"data_analysis"}
+{"id":"p0220","text":"how should I summarize survey responses with missing values","ground_truth":"data_analysis"}
+{"id":"p0221","text":"How should I track results without fooling myself about a small sample?","ground_truth":"novel_esports_betting"}
+{"id":"p0222","text":"is it okay to work out with mild muscle soreness","ground_truth":"fitness_health"}
+{"id":"p0223","text":"The new leaves on my basil are curling. What might be wrong? I’m trying to learn the basics.","ground_truth":"novel_home_plants"}
+{"id":"p0224","text":"compare these grocery delivery memberships","ground_truth":"shopping"}
+{"id":"p0225","text":"I’m stuck: what should I ask a seller before ordering custom furniture","ground_truth":"shopping"}
+{"id":"p0226","text":"can you give this paragraph a warmer tone","ground_truth":"writing_editing"}
+{"id":"p0227","text":"help me compare night train and flight options","ground_truth":"travel_planning"}
+{"id":"p0228","text":"please remove filler words from this draft","ground_truth":"writing_editing"}
+{"id":"p0229","text":"why is my homemade mayonnaise not thickening","ground_truth":"cooking_recipes"}
+{"id":"p0230","text":"What is the best Italian translation for 'take your time'?","ground_truth":"translation"}
+{"id":"p0231","text":"translate this Ukrainian announcement into clear English","ground_truth":"translation"}
+{"id":"p0232","text":"can you make this invitation sound more casual","ground_truth":"writing_editing"}
+{"id":"p0233","text":"Could you take a look? how much time should I allow for a museum in Paris","ground_truth":"travel_planning"}
+{"id":"p0234","text":"What is the difference between decimal and American odds?","ground_truth":"novel_esports_betting"}
+{"id":"p0235","text":"turn this list of ideas into a persuasive proposal","ground_truth":"writing_editing"}
+{"id":"p0236","text":"I need an informal Japanese version for a friend","ground_truth":"translation"}
+{"id":"p0237","text":"please write a recipe using lentils and carrots Please show the steps if there are any.","ground_truth":"cooking_recipes"}
+{"id":"p0238","text":"find a compact air purifier for a bedroom","ground_truth":"shopping"}
+{"id":"p0239","text":"what exercises help ankle stability","ground_truth":"fitness_health"}
+{"id":"p0240","text":"correct the spelling but don't change the dialect","ground_truth":"writing_editing"}
+{"id":"p0241","text":"what are easy ways to move more at work Please show the steps if there are any.","ground_truth":"fitness_health"}
+{"id":"p0242","text":"Please help — plan a realistic timeline for moving apartments","ground_truth":"scheduling"}
+{"id":"p0243","text":"I sit all day and my lower back feels tight","ground_truth":"fitness_health"}
+{"id":"p0244","text":"how many steps should I aim for as a beginner","ground_truth":"fitness_health"}
+{"id":"p0245","text":"find things to do in Copenhagen when it rains","ground_truth":"travel_planning"}
+{"id":"p0246","text":"how do I calculate combinations of 5 choose 2","ground_truth":"math_homework"}
+{"id":"p0247","text":"Could you help? How do I balance a homebrew card in a deck-building game?","ground_truth":"novel_board_games"}
+{"id":"p0248","text":"Why are there ants around my hive stand?","ground_truth":"novel_beekeeping"}
+{"id":"p0249","text":"my dashboard numbers changed after filtering; why","ground_truth":"data_analysis"}
+{"id":"p0250","text":"the app is slow when rendering a thousand rows","ground_truth":"coding_help"}
+{"id":"p0251","text":"Can you help me with this? find a carry-on suitcase that fits strict airline limits","ground_truth":"shopping"}
+{"id":"p0252","text":"Could you take a look? give me ideas for a brunch for eight","ground_truth":"cooking_recipes"}
+{"id":"p0253","text":"turn this English apology into formal Arabic","ground_truth":"translation"}
+{"id":"p0254","text":"what is a good warm-up before lifting weights","ground_truth":"fitness_health"}
+{"id":"p0255","text":"What can I see in the sky with binoculars this month?","ground_truth":"novel_astronomy"}
+{"id":"p0256","text":"how can I start running without hurting my knees","ground_truth":"fitness_health"}
+{"id":"p0257","text":"Quick question: what is the best way to crisp potatoes in the oven","ground_truth":"cooking_recipes"}
+{"id":"p0258","text":"how can I improve my sleep schedule","ground_truth":"fitness_health"}
+{"id":"p0259","text":"plan my morning around a school drop-off at 8:15","ground_truth":"scheduling"}
+{"id":"p0260","text":"how much dry rice should I cook for six guests","ground_truth":"cooking_recipes"}
+{"id":"p0261","text":"How can I find my great-grandmother's birth record?","ground_truth":"novel_genealogy_research"}
+{"id":"p0262","text":"solve the absolute value equation |x-3|=8","ground_truth":"math_homework"}
+{"id":"p0263","text":"How do I catch several exception types in one block?","ground_truth":"coding_help"}
+{"id":"p0264","text":"help me choose bins for this histogram","ground_truth":"data_analysis"}
+{"id":"p0265","text":"help me write a thank-you note after an interview","ground_truth":"writing_editing"}
+{"id":"p0266","text":"how do I handle a meeting that overlaps another one","ground_truth":"scheduling"}
+{"id":"p0267","text":"When is the next good meteor shower to observe?","ground_truth":"novel_astronomy"}
+{"id":"p0268","text":"which side of the train has better views on this route","ground_truth":"travel_planning"}
+{"id":"p0269","text":"I need kitchen knives for a beginner cook","ground_truth":"shopping"}
+{"id":"p0270","text":"polish this email to my manager without making it stiff","ground_truth":"writing_editing"}
+{"id":"p0271","text":"my shoulders are sore from working at a desk","ground_truth":"fitness_health"}
+{"id":"p0272","text":"I’m stuck: can you keep the same line breaks while translating this document","ground_truth":"translation"}
+{"id":"p0273","text":"make a simple agenda for our 20-minute standup","ground_truth":"scheduling"}
+{"id":"p0274","text":"how do I tell if my shoes are causing foot pain","ground_truth":"fitness_health"}
+{"id":"p0275","text":"can I freeze this cream-based casserole","ground_truth":"cooking_recipes"}
+{"id":"p0276","text":"make a morning routine that gets me out by 8","ground_truth":"scheduling"}
+{"id":"p0277","text":"Can you help me with this? please turn these notes into a clear meeting summary","ground_truth":"writing_editing"}
+{"id":"p0278","text":"Remind me tomorrow morning to call the dentist","ground_truth":"scheduling"}
+{"id":"p0279","text":"why do my calves cramp during runs","ground_truth":"fitness_health"}
+{"id":"p0280","text":"compare these two phone plans for international data","ground_truth":"shopping"}
+{"id":"p0281","text":"reschedule the dentist to any afternoon next week","ground_truth":"scheduling"}
+{"id":"p0282","text":"I need a desk setup that reduces neck strain","ground_truth":"fitness_health"}
+{"id":"p0283","text":"Why does my automatic watch lose time overnight?","ground_truth":"novel_watch_collecting"}
+{"id":"p0284","text":"how do I solve a proportion with a variable","ground_truth":"math_homework"}
+{"id":"p0285","text":"plan a food-focused trip to Mexico City","ground_truth":"travel_planning"}
+{"id":"p0286","text":"make this message in English sound warm in Italian A short explanation would help.","ground_truth":"translation"}
+{"id":"p0287","text":"can you tell me the weekdays in the first half of March","ground_truth":"scheduling"}
+{"id":"p0288","text":"can you forecast next month's demand from this history A short explanation would help.","ground_truth":"data_analysis"}
+{"id":"p0289","text":"calculate the midpoint of these coordinates","ground_truth":"math_homework"}
+{"id":"p0290","text":"I am training for a charity walk; where do I start","ground_truth":"fitness_health"}
+{"id":"p0291","text":"find a sofa fabric that resists cat hair","ground_truth":"shopping"}
+{"id":"p0292","text":"can you make this SQL query faster without changing the result I’m not sure where to start.","ground_truth":"coding_help"}
+{"id":"p0293","text":"write a short confirmation for tomorrow's appointment","ground_truth":"scheduling"}
+{"id":"p0294","text":"explain promises like I'm new to JavaScript","ground_truth":"coding_help"}
+{"id":"p0295","text":"How can I add pagination to this database endpoint?","ground_truth":"coding_help"}
+{"id":"p0296","text":"Can you explain the difference between tannin and acidity?","ground_truth":"novel_wine_tasting"}
+{"id":"p0297","text":"how can I say no professionally in this email","ground_truth":"writing_editing"}
+{"id":"p0298","text":"turn this rough outline into a short blog post","ground_truth":"writing_editing"}
+{"id":"p0299","text":"which chart would best show these categories over time","ground_truth":"data_analysis"}
+{"id":"p0300","text":"can you explain active recovery","ground_truth":"fitness_health"}
+{"id":"p0301","text":"the button click works once and then stops firing","ground_truth":"coding_help"}
+{"id":"p0302","text":"move the recurring meeting to Wednesdays A short explanation would help.","ground_truth":"scheduling"}
+{"id":"p0303","text":"is there a cheaper alternative to this brand","ground_truth":"shopping"}
+{"id":"p0304","text":"expand (x+4)(x-6)","ground_truth":"math_homework"}
+{"id":"p0305","text":"make my text less repetitive","ground_truth":"writing_editing"}
+{"id":"p0306","text":"How long should I decant a young Barolo?","ground_truth":"novel_wine_tasting"}
+{"id":"p0307","text":"What causes a lunar eclipse to turn red?","ground_truth":"novel_astronomy"}
+{"id":"p0308","text":"find a 30-minute slot for me and Sam next week","ground_truth":"scheduling"}
+{"id":"p0309","text":"make this English joke work for a Spanish-speaking audience","ground_truth":"translation"}
+{"id":"p0310","text":"help me come up with a catchy title for this article","ground_truth":"writing_editing"}
+{"id":"p0311","text":"what vegetables roast at the same time as sweet potatoes","ground_truth":"cooking_recipes"}
+{"id":"p0312","text":"how do I use the Pythagorean theorem here","ground_truth":"math_homework"}
+{"id":"p0313","text":"Quick question: find a simple wool coat for a mild winter","ground_truth":"shopping"}
+{"id":"p0314","text":"how can I avoid double-booking across two calendars","ground_truth":"scheduling"}
+{"id":"p0315","text":"Please help — is refurbished acceptable for this camera","ground_truth":"shopping"}
+{"id":"p0316","text":"what is the inverse of this function","ground_truth":"math_homework"}
+{"id":"p0317","text":"help me prioritize today's tasks by deadline","ground_truth":"scheduling"}
+{"id":"p0318","text":"make a breakfast with oats that is not porridge","ground_truth":"cooking_recipes"}
+{"id":"p0319","text":"please walk through this geometry proof","ground_truth":"math_homework"}
+{"id":"p0320","text":"How should I cite a scanned marriage certificate in my family history notes?","ground_truth":"novel_genealogy_research"}
+{"id":"p0321","text":"I need a weekly reminder to submit my timesheet","ground_truth":"scheduling"}
+{"id":"p0322","text":"make this technical explanation understandable to customers","ground_truth":"writing_editing"}
+{"id":"p0323","text":"Please help — prove that these two triangles are similar","ground_truth":"math_homework"}
+{"id":"p0324","text":"I get side stitches when I jog","ground_truth":"fitness_health"}
+{"id":"p0325","text":"suggest a winter city destination with Christmas markets","ground_truth":"travel_planning"}
+{"id":"p0326","text":"does this email need a comma here","ground_truth":"writing_editing"}
+{"id":"p0327","text":"find family-friendly activities in Vancouver","ground_truth":"travel_planning"}
+{"id":"p0328","text":"how do I detect a sudden change in this time series Please show the steps if there are any.","ground_truth":"data_analysis"}
+{"id":"p0329","text":"I’m stuck: can you suggest realistic buffer time between calls","ground_truth":"scheduling"}
+{"id":"p0330","text":"What is the difference between 6/8 and 3/4?","ground_truth":"novel_music_theory"}
+{"id":"p0331","text":"I have no oven, only a frying pan and microwave","ground_truth":"cooking_recipes"}
+{"id":"p0332","text":"Can you explain syncopation with a simple example? I’m trying to learn the basics.","ground_truth":"novel_music_theory"}
+{"id":"p0333","text":"help me interpret this confusion matrix","ground_truth":"data_analysis"}
+{"id":"p0334","text":"help me combine monthly files into one tidy table","ground_truth":"data_analysis"}
+{"id":"p0335","text":"please add logging around this failing function","ground_truth":"coding_help"}
+{"id":"p0336","text":"Could you help? Why do stars twinkle but planets usually do not?","ground_truth":"novel_astronomy"}
+{"id":"p0337","text":"Can you explain what a watch's power reserve means?","ground_truth":"novel_watch_collecting"}
+{"id":"p0338","text":"how should I impute these missing measurements","ground_truth":"data_analysis"}
+{"id":"p0339","text":"I need a plan for three exams over ten days","ground_truth":"scheduling"}
+{"id":"p0340","text":"Can you help me compare two possible ancestors with the same name?","ground_truth":"novel_genealogy_research"}
+{"id":"p0341","text":"help me evaluate this product review pattern","ground_truth":"shopping"}
+{"id":"p0342","text":"create a checklist for preparing before Friday's presentation I’m not sure where to start.","ground_truth":"scheduling"}
+{"id":"p0343","text":"is this jacket worth the price based on the materials","ground_truth":"shopping"}
+{"id":"p0344","text":"what is a good base for exploring the Scottish Highlands","ground_truth":"travel_planning"}
+{"id":"p0345","text":"What are good cooperative board games for three adults?","ground_truth":"novel_board_games"}
+{"id":"p0346","text":"I’m stuck: are there luggage lockers at major European stations","ground_truth":"travel_planning"}
+{"id":"p0347","text":"help me mock a time-dependent function in pytest","ground_truth":"coding_help"}
+{"id":"p0348","text":"help me factor 6x squared plus 11x plus 3 Please show the steps if there are any.","ground_truth":"math_homework"}
+{"id":"p0349","text":"how do I tell if an avocado is ripe","ground_truth":"cooking_recipes"}
+{"id":"p0350","text":"How can I organize a shelf full of board-game boxes?","ground_truth":"novel_board_games"}
+{"id":"p0351","text":"why are my CSS styles being overridden","ground_truth":"coding_help"}
+{"id":"p0352","text":"I’m stuck: convert this callback code to async await","ground_truth":"coding_help"}
+{"id":"p0353","text":"I need a simple Flask route that accepts an uploaded image","ground_truth":"coding_help"}
+{"id":"p0354","text":"Please help — I want a literal translation first, then a more natural one","ground_truth":"translation"}
+{"id":"p0355","text":"please proofread this essay but keep my voice","ground_truth":"writing_editing"}
+{"id":"p0356","text":"calculate compound interest for 500 over three years","ground_truth":"math_homework"}
+{"id":"p0357","text":"find a waterproof phone case for swimming","ground_truth":"shopping"}
+{"id":"p0358","text":"solve this system: x+y=10 and 2x-y=5","ground_truth":"math_homework"}
+{"id":"p0359","text":"I want a plan to improve flexibility","ground_truth":"fitness_health"}
+{"id":"p0360","text":"I want a durable water bottle that fits a bike cage","ground_truth":"shopping"}
+{"id":"p0361","text":"what does the Portuguese slang word 'beleza' mean here","ground_truth":"translation"}
+{"id":"p0362","text":"Could you help? How do I identify the key of this melody?","ground_truth":"novel_music_theory"}
+{"id":"p0363","text":"help me use up three very ripe avocados","ground_truth":"cooking_recipes"}
+{"id":"p0364","text":"translate this Swedish email and keep the formatting","ground_truth":"translation"}
+{"id":"p0365","text":"What is the purpose of a queen excluder?","ground_truth":"novel_beekeeping"}
+{"id":"p0366","text":"what are good day trips from Edinburgh","ground_truth":"travel_planning"}
+{"id":"p0367","text":"I’m stuck: how can I compare two git commits","ground_truth":"coding_help"}
+{"id":"p0368","text":"integrate 2x + 5","ground_truth":"math_homework"}
+{"id":"p0369","text":"Could you take a look? what breathing pattern should I use while running","ground_truth":"fitness_health"}
+{"id":"p0370","text":"How can I keep notes at a casual tasting? I’m trying to learn the basics.","ground_truth":"novel_wine_tasting"}
+{"id":"p0371","text":"how long should I roast a whole chicken at 190C","ground_truth":"cooking_recipes"}
+{"id":"p0372","text":"how do I cook dried beans without soaking overnight","ground_truth":"cooking_recipes"}
+{"id":"p0373","text":"the machine translation sounds weird; rewrite it naturally in Spanish Please show the steps if there are any.","ground_truth":"translation"}
+{"id":"p0374","text":"find a quiet cordless vacuum under 200 euros","ground_truth":"shopping"}
+{"id":"p0375","text":"why does my Python date comparison raise a type error","ground_truth":"coding_help"}
+{"id":"p0376","text":"what should I know before hiking in the Dolomites","ground_truth":"travel_planning"}
+{"id":"p0377","text":"Can you explain map handicaps in competitive shooters?","ground_truth":"novel_esports_betting"}
+{"id":"p0378","text":"Could you help? How do I find Polaris without a telescope?","ground_truth":"novel_astronomy"}
+{"id":"p0379","text":"how should I reheat pizza so the crust stays crisp","ground_truth":"cooking_recipes"}
+{"id":"p0380","text":"Quick question: plan a national parks trip in Utah","ground_truth":"travel_planning"}
+{"id":"p0381","text":"Can you help me with this? what is the probability of drawing two red cards","ground_truth":"math_homework"}
+{"id":"p0382","text":"compare the energy use of these two heaters","ground_truth":"shopping"}
+{"id":"p0383","text":"How do implied probabilities work in an esports betting line?","ground_truth":"novel_esports_betting"}
+{"id":"p0384","text":"why did my bread not rise","ground_truth":"cooking_recipes"}
+{"id":"p0385","text":"make an itinerary that leaves afternoons free","ground_truth":"travel_planning"}
+{"id":"p0386","text":"My rosemary keeps drying out indoors despite watering.","ground_truth":"novel_home_plants"}
+{"id":"p0387","text":"I forgot an appointment, help me write a rescheduling note","ground_truth":"scheduling"}
+{"id":"p0388","text":"rewrite my complaint so it sounds firm but respectful","ground_truth":"writing_editing"}
+{"id":"p0389","text":"Can you help me with this? what can I use instead of fish sauce","ground_truth":"cooking_recipes"}
+{"id":"p0390","text":"Could you help? Can I propagate this pothos cutting in water?","ground_truth":"novel_home_plants"}
+{"id":"p0391","text":"How do I transpose this melody down a whole step?","ground_truth":"novel_music_theory"}
+{"id":"p0392","text":"make my Portuguese text less formal","ground_truth":"translation"}
+{"id":"p0393","text":"make me a beginner strength routine with no equipment","ground_truth":"fitness_health"}
+{"id":"p0394","text":"please explain why the confidence interval is so wide","ground_truth":"data_analysis"}
+{"id":"p0395","text":"Quick question: what is the difference between soreness and an injury","ground_truth":"fitness_health"}
+{"id":"p0396","text":"is this online seller's return policy reasonable","ground_truth":"shopping"}
+{"id":"p0397","text":"Could you help? How can I tell whether a colony has enough food for winter?","ground_truth":"novel_beekeeping"}
+{"id":"p0398","text":"How do I increase humidity without making the room damp?","ground_truth":"novel_home_plants"}
+{"id":"p0399","text":"which running watch has the clearest screen","ground_truth":"shopping"}
+{"id":"p0400","text":"How can I spot a redial in an older watch listing?","ground_truth":"novel_watch_collecting"}
+{"id":"p0401","text":"what are good exercises for posture A short explanation would help.","ground_truth":"fitness_health"}
+{"id":"p0402","text":"Why does a ii-V-I progression sound so resolved?","ground_truth":"novel_music_theory"}
+{"id":"p0403","text":"help me find noise-canceling headphones for small ears","ground_truth":"shopping"}
+{"id":"p0404","text":"The engine temperature rises in slow traffic. What should I inspect?","ground_truth":"novel_car_maintenance"}
+{"id":"p0405","text":"please check my logarithm steps I’m not sure where to start.","ground_truth":"math_homework"}
+{"id":"p0406","text":"I’m stuck: what does this cluster analysis suggest","ground_truth":"data_analysis"}
+{"id":"p0407","text":"what date is 45 days after October 12","ground_truth":"scheduling"}
+{"id":"p0408","text":"what are good features in a child car seat","ground_truth":"shopping"}
+{"id":"p0409","text":"find a gift under 30 dollars for a coworker Please show the steps if there are any.","ground_truth":"shopping"}
+{"id":"p0410","text":"I need a low-effort slow cooker meal","ground_truth":"cooking_recipes"}
+{"id":"p0411","text":"what are good metrics for this experiment","ground_truth":"data_analysis"}
+{"id":"p0412","text":"find the roots using the quadratic formula","ground_truth":"math_homework"}
+{"id":"p0413","text":"can you suggest resistance-band exercises","ground_truth":"fitness_health"}
+{"id":"p0414","text":"how do I keep rice from turning mushy","ground_truth":"cooking_recipes"}
+{"id":"p0415","text":"can you check whether this paragraph is coherent","ground_truth":"writing_editing"}
+{"id":"p0416","text":"make this proposal more persuasive without adding claims","ground_truth":"writing_editing"}
+{"id":"p0417","text":"I need dinner ideas that use one pot","ground_truth":"cooking_recipes"}
+{"id":"p0418","text":"my CSS grid collapses on mobile but looks fine on desktop","ground_truth":"coding_help"}
+{"id":"p0419","text":"translate these customer replies into polite Portuguese","ground_truth":"translation"}
+{"id":"p0420","text":"how long should I rest between strength sets","ground_truth":"fitness_health"}
+{"id":"p0421","text":"Please help — How do I join these two tables without losing unmatched records?","ground_truth":"coding_help"}
+{"id":"p0422","text":"Please help — make a short routine I can do in a hotel room","ground_truth":"fitness_health"}
+{"id":"p0423","text":"help me check this statistics homework","ground_truth":"math_homework"}
+{"id":"p0424","text":"Quick question: I need subtitles translated from English into Spanish","ground_truth":"translation"}
+{"id":"p0425","text":"suggest affordable places to stay in Barcelona I’m not sure where to start.","ground_truth":"travel_planning"}
+{"id":"p0426","text":"can you explain why this translation uses the imperfect tense","ground_truth":"translation"}
+{"id":"p0427","text":"When should a new hive receive its first inspection?","ground_truth":"novel_beekeeping"}
+{"id":"p0428","text":"explain the order of operations for this expression","ground_truth":"math_homework"}
+{"id":"p0429","text":"What does this Hindi sentence say?","ground_truth":"translation"}
+{"id":"p0430","text":"is this skincare ingredient list okay for sensitive skin","ground_truth":"shopping"}
+{"id":"p0431","text":"what is the next Monday after the 17th","ground_truth":"scheduling"}
+{"id":"p0432","text":"I need to compare everyone's availability for next Tuesday","ground_truth":"scheduling"}
+{"id":"p0433","text":"evaluate the sum from 1 to 50","ground_truth":"math_homework"}
+{"id":"p0434","text":"what can I make with chickpeas, tomatoes, and spinach","ground_truth":"cooking_recipes"}
+{"id":"p0435","text":"what is the equation of this line from the graph","ground_truth":"math_homework"}
+{"id":"p0436","text":"please translate this Korean caption and preserve the emojis I’m not sure where to start.","ground_truth":"translation"}
+{"id":"p0437","text":"Please help — I need a 20-minute dinner with tofu","ground_truth":"cooking_recipes"}
+{"id":"p0438","text":"Can you help me with this? write a tactful response to a negative comment","ground_truth":"writing_editing"}
+{"id":"p0439","text":"I have apples and puff pastry; any ideas","ground_truth":"cooking_recipes"}
+{"id":"p0440","text":"Can you explain this JavaScript error: undefined is not a function?","ground_truth":"coding_help"}
+{"id":"p0441","text":"I want a low-stress trip with very little driving","ground_truth":"travel_planning"}
+{"id":"p0442","text":"I feel dizzy during workouts; what should I do I’m not sure where to start.","ground_truth":"fitness_health"}
+{"id":"p0443","text":"Can you help me with this? I'm getting a 401 from my API even though the token looks right","ground_truth":"coding_help"}
+{"id":"p0444","text":"my cron job runs manually but not on schedule Please show the steps if there are any.","ground_truth":"coding_help"}
+{"id":"p0445","text":"I'm confused by Python virtual environments","ground_truth":"coding_help"}
+{"id":"p0446","text":"help me plan a packing schedule before Saturday","ground_truth":"scheduling"}
+{"id":"p0447","text":"translate my message into Brazilian Portuguese, not European Portuguese","ground_truth":"translation"}
+{"id":"p0448","text":"how do I graph y = -2x + 3","ground_truth":"math_homework"}
+{"id":"p0449","text":"I need to cancel a meeting without sounding rude","ground_truth":"scheduling"}
+{"id":"p0450","text":"find a recurring time that avoids lunch","ground_truth":"scheduling"}
+{"id":"p0451","text":"draft a polite invite for a project kickoff","ground_truth":"scheduling"}
+{"id":"p0452","text":"what are safe areas to stay in Buenos Aires","ground_truth":"travel_planning"}
+{"id":"p0453","text":"organize this messy to-do list into today and later","ground_truth":"scheduling"}
+{"id":"p0454","text":"I have a 1901 census entry but cannot read the occupation.","ground_truth":"novel_genealogy_research"}
+{"id":"p0455","text":"edit my announcement so people actually understand the deadline","ground_truth":"writing_editing"}
+{"id":"p0456","text":"make this introduction more engaging","ground_truth":"writing_editing"}
+{"id":"p0457","text":"give me a simple recipe for homemade salsa I’m not sure where to start.","ground_truth":"cooking_recipes"}
+{"id":"p0458","text":"Could you help? How can I practice recognizing intervals by ear?","ground_truth":"novel_music_theory"}
+{"id":"p0459","text":"simplify these negative fractions","ground_truth":"math_homework"}
+{"id":"p0460","text":"help me estimate a realistic daily travel budget","ground_truth":"travel_planning"}
+{"id":"p0461","text":"I’m stuck: I need to block off focus time every morning","ground_truth":"scheduling"}
+{"id":"p0462","text":"I need an affordable printer with cheap ink","ground_truth":"shopping"}
+{"id":"p0463","text":"find the slope between these two points","ground_truth":"math_homework"}
+{"id":"p0464","text":"I found queen cells on a frame; what should I check next?","ground_truth":"novel_beekeeping"}
+{"id":"p0465","text":"make a simple table of yearly totals","ground_truth":"data_analysis"}
+{"id":"p0466","text":"How would a native Korean speaker say 'I'm running late'","ground_truth":"translation"}
+{"id":"p0467","text":"explain how to rationalize this denominator","ground_truth":"math_homework"}
+{"id":"p0468","text":"convert 72 kilometers per hour to meters per second","ground_truth":"math_homework"}
+{"id":"p0469","text":"make this paragraph shorter by about half Please show the steps if there are any.","ground_truth":"writing_editing"}
+{"id":"p0470","text":"I need a replacement charger, how do I check compatibility I’m not sure where to start.","ground_truth":"shopping"}
+{"id":"p0471","text":"calculate a rolling seven-day average","ground_truth":"data_analysis"}
+{"id":"p0472","text":"make a mild curry with pantry ingredients","ground_truth":"cooking_recipes"}
+{"id":"p0473","text":"how can I preserve login state between page refreshes","ground_truth":"coding_help"}
+{"id":"p0474","text":"can you make this list into a calendar-friendly agenda","ground_truth":"scheduling"}
+{"id":"p0475","text":"how can I track progress without focusing on weight","ground_truth":"fitness_health"}
+{"id":"p0476","text":"what is a safe way to thaw frozen meat","ground_truth":"cooking_recipes"}
+{"id":"p0477","text":"I need cardio ideas for a small apartment","ground_truth":"fitness_health"}
+{"id":"p0478","text":"my bar chart is hiding small categories","ground_truth":"data_analysis"}
+{"id":"p0479","text":"translate the instructions into plain-language Vietnamese","ground_truth":"translation"}
+{"id":"p0480","text":"Could you help? What is the difference between worker placement and action selection?","ground_truth":"novel_board_games"}
+{"id":"p0481","text":"Can you help me with this? the image path is broken only after deployment","ground_truth":"coding_help"}
+{"id":"p0482","text":"help me understand radians versus degrees","ground_truth":"math_homework"}
+{"id":"p0483","text":"Could you help? My relative changed surnames after immigrating; how can I trace that?","ground_truth":"novel_genealogy_research"}
+{"id":"p0484","text":"Where might parish records be kept for a village in Galicia?","ground_truth":"novel_genealogy_research"}
+{"id":"p0485","text":"can you suggest a weekly plan for general fitness","ground_truth":"fitness_health"}
+{"id":"p0486","text":"what are healthy snacks before exercise","ground_truth":"fitness_health"}
+{"id":"p0487","text":"I need a cake recipe for a 20 cm pan","ground_truth":"cooking_recipes"}
+{"id":"p0488","text":"can you inspect this dataset for quality issues","ground_truth":"data_analysis"}
+{"id":"p0489","text":"plan a stopover in Istanbul","ground_truth":"travel_planning"}
+{"id":"p0490","text":"can you explain this regression output in plain English","ground_truth":"data_analysis"}
+{"id":"p0491","text":"give me vegetarian fillings for tacos","ground_truth":"cooking_recipes"}
+{"id":"p0492","text":"how should a beginner pace a five-kilometer run","ground_truth":"fitness_health"}
+{"id":"p0493","text":"Which games work well for two people who like negotiation? I’m trying to learn the basics.","ground_truth":"novel_board_games"}
+{"id":"p0494","text":"simplify (x^2 - 9)/(x - 3)","ground_truth":"math_homework"}
+{"id":"p0495","text":"I need a wheelchair-friendly city break","ground_truth":"travel_planning"}
+{"id":"p0496","text":"find the missing angle in this polygon","ground_truth":"math_homework"}
+{"id":"p0497","text":"how do I use a z-score","ground_truth":"math_homework"}
+{"id":"p0498","text":"translate the text in this photo into English","ground_truth":"translation"}
+{"id":"p0499","text":"How do I measure my wrist for a replacement strap?","ground_truth":"novel_watch_collecting"}
+{"id":"p0500","text":"is the extended warranty worth buying","ground_truth":"shopping"}
+{"id":"p0501","text":"I’m stuck: I need a short caption for a photo of our team","ground_truth":"writing_editing"}
+{"id":"p0502","text":"schedule a team check-in every other Friday","ground_truth":"scheduling"}
+{"id":"p0503","text":"I need a non-toxic mattress with a medium feel","ground_truth":"shopping"}
+{"id":"p0504","text":"My battery is dead every few mornings; what could cause that?","ground_truth":"novel_car_maintenance"}
+{"id":"p0505","text":"give me a simple tomato soup recipe","ground_truth":"cooking_recipes"}
+{"id":"p0506","text":"can you translate the labels on this German form","ground_truth":"translation"}
+{"id":"p0507","text":"how can I reduce the sugar in this muffin recipe","ground_truth":"cooking_recipes"}
+{"id":"p0508","text":"how can I make soup less salty","ground_truth":"cooking_recipes"}
+{"id":"p0509","text":"set up a recurring reminder for the rent","ground_truth":"scheduling"}
+{"id":"p0510","text":"solve x squared minus 5x plus 6 equals zero A short explanation would help.","ground_truth":"math_homework"}
+{"id":"p0511","text":"what should I reserve in advance for Rome","ground_truth":"travel_planning"}
+{"id":"p0512","text":"how can I avoid jet lag flying east","ground_truth":"travel_planning"}
+{"id":"p0513","text":"Can you help me with this? Please translate the paragraph below into simple English","ground_truth":"translation"}
+{"id":"p0514","text":"what is the next term in this recursive sequence","ground_truth":"math_homework"}
+{"id":"p0515","text":"Why does my Java program run out of memory?","ground_truth":"coding_help"}
+{"id":"p0516","text":"how many working days are between these dates Please show the steps if there are any.","ground_truth":"scheduling"}
+{"id":"p0517","text":"fix my sql query, it keeps returning duplicate rows","ground_truth":"coding_help"}
+{"id":"p0518","text":"plan a solo trip to Vietnam for ten days","ground_truth":"travel_planning"}
+{"id":"p0519","text":"what stretches help after cycling","ground_truth":"fitness_health"}
+{"id":"p0520","text":"what is a fair price for this used phone","ground_truth":"shopping"}
+{"id":"p0521","text":"I want a ring light for video calls in a tiny room A short explanation would help.","ground_truth":"shopping"}
+{"id":"p0522","text":"can I substitute yogurt for sour cream in this sauce","ground_truth":"cooking_recipes"}
+{"id":"p0523","text":"can you fix the indentation and syntax in this code","ground_truth":"coding_help"}
+{"id":"p0524","text":"is stretching before or after exercise better","ground_truth":"fitness_health"}
+{"id":"p0525","text":"set a reminder for the subscription cancellation window","ground_truth":"scheduling"}
+{"id":"p0526","text":"why does adding one filter change every average","ground_truth":"data_analysis"}
+{"id":"p0527","text":"when should I start a six-week course if it ends June 1","ground_truth":"scheduling"}
+{"id":"p0528","text":"I need a more professional way to ask for a refund","ground_truth":"writing_editing"}
+{"id":"p0529","text":"I need a SQL query that returns the latest row per user","ground_truth":"coding_help"}
+{"id":"p0530","text":"I need a concise bio for a conference speaker page","ground_truth":"writing_editing"}
+{"id":"p0531","text":"Can you help me with this? I want a warm destination in February under a moderate budget","ground_truth":"travel_planning"}
+{"id":"p0532","text":"I’m stuck: translate this paragraph into clear, natural Polish","ground_truth":"translation"}
+{"id":"p0533","text":"I don't understand how to factor this quadratic","ground_truth":"math_homework"}
+{"id":"p0534","text":"I’m stuck: why do my muscles feel weak after being sick","ground_truth":"fitness_health"}
+{"id":"p0535","text":"what is the best way to see several Swiss towns","ground_truth":"travel_planning"}
+{"id":"p0536","text":"what travel adapter do I need for Australia","ground_truth":"travel_planning"}
+{"id":"p0537","text":"Could you help? What foods pair well with a dry Riesling?","ground_truth":"novel_wine_tasting"}
+{"id":"p0538","text":"I want a simple mobility routine for the hips","ground_truth":"fitness_health"}
+{"id":"p0539","text":"Translate this note into natural Spanish: I'll call you after lunch.","ground_truth":"translation"}
+{"id":"p0540","text":"I have a deadline in ten days, break the work into steps","ground_truth":"scheduling"}
+{"id":"p0541","text":"Translate the error message from Russian and explain the tone","ground_truth":"translation"}
+{"id":"p0542","text":"Could you take a look? I need a pivot by region and quarter","ground_truth":"data_analysis"}
+{"id":"p0543","text":"can you compare the storage sizes and prices here","ground_truth":"shopping"}
+{"id":"p0544","text":"I’m stuck: which monitor would be best for coding and eye comfort","ground_truth":"shopping"}
+{"id":"p0545","text":"does this paragraph have a clear thesis","ground_truth":"writing_editing"}
+{"id":"p0546","text":"what is the easiest way to get from the airport to central Tokyo","ground_truth":"travel_planning"}
+{"id":"p0547","text":"how do I poach an egg A short explanation would help.","ground_truth":"cooking_recipes"}
+{"id":"p0548","text":"I need exercises that are easy on my wrists","ground_truth":"fitness_health"}
+{"id":"p0549","text":"Can you shorten this paragraph and keep the main point?","ground_truth":"writing_editing"}
+{"id":"p0550","text":"compare actual versus predicted values","ground_truth":"data_analysis"}
+{"id":"p0551","text":"translate my cover letter from English to German","ground_truth":"translation"}
+{"id":"p0552","text":"What does a secondary dominant do in a song?","ground_truth":"novel_music_theory"}
+{"id":"p0553","text":"Why does this game use victory points instead of eliminating players?","ground_truth":"novel_board_games"}
+{"id":"p0554","text":"My steering wheel vibrates at highway speed; is that urgent?","ground_truth":"novel_car_maintenance"}
+{"id":"p0555","text":"I want a sturdy desk under 120 cm wide","ground_truth":"shopping"}
+{"id":"p0556","text":"I need sandals with arch support for walking","ground_truth":"shopping"}
+{"id":"p0557","text":"help me choose a destination for autumn colors","ground_truth":"travel_planning"}
+{"id":"p0558","text":"fix the grammar in this message to my landlord","ground_truth":"writing_editing"}
+{"id":"p0559","text":"find the circumference when the radius is 7","ground_truth":"math_homework"}
+{"id":"p0560","text":"rewrite this sentence so the pronoun is clear","ground_truth":"writing_editing"}
+{"id":"p0561","text":"my React component rerenders forever after I added useEffect","ground_truth":"coding_help"}
+{"id":"p0562","text":"can you draft a message proposing three meeting times","ground_truth":"scheduling"}
+{"id":"p0563","text":"Why does temperature change the flavor of a wine?","ground_truth":"novel_wine_tasting"}
+{"id":"p0564","text":"please explain what this recursive function is doing","ground_truth":"coding_help"}
+{"id":"p0565","text":"give me a few hooks for a newsletter","ground_truth":"writing_editing"}
+{"id":"p0566","text":"Could you help? Is magnetization a common cause of poor accuracy?","ground_truth":"novel_watch_collecting"}
+{"id":"p0567","text":"Can you help me with this? what is a good way to use leftover roast vegetables","ground_truth":"cooking_recipes"}
+{"id":"p0568","text":"remind me monthly to back up my files","ground_truth":"scheduling"}
+{"id":"p0569","text":"please explain how to make a basic vinaigrette","ground_truth":"cooking_recipes"}
+{"id":"p0570","text":"plan a long weekend in Porto","ground_truth":"travel_planning"}
+{"id":"p0571","text":"Could you help? How do I tell whether a used car has had flood damage?","ground_truth":"novel_car_maintenance"}
+{"id":"p0572","text":"what is 15 percent of 240","ground_truth":"math_homework"}
+{"id":"p0573","text":"I’m stuck: I need three alternatives for this subject line","ground_truth":"writing_editing"}
+{"id":"p0574","text":"is the mean misleading for this distribution","ground_truth":"data_analysis"}
+{"id":"p0575","text":"please edit my wedding speech for timing A short explanation would help.","ground_truth":"writing_editing"}
+{"id":"p0576","text":"give me a chocolate dessert without eggs","ground_truth":"cooking_recipes"}
+{"id":"p0577","text":"Can you explain the difference between a planet and a dwarf planet?","ground_truth":"novel_astronomy"}
+{"id":"p0578","text":"remind me to water the office plants every Monday","ground_truth":"scheduling"}
+{"id":"p0579","text":"Suggest a short strategy game with very little reading.","ground_truth":"novel_board_games"}
+{"id":"p0580","text":"how do I strengthen my core safely","ground_truth":"fitness_health"}
+{"id":"p0581","text":"Please help — fix the punctuation and awkward wording below","ground_truth":"writing_editing"}
+{"id":"p0582","text":"I need a regex that extracts the numbers from a product code","ground_truth":"coding_help"}
+{"id":"p0583","text":"write a bash command to find files bigger than 100MB","ground_truth":"coding_help"}
+{"id":"p0584","text":"What should I inspect before buying a vintage mechanical watch?","ground_truth":"novel_watch_collecting"}
+{"id":"p0585","text":"find gifts for a 10-year-old who likes science","ground_truth":"shopping"}
+{"id":"p0586","text":"what is the best way to visualize missingness","ground_truth":"data_analysis"}
+{"id":"p0587","text":"why is my index not being used by postgres","ground_truth":"coding_help"}
+{"id":"p0588","text":"help me brainstorm names for a community newsletter","ground_truth":"writing_editing"}
+{"id":"p0589","text":"how long do hard-boiled eggs keep","ground_truth":"cooking_recipes"}
+{"id":"p0590","text":"What makes a dial patina desirable to collectors?","ground_truth":"novel_watch_collecting"}
+{"id":"p0591","text":"Could you help? What protective clothing is actually necessary for a beginner?","ground_truth":"novel_beekeeping"}
+{"id":"p0592","text":"Can you help me with this? what exercises target the upper back","ground_truth":"fitness_health"}
+{"id":"p0593","text":"How can I recognize a suspiciously lopsided market?","ground_truth":"novel_esports_betting"}
+{"id":"p0594","text":"how many days should I spend in Prague","ground_truth":"travel_planning"}
+{"id":"p0595","text":"make this apology sincere without overdoing it","ground_truth":"writing_editing"}
+{"id":"p0596","text":"help me build up to ten push-ups","ground_truth":"fitness_health"}
+{"id":"p0597","text":"my npm install is stuck at resolving dependencies","ground_truth":"coding_help"}
+{"id":"p0598","text":"calculate retention by signup month","ground_truth":"data_analysis"}
+{"id":"p0599","text":"why are my date groups sorting alphabetically","ground_truth":"data_analysis"}
+{"id":"p0600","text":"How should I choose a telescope for viewing Saturn's rings?","ground_truth":"novel_astronomy"}
+{"id":"p0601","text":"make a shopping list for a week of easy breakfasts","ground_truth":"cooking_recipes"}
+{"id":"p0602","text":"how do I store fresh basil so it lasts","ground_truth":"cooking_recipes"}
+{"id":"p0603","text":"What signs suggest a hive has a mite problem?","ground_truth":"novel_beekeeping"}
+{"id":"p0604","text":"I need a travel plan for two adults and a toddler","ground_truth":"travel_planning"}
+{"id":"p0605","text":"Could you take a look? can you suggest a better opening sentence","ground_truth":"writing_editing"}
+{"id":"p0606","text":"is this Chinese sentence grammatically correct and what does it mean","ground_truth":"translation"}
+{"id":"p0607","text":"make a histogram from this list of ages","ground_truth":"data_analysis"}
+{"id":"p0608","text":"how can I sample rows reproducibly I’m not sure where to start.","ground_truth":"data_analysis"}
+{"id":"p0609","text":"Can you help me with this? calculate each department's share of the total","ground_truth":"data_analysis"}
+{"id":"p0610","text":"what should I pack for Iceland in October","ground_truth":"travel_planning"}
+{"id":"p0611","text":"What does it mean when a wine is described as austere?","ground_truth":"novel_wine_tasting"}
+{"id":"p0612","text":"There are tiny flies around my potting soil. What are they?","ground_truth":"novel_home_plants"}
+{"id":"p0613","text":"Could you help? The check-engine light came on after I filled the tank.","ground_truth":"novel_car_maintenance"}
+{"id":"p0614","text":"I lost a token from my game; what are sensible replacements?","ground_truth":"novel_board_games"}
+{"id":"p0615","text":"What does closing-line value mean in this context?","ground_truth":"novel_esports_betting"}
+{"id":"p0616","text":"Why does the Moon appear upside down from different latitudes?","ground_truth":"novel_astronomy"}
+{"id":"p0617","text":"what dates are available if I cannot do weekends","ground_truth":"scheduling"}
+{"id":"p0618","text":"Can you translate this Japanese menu item by item?","ground_truth":"translation"}
+{"id":"p0619","text":"how much water should I drink during a long walk","ground_truth":"fitness_health"}
+{"id":"p0620","text":"What causes a corked bottle to smell musty?","ground_truth":"novel_wine_tasting"}
+{"id":"p0621","text":"please review this SQL update before I run it","ground_truth":"coding_help"}
+{"id":"p0622","text":"rewrite this description for a general audience","ground_truth":"writing_editing"}
+{"id":"p0623","text":"which airport is most convenient for central London","ground_truth":"travel_planning"}
+{"id":"p0624","text":"What statistics matter when comparing two teams before a match?","ground_truth":"novel_esports_betting"}
+{"id":"p0625","text":"suggest a two-week trip using only trains","ground_truth":"travel_planning"}
+{"id":"p0626","text":"my knee clicks when I squat but does not hurt","ground_truth":"fitness_health"}
+{"id":"p0627","text":"what size backpack works for a daily commute","ground_truth":"shopping"}
+{"id":"p0628","text":"I’m stuck: can you scale this recipe down to one serving","ground_truth":"cooking_recipes"}
+{"id":"p0629","text":"is there a relationship between price and returns","ground_truth":"data_analysis"}
+{"id":"p0630","text":"Please help — what is the best season to visit Patagonia","ground_truth":"travel_planning"}
+{"id":"p0631","text":"Can you explain modes using a piano keyboard?","ground_truth":"novel_music_theory"}
+{"id":"p0632","text":"I accidentally committed a secret to git; how can I remove it safely? A short explanation would help.","ground_truth":"coding_help"}
+{"id":"p0633","text":"help me check whether this sample is biased","ground_truth":"data_analysis"}
+{"id":"p0634","text":"What tools do I need for changing a cabin air filter? I’m trying to learn the basics.","ground_truth":"novel_car_maintenance"}
+{"id":"p0635","text":"what is the difference between baking soda and powder","ground_truth":"cooking_recipes"}
+{"id":"p0636","text":"make my Spanish text sound less robotic","ground_truth":"translation"}
+{"id":"p0637","text":"help me pick a gift for someone who loves board games","ground_truth":"shopping"}
+{"id":"p0638","text":"why is my answer different when I round early","ground_truth":"math_homework"}
+{"id":"p0639","text":"translate these three short questions into Japanese","ground_truth":"translation"}
+{"id":"p0640","text":"find the area of a triangle with base 9 and height 4","ground_truth":"math_homework"}
+{"id":"p0641","text":"I need help with long division","ground_truth":"math_homework"}
+{"id":"p0642","text":"join these sales and customer tables by account id","ground_truth":"data_analysis"}
+{"id":"p0643","text":"what does a negative exponent mean","ground_truth":"math_homework"}
+{"id":"p0644","text":"I need a quick vegetarian dinner for two","ground_truth":"cooking_recipes"}
+{"id":"p0645","text":"make my resume bullet stronger but truthful","ground_truth":"writing_editing"}
+{"id":"p0646","text":"I want a clean way to validate an email in a form","ground_truth":"coding_help"}
+{"id":"p0647","text":"turn this French sentence into everyday English","ground_truth":"translation"}
+{"id":"p0648","text":"what test should I use for two non-normal groups","ground_truth":"data_analysis"}
+{"id":"p0649","text":"I'm seeing a CORS error from the browser","ground_truth":"coding_help"}
+{"id":"p0650","text":"help me schedule breaks during a long study session","ground_truth":"scheduling"}

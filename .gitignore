@@ -1,0 +1,8 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.upstream/
+models/
+results/*.log
+.DS_Store
