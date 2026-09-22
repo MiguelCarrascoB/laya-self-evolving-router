@@ -88,8 +88,9 @@ are substitutes.
 
 ## Known issues
 
-- `analyze_ablation.py` computes judge-derived columns as `null` (merge key mismatch);
-  the numbers above were computed from `judge.json` + `semantic_accuracy.py` directly.
+- ~~`analyze_ablation.py` computes judge-derived columns as `null` (merge key mismatch)~~ —
+  fixed in `9941c45` (judge entries now match relative or absolute run paths). The numbers
+  above were computed from `judge.json` + `semantic_accuracy.py` directly.
 - Provider rejects `temperature=0`; proposer stochasticity is captured only by the
   repeat-pair noise floor.
 
