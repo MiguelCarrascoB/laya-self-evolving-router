@@ -20,16 +20,28 @@ class SelfEvolvingRouter:
         laya_model: str = "aac6fef/laya-mlx",
         batch_size: int = 10,
         backend: str = "mlx",
+        proposer_mode: str = "as-today",
+        few_shot: str | None = None,
+        initial_categories: list[dict] | None = None,
     ) -> None:
         self.registry = CategoryRegistry()
         self.proposer = proposer
         self.threshold = confidence_threshold
         self.batch_size = batch_size
         self.backend = backend
-        self._agent = self._load_laya(laya_model)
+        self.proposer_mode = proposer_mode
+        self.few_shot = few_shot
+        self.laya_model = laya_model
+        self.initial_categories = list(initial_categories or [])
         self.llm_calls = 0
+        for cat in self.initial_categories:
+            self.registry.seed(cat["name"], cat["description"])
+        self._agent = self._load_laya(laya_model)
 
     def _load_laya(self, model_id: str):
+        # Lazy import: constructing a router is what pulls in the Laya model
+        # stack; importing this module (and simulation/cli) must stay free of it
+        # so CI on Linux can import the package without laya-mlx / laya-coreml.
         if self.backend == "coreml":
             import laya_coreml as laya
             agent = laya.load(model_id)
@@ -70,13 +82,23 @@ class SelfEvolvingRouter:
             route, reason = choice, "classified"
 
         usage = result.get("usage", {})
+        probs = answer["probabilities"]
+        values = list(probs.values())
+        if len(values) >= 2:
+            ordered = sorted(values, reverse=True)
+            top2_margin = ordered[0] - ordered[1]
+        else:
+            top2_margin = 0.0
         return {
             "id": prompt_id,
             "text": text,
             "laya_choice": choice,
             "route": route,
             "reason": reason,
-            "probs": answer["probabilities"],
+            "probs": probs,
+            "top_prob": probs.get(choice),
+            "top2_margin": top2_margin,
+            "n_options": len(probs),
             "latency_ms": round(latency_ms, 2),
             "input_tokens": usage.get("input_tokens", 0),
             "categories_at_route": len(self.registry.all()),
@@ -88,7 +110,12 @@ class SelfEvolvingRouter:
             return []
         batch = others[: self.proposer.batch_size]
         existing = [{"name": c.name, "description": c.description} for c in self.registry.all()]
-        proposals = self.proposer.propose([o["text"] for o in batch], existing)
+        proposals = self.proposer.propose(
+            [o["text"] for o in batch],
+            existing,
+            mode=self.proposer_mode,
+            few_shot=self.few_shot,
+        )
         self.llm_calls += 1
         created = []
         for p in proposals:
@@ -105,4 +132,7 @@ class SelfEvolvingRouter:
             "backend": self.backend,
             "categories": self.registry.names(),
             "llm_calls": self.llm_calls,
+            "proposer_stats": self.proposer.stats,
+            "registry_rejections": self.registry.rejections,
+            "seed_rejections": self.registry.seed_rejections,
         }

@@ -4,30 +4,43 @@ once the new categories exist. Everything is logged for the visualizer."""
 
 from __future__ import annotations
 
+import datetime
+import hashlib
 import json
+import random
+import subprocess
 import time
 
+from .metrics import compute_metrics
 from .router import OTHER, SelfEvolvingRouter
 
 LEARN_BATCH = 10
+MAX_REROUTES = 2
 
 
 def run_simulation(
     router: SelfEvolvingRouter,
     dataset_path: str,
     learn_interval: int = LEARN_BATCH,
+    *,
+    seed: int | None = None,
+    seed_set_name: str | None = None,
 ) -> dict:
     """Streams the dataset once. Every `learn_interval` 'other' events trigger
     one LLM call; newly created categories immediately re-classify the
-    pending 'other' prompts against the grown registry."""
-    with open(dataset_path, encoding="utf-8") as f:
-        prompts = [json.loads(line) for line in f if line.strip()]
+    pending 'other' prompts against the grown registry.
+
+    ``seed=None`` streams the dataset in file order; ``seed=<int>`` applies a
+    deterministic ``random.Random(seed).shuffle`` permutation first, so paired
+    runs across registry/proposer cells compare the same prompt order.
+    """
+    prompts = _load_prompts(dataset_path, seed)
 
     events: list[dict] = []
     creations: list[dict] = []
     pending_other: list[dict] = []  # events waiting for new categories
     retry_guess: dict[str, int] = {}  # otherwise unbounded churn
-    max_reroutes = 2
+    max_reroutes = MAX_REROUTES
 
     t_start = time.perf_counter()
     for i, p in enumerate(prompts):
@@ -58,26 +71,111 @@ def run_simulation(
     wall = time.perf_counter() - t_start
     latencies = [e["latency_ms"] for e in events]
     seeded = {j["ground_truth"] for j in prompts if not j["ground_truth"].startswith("novel")}
+
+    registry_dicts = router.registry.as_dicts()
+    registry_final = router.stats()
+    registry_final["categories"] = registry_dicts
+
     return {
         "meta": {
             "backend": router.backend,
-            "model": router.stats()["backend"],
+            "model": router.laya_model,
+            "proposer_model": _proposer_model(router.proposer),
             "threshold": router.threshold,
             "n_prompts": len(prompts),
             "wall_seconds": round(wall, 2),
             "llm_calls": router.llm_calls,
         },
+        "run_config": _build_run_config(router, dataset_path, seed, seed_set_name),
         "events": events,
         "category_creations": creations,
-        "registry_final": router.stats(),
+        "registry_final": registry_final,
+        "seed_rejections": router.registry.seed_rejections,
         "growth_history": router.registry.growth_history(),
-        "metrics": _summary_metrics(events, creations, set(router.registry.names()), seeded),
+        "metrics": compute_metrics(events, registry_dicts, seeded, router.registry.rejections),
         "latency": {
             "p50": _pct(latencies, 50),
             "p95": _pct(latencies, 95),
-            "mean": round(sum(latencies) / len(latencies), 2),
+            "mean": round(sum(latencies) / len(latencies), 2) if latencies else 0.0,
         },
     }
+
+
+def _load_prompts(dataset_path: str, seed: int | None = None) -> list[dict]:
+    """Read the JSONL dataset, optionally applying a deterministic permutation."""
+    with open(dataset_path, encoding="utf-8") as f:
+        items = [json.loads(line) for line in f if line.strip()]
+    if seed is not None:
+        random.Random(seed).shuffle(items)
+    return items
+
+
+def _build_run_config(
+    router: SelfEvolvingRouter,
+    dataset_path: str,
+    permutation_seed: int | None,
+    seed_set_name: str | None,
+) -> dict:
+    """Provenance block: everything needed to reproduce (or compare) this run."""
+    return {
+        "proposer_mode": router.proposer_mode,
+        "few_shot": router.few_shot,
+        "threshold": router.threshold,
+        "batch_size": router.batch_size,
+        "max_reroutes": MAX_REROUTES,
+        "max_categories": getattr(router.registry, "_max", 30),
+        "seed_set_name": seed_set_name,
+        "seed_set_hash": _seed_set_hash(router.initial_categories),
+        "dataset_path": dataset_path,
+        "dataset_hash": _file_sha1(dataset_path),
+        "permutation_seed": permutation_seed,
+        "temperature": getattr(router.proposer, "temperature", None),
+        "temperature_requested": getattr(router.proposer, "temperature_requested", None),
+        "laya_model": router.laya_model,
+        "backend": router.backend,
+        "proposer_model": _proposer_model(router.proposer),
+        "git_sha": _git_sha(),
+        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+    }
+
+
+def _seed_set_hash(initial_categories: list[dict]) -> str | None:
+    """SHA-1 of the seeded (name, description) list; None for a cold start."""
+    if not initial_categories:
+        return None
+    canonical = json.dumps([[c.get("name"), c.get("description")] for c in initial_categories])
+    return hashlib.sha1(canonical.encode("utf-8")).hexdigest()
+
+
+def _file_sha1(path: str) -> str | None:
+    try:
+        with open(path, "rb") as f:
+            return hashlib.sha1(f.read()).hexdigest()
+    except OSError:
+        return None
+
+
+def _proposer_model(proposer) -> str | None:
+    """The configured OpenAI (primary) model, read defensively from the proposer."""
+    primary = getattr(proposer, "_primary", None)
+    if isinstance(primary, dict):
+        return primary.get("model")
+    return None
+
+
+def _git_sha() -> str | None:
+    try:
+        out = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if out.returncode == 0:
+            return out.stdout.strip() or None
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return None
 
 
 def _retry_pending(
@@ -110,29 +208,3 @@ def _pct(xs: list[float], p: int) -> float:
     s = sorted(xs)
     k = max(0, min(len(s) - 1, int(len(s) * p / 100)))
     return round(s[k], 2)
-
-
-def _summary_metrics(events: list[dict], creations: list[dict], registry_names: set, seeded: set) -> dict:
-    final = {}
-    for e in events:  # last routing decision wins (re-routes overwrite)
-        final[e["id"]] = e
-    final_events = list(final.values())
-    n = len(final_events)
-    correct = sum(1 for e in final_events if e.get("correct"))
-    routed_other = sum(1 for e in final_events if e["route"] == OTHER)
-    handled_ground_truth = [
-        e for e in final_events if e["ground_truth"].startswith("novel")
-    ]
-    novel_other = [e for e in handled_ground_truth if e["route"] == OTHER]
-    return {
-        "accuracy_final": round(correct / n, 4) if n else 0,  # exact label match
-        "coverage_final": round((n - routed_other) / n, 4) if n else 0,  # routed to a real category
-        "label_match_rate_of_covered": round(
-            correct / (n - routed_other), 4
-        ) if routed_other < n else 0.0,
-        "other_rate_final": round(routed_other / n, 4) if n else 0,
-        "novel_prompts": len(handled_ground_truth),
-        "novel_final_other": len(novel_other),
-        "seed_categories_recovered": round(len(registry_names & seeded) / len(seeded), 4) if seeded else 0,
-        "re_route_count": len(events) - len(final_events),
-    }
