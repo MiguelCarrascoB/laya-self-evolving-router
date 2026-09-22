@@ -22,6 +22,9 @@ def test_matrix_completeness_and_kinds():
     assert all(c["few_shot"] == "full" for c in run_ablation.CELLS if c["kind"] == "anchor")
     assert all(c["dedup"] is None for c in run_ablation.CELLS if c["kind"] != "dedup")
     assert all(c.get("enabled", True) is True for c in run_ablation.CELLS if c["kind"] == "dedup")
+    assert all(c["gate"] in {"bucket-topprob", "frozen"} for c in run_ablation.CELLS)
+    assert next(c for c in run_ablation.CELLS if c["id"] == "anchor-cold-as-today")["gate"] == "frozen"
+    assert all(c["gate"] == "bucket-topprob" for c in run_ablation.CELLS if c["id"] != "anchor-cold-as-today")
 
 
 def test_output_naming_including_repeats(tmp_path):
@@ -42,7 +45,7 @@ def test_command_construction():
     cell = next(c for c in run_ablation.CELLS if c["id"] == "seeded-hardened")
     assert run_ablation.build_command(cell, 42, "out.json", "mlx", "model", 0.5) == [
         "uv", "run", "laya-router", "simulate", "--dataset", "data/dataset.jsonl", "--out", "out.json",
-        "--backend", "mlx", "--model", "model", "--threshold", "0.5", "--seed", "42",
+        "--backend", "mlx", "--model", "model", "--threshold", "0.5", "--gate", "bucket-topprob", "--seed", "42",
         "--seed-file", "data/seeds_canonical.json", "--proposer", "hardened", "--few-shot", "none",
     ]
 

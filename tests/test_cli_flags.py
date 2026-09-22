@@ -15,6 +15,7 @@ def test_simulate_defaults():
     assert args.backend == "mlx"
     assert args.model is None
     assert args.threshold == 0.5
+    assert args.gate == "bucket-topprob"
     assert args.seed is None
     assert args.seed_file is None
     assert args.proposer == "as-today"
@@ -30,12 +31,14 @@ def test_simulate_flags():
         "--proposer", "hardened",
         "--few-shot", "three",
         "--threshold", "0.6",
+        "--gate", "frozen",
     ])
     assert args.seed == 42
     assert args.seed_file == "seeds.json"
     assert args.proposer == "hardened"
     assert args.few_shot == "three"
     assert args.threshold == 0.6
+    assert args.gate == "frozen"
 
 
 def test_proposer_choices_reject_invalid():
@@ -61,6 +64,7 @@ def test_live_mirrors_proposer_flags():
     assert args.proposer == "system-placement"
     assert args.few_shot == "none"
     assert args.seed_file == "s.json"
+    assert args.gate == "bucket-topprob"
 
 
 def test_resolve_few_shot_default_full(monkeypatch):

@@ -6,6 +6,7 @@ import time
 
 from .categories import CategoryRegistry
 from .llm import LLMCategoryProposer
+from . import metrics
 
 OTHER = "other"
 QUESTION_ID = "intent"
@@ -24,10 +25,12 @@ class SelfEvolvingRouter:
         few_shot: str | None = None,
         initial_categories: list[dict] | None = None,
         extra_dedup: str | None = None,
+        gate: str = "bucket-topprob",
     ) -> None:
         self.registry = CategoryRegistry(extra_dedup=extra_dedup)
         self.proposer = proposer
         self.threshold = confidence_threshold
+        self.gate = gate
         self.batch_size = batch_size
         self.backend = backend
         self.proposer_mode = proposer_mode
@@ -75,7 +78,14 @@ class SelfEvolvingRouter:
         answer = result["answers"][QUESTION_ID]
         choice = answer["choice"]
 
-        if choice != OTHER and answer["confidence"] < self.threshold:
+        demoted, reason = metrics.demotes_to_other(
+            choice=choice,
+            probabilities=answer["probabilities"],
+            confidence=answer["confidence"],
+            gate=self.gate,
+            threshold=self.threshold,
+        )
+        if demoted:
             route, reason = OTHER, "low_confidence"
         elif choice == OTHER:
             route, reason = OTHER, "other_bucket"
@@ -131,6 +141,7 @@ class SelfEvolvingRouter:
     def stats(self) -> dict:
         return {
             "backend": self.backend,
+            "gate": self.gate,
             "categories": self.registry.names(),
             "llm_calls": self.llm_calls,
             "proposer_stats": self.proposer.stats,

@@ -1,6 +1,35 @@
 """Pure math tests for metrics.compute_metrics (no Laya / no router import)."""
 
-from laya_router.metrics import compute_metrics
+from laya_router.metrics import compute_metrics, demotes_to_other, gate_thresholds
+
+
+def test_frozen_gate_preserves_strict_historical_check():
+    assert demotes_to_other(choice="x", probabilities={}, confidence=0.49, gate="frozen") == (True, "low_confidence")
+    assert demotes_to_other(choice="x", probabilities={}, confidence=0.5, gate="frozen") == (False, "")
+    assert demotes_to_other(choice="other", probabilities={}, confidence=0.0, gate="frozen") == (False, "")
+
+
+def test_bucket_topprob_boundaries():
+    ten = {str(i): 0.0 for i in range(9)}
+    eleven = {str(i): 0.0 for i in range(10)}
+    ten["x"] = 0.5
+    eleven["x"] = 0.9
+    assert demotes_to_other(choice="x", probabilities=ten, confidence=0.0, gate="bucket-topprob") == (False, "")
+    assert demotes_to_other(choice="x", probabilities=eleven, confidence=0.0, gate="bucket-topprob") == (False, "")
+    ten["x"] = 0.49
+    eleven["x"] = 0.89
+    assert demotes_to_other(choice="x", probabilities=ten, confidence=1.0, gate="bucket-topprob")[0]
+    assert demotes_to_other(choice="x", probabilities=eleven, confidence=1.0, gate="bucket-topprob")[0]
+
+
+def test_bucket_gate_safe_other_and_empty_probabilities():
+    assert demotes_to_other(choice="other", probabilities={"other": 0.0}, confidence=0.0, gate="bucket-topprob") == (False, "")
+    assert demotes_to_other(choice="x", probabilities={}, confidence=0.0, gate="bucket-topprob") == (False, "")
+
+
+def test_gate_threshold_shapes():
+    assert gate_thresholds("bucket-topprob", 0.5) == {"<=10 options": 0.5, "11+ options": 0.9}
+    assert gate_thresholds("frozen", 0.7) == {"frozen threshold": 0.7}
 
 
 def _cat(name, seeded=False):

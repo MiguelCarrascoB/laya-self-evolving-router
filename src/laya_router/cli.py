@@ -9,6 +9,7 @@ import sys
 
 from .llm import load_providers
 from .router import SelfEvolvingRouter
+from .metrics import GATE_POLICIES
 from .simulation import run_simulation
 
 PROPOSER_MODES = ["blind", "as-today", "hardened", "system-placement"]
@@ -26,6 +27,7 @@ def build_parser() -> argparse.ArgumentParser:
     sim.add_argument("--backend", default="mlx", choices=["mlx", "coreml"])
     sim.add_argument("--model", default=None, help="laya checkpoint id or dir")
     sim.add_argument("--threshold", type=float, default=0.5)
+    sim.add_argument("--gate", default="bucket-topprob", choices=GATE_POLICIES)
     sim.add_argument("--seed", type=int, default=None, help="permutation seed (default: file order)")
     sim.add_argument("--seed-file", default=None, help="JSON list of {name, description} seed categories")
     sim.add_argument("--proposer", default="as-today", choices=PROPOSER_MODES)
@@ -37,6 +39,7 @@ def build_parser() -> argparse.ArgumentParser:
     live.add_argument("--backend", default="mlx", choices=["mlx", "coreml"])
     live.add_argument("--model", default=None)
     live.add_argument("--threshold", type=float, default=0.5)
+    live.add_argument("--gate", default="bucket-topprob", choices=GATE_POLICIES)
     live.add_argument("--seed-file", default=None, help="JSON list of {name, description} seed categories")
     live.add_argument("--proposer", default="as-today", choices=PROPOSER_MODES)
     live.add_argument("--few-shot", default=None, choices=FEWSHOT_CHOICES,
@@ -86,6 +89,7 @@ def main() -> None:
     router = SelfEvolvingRouter(
         proposer=load_providers(),
         confidence_threshold=args.threshold,
+        gate=args.gate,
         laya_model=model,
         backend=args.backend,
         proposer_mode=args.proposer,
@@ -93,12 +97,13 @@ def main() -> None:
         initial_categories=initial_categories,
         extra_dedup=extra_dedup,
     )
-    print(f"Router ready | backend={args.backend} model={model} dedup={args.dedup}", file=sys.stderr)
+    print(f"Router ready | backend={args.backend} model={model} gate={args.gate} dedup={args.dedup}", file=sys.stderr)
 
     if args.cmd == "simulate":
         print(
             f"run config | dataset={args.dataset} backend={args.backend} model={model} "
             f"threshold={args.threshold} proposer={args.proposer} few_shot={few_shot} "
+            f"gate={args.gate} "
             f"seed={args.seed} seed_file={args.seed_file} "
             f"initial_categories={len(initial_categories or [])} dedup={args.dedup}",
             file=sys.stderr,

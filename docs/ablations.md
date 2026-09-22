@@ -7,6 +7,17 @@ cell. Factorial cells use no proposer few-shot context; anchor cells use the
 full context. Runs use MLX, `aac6fef/laya-mlx`, and threshold `0.5` unless
 overridden on the command line.
 
+### Confidence gate policy
+
+The default `bucket-topprob` gate uses the calibrated top probability rather
+than normalized-entropy confidence: it demotes a non-`other` choice below
+`0.5` when there are at most 10 probability entries, and below `0.9` when
+there are 11 or more. The measured firing rates were 64%, 7%, and 0% at 5,
+10, and 11 options respectively; at 11+ options the mean top probability was
+`0.98+`. The explicit `frozen` policy preserves the historical strict
+`confidence < 0.5` behavior. `anchor-cold-as-today` uses `frozen` as the
+historical-fidelity / README anchor; every other cell uses `bucket-topprob`.
+
 | Kind | Cells | Flags |
 |---|---|---|
 | factorial | `cold-*`, `seeded-*` (8) | `--few-shot none`; seeded cells use `data/seeds_canonical.json` |

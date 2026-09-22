@@ -10,6 +10,45 @@ byte-compatible for the README and visualizer.
 from __future__ import annotations
 
 OTHER = "other"
+GATE_POLICIES = ("bucket-topprob", "frozen")
+
+
+def demotes_to_other(
+    *,
+    choice: str,
+    probabilities: dict[str, float],
+    confidence: float,
+    gate: str,
+    threshold: float = 0.5,
+) -> tuple[bool, str]:
+    """Return whether a choice is demoted and the reason for that decision.
+
+    ``frozen`` preserves the historical strict confidence check exactly.
+    ``bucket-topprob`` uses a 0.5 top-probability threshold for at most ten
+    probability entries and 0.9 for eleven or more.  ``other`` is never
+    demoted. Missing or empty probabilities are safe and do not demote under
+    the bucket policy.
+    """
+    if gate not in GATE_POLICIES:
+        raise ValueError(f"unknown gate policy: {gate}")
+    if choice == OTHER:
+        return False, ""
+    if gate == "frozen":
+        return (confidence < threshold), "low_confidence" if confidence < threshold else ""
+    if not probabilities:
+        return False, ""
+    limit = 0.5 if len(probabilities) <= 10 else 0.9
+    demote = probabilities.get(choice, 0.0) < limit
+    return demote, "low_confidence" if demote else ""
+
+
+def gate_thresholds(gate: str, threshold: float) -> dict:
+    """Describe the thresholds used by a supported gate policy."""
+    if gate not in GATE_POLICIES:
+        raise ValueError(f"unknown gate policy: {gate}")
+    if gate == "frozen":
+        return {"frozen threshold": threshold}
+    return {"<=10 options": 0.5, "11+ options": 0.9}
 
 
 def compute_metrics(

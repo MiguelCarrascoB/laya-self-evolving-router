@@ -11,7 +11,7 @@ import random
 import subprocess
 import time
 
-from .metrics import compute_metrics
+from .metrics import compute_metrics, gate_thresholds
 from .router import OTHER, SelfEvolvingRouter
 
 LEARN_BATCH = 10
@@ -121,6 +121,10 @@ def _build_run_config(
         "proposer_mode": router.proposer_mode,
         "few_shot": router.few_shot,
         "threshold": router.threshold,
+        "gate": getattr(router, "gate", "bucket-topprob"),
+        "gate_thresholds": gate_thresholds(
+            getattr(router, "gate", "bucket-topprob"), router.threshold
+        ),
         "batch_size": router.batch_size,
         "max_reroutes": MAX_REROUTES,
         "max_categories": getattr(router.registry, "_max", 30),
