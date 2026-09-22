@@ -171,6 +171,31 @@ def _load(path: Path) -> dict[str, Any] | None:
         return None
 
 
+def _path_keys(path: str | Path) -> tuple[str, ...]:
+    """Return stable aliases used by judge files from different invocations."""
+    raw = str(path)
+    resolved = str(Path(path).resolve())
+    name = Path(path).name
+    return tuple(dict.fromkeys((raw, resolved, name)))
+
+
+def _judge_summary(judge: dict[str, Any], path: str | Path) -> dict[str, Any]:
+    """Find a judge result whether it was saved with relative or absolute paths."""
+    for key in _path_keys(path):
+        value = judge.get(key)
+        if isinstance(value, dict):
+            summary = value.get("summary")
+            return summary if isinstance(summary, dict) else {}
+    target = str(Path(path).resolve())
+    for key, value in judge.items():
+        if key == "run_config" or not isinstance(value, dict):
+            continue
+        if str(Path(key).resolve()) == target:
+            summary = value.get("summary")
+            return summary if isinstance(summary, dict) else {}
+    return {}
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--ablation-dir", required=True, type=Path)
@@ -196,9 +221,12 @@ def main(argv: list[str] | None = None) -> int:
         groups.setdefault((parsed["cell"], parsed["dedup_tag"]), []).append(data)
     baseline_data = [(str(p), _load(p)) for p in args.baselines if _load(p) is not None]
     judge: dict[str, Any] = {}
+    judge_out = args.ablation_dir / "judge.json"
+    loaded_judge = _load(judge_out)
+    if loaded_judge is not None:
+        judge = loaded_judge
     if args.judge:
         judge_paths = [str(p) for p in paths] + [p for p, _ in baseline_data]
-        judge_out = args.ablation_dir / "judge.json"
         if judge_paths:
             subprocess.run(["uv", "run", "python", "scripts/judge_registry.py", *judge_paths, "--out", str(judge_out)], check=True)
             loaded = _load(judge_out)
@@ -212,7 +240,7 @@ def main(argv: list[str] | None = None) -> int:
         for metric in ("dup_pair_count", "dup_pair_count_strict", "fragmentation_max", "n_junk"):
             vals = []
             for r in runs:
-                summary = (judge.get(r["_parsed"]["path"], {}) or {}).get("summary", {})
+                summary = _judge_summary(judge, r["_parsed"]["path"])
                 vals.append(summary.get(metric))
             agg[metric] = _stat(vals)
         agg["low_confidence_share"] = {"mean": agg["gate_decomposition"]["low_confidence_share"], "range": None, "min": None, "max": None}
@@ -234,7 +262,7 @@ def main(argv: list[str] | None = None) -> int:
     for path, data in baseline_data:
         row = {"path": path, "accuracy_final": _value(data, "accuracy_final"), "label_match_rate_of_covered": _value(data, "label_match_rate_of_covered"),
                "coverage_final": _value(data, "coverage_final"), "other_rate_final": _value(data, "other_rate_final"), "llm_calls": _value(data, "llm_calls")}
-        row["judge"] = (judge.get(path) or {}).get("summary")
+        row["judge"] = _judge_summary(judge, path)
         baselines.append(row)
     output = {"cells": cells, "paired_deltas": comparisons, "noise_floor": noise_floor([r for runs in cell_runs.values() for r in runs]),
               "baselines": baselines, "run_config_consistency": {"ok": not consistency_issues, "issues": consistency_issues}}

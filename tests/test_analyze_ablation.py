@@ -49,3 +49,12 @@ def test_gate_and_markdown():
 def test_baseline_shape_is_tolerated():
     assert mod._value({"metrics": {"accuracy_final": .2}}, "accuracy_final") == .2
     assert mod._value({"metrics": {}}, "coverage_final") is None
+
+
+def test_judge_summary_matches_path_aliases(tmp_path):
+    run_path = tmp_path / "cold-blind-fshot-none-p13.json"
+    summary = {"dup_pair_count": 2, "fragmentation_max": 4, "n_junk": 1}
+    judge = {str(run_path.resolve()): {"summary": summary}}
+
+    assert mod._judge_summary(judge, str(run_path)) == summary
+    assert mod._judge_summary({run_path.name: {"summary": summary}}, run_path) == summary
