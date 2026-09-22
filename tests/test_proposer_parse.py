@@ -40,3 +40,22 @@ def test_parse_skips_items_without_description():
         '[{"name": "foo"}, {"name": "bar", "description": "A real intent"}]'
     )
     assert out == [ProposedCategory("bar", "A real intent")]
+
+
+def test_parse_skips_non_dict_items():
+    out = LLMCategoryProposer._parse('[null, "not an object", {"name": "ok", "description": " fine "}]')
+    assert out == [ProposedCategory("ok", "fine")]
+
+
+def test_parse_strips_name_and_description_whitespace():
+    out = LLMCategoryProposer._parse(
+        '[{"name": "  scheduling  ", "description": "  Planning tasks  "}]'
+    )
+    assert out == [ProposedCategory("scheduling", "Planning tasks")]
+
+
+def test_parse_records_long_description_drop():
+    text = '[{"name": "too_long", "description": "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen"}]'
+    out, drops = LLMCategoryProposer._parse_with_drops(text)
+    assert out == []
+    assert drops == [{"name": "too_long", "reason": "desc_too_long"}]

@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import sys
 from dataclasses import dataclass
 
 try:
@@ -106,8 +107,76 @@ def _build_system_prompt() -> str:
     return SYSTEM_PROMPT_TEMPLATE.format(examples=examples)
 
 
+def _few_shot_value(few_shot: str) -> str:
+    value = few_shot.strip().lower()
+    return "three" if value == "3" else value
+
+
+def _existing_text(existing: list[dict] | None) -> str:
+    lines = []
+    for category in existing or []:
+        if isinstance(category, dict):
+            name = category.get("name", "")
+            description = category.get("description", "")
+        else:
+            name, description = category, ""
+        if name:
+            lines.append(f"- {name}: {description}")
+    return "\n".join(lines) if lines else "(none yet)"
+
+
+def build_system_prompt(*, existing: list[dict] | None, mode: str, few_shot: str) -> str:
+    """Render the proposer system prompt for an ablation configuration."""
+    few_shot = _few_shot_value(few_shot)
+    if few_shot == "none":
+        prompt = SYSTEM_PROMPT_NO_FEWSHOT
+    else:
+        n = 3 if few_shot == "three" else len(FEWSHOT_EXAMPLES)
+        examples = "\n".join(f'- "{name}" — {desc}' for name, desc in FEWSHOT_EXAMPLES[:n])
+        prompt = SYSTEM_PROMPT_TEMPLATE.format(examples=examples)
+    if mode == "system-placement":
+        prompt += (
+            "\n\nExisting categories (name: description). Do not duplicate these concepts:\n"
+            f"{_existing_text(existing)}\n\n"
+            "Do not duplicate these concepts. Do not near-duplicate the concept of any existing category."
+        )
+    return prompt
+
+
+def build_user_prompt(prompts: list[str], existing: list[dict] | None, *, mode: str) -> str:
+    """Render the proposer user prompt for an ablation configuration."""
+    existing_text = _existing_text(existing)
+    if mode == "blind" or mode == "system-placement":
+        prompt_text = "\n".join(prompts)
+        return (
+            "Unclassified prompts (one per line):\n"
+            f"{prompt_text}\n\n"
+            "Propose up to 3 new, DISTINCT intent categories covering the biggest coherent\n"
+            "groups of prompts. Prefer the canonical name for a standard intent; if a canonical intent is too broad or\n"
+            "diverse in this batch, propose narrower, specific categories instead so the router can match them confidently. If nothing new is needed, return [].\n\n"
+            "Proposal rules:\n"
+            "- name: 1-3 words, lowercase, underscores, a distinct concrete intent.\n"
+            "- description: at most 12 words stating what belongs in the category.\n"
+            "- No catch-alls (\"general_help\", \"recommendations\", \"information\", \"requests\").\n\n"
+            "Return ONLY a JSON array, for example:\n"
+            "[{\"name\": \"translation\", \"description\": \"Converting text between languages.\"}]"
+        )
+    prompt = PROMPT_TEMPLATE.format(existing=existing_text, prompts="\n".join(prompts))
+    if mode == "hardened":
+        prompt = prompt.replace(
+            "Propose up to 3 new, DISTINCT intent categories",
+            "0. Overlap check: compare the batch against EVERY existing category above. If a category already covers an intent, do not propose it — the router will re-route those prompts. Return [] unless the batch contains genuinely NEW intents.\n\nPropose up to 3 new, DISTINCT intent categories",
+            1,
+        ).replace(
+            "Prefer the canonical name for a standard intent;",
+            'Prefer established conventional names for standard intents (e.g. "translation", "scheduling") when they fit;',
+            1,
+        )
+    return prompt
+
+
 class LLMCategoryProposer:
-    def __init__(self, primary_cfg: dict, fallback_cfg: dict | None) -> None:
+    def __init__(self, primary_cfg: dict, fallback_cfg: dict | None, temperature: float | None = 0.0) -> None:
         from openai import OpenAI
 
         self._client = OpenAI(
@@ -116,6 +185,10 @@ class LLMCategoryProposer:
         )
         self._primary = primary_cfg
         self._fallback = fallback_cfg
+        self.temperature = temperature
+        self.temperature_requested = temperature
+        self.stats = {"calls": 0, "attempts": 0, "fallback_calls": 0,
+                      "empty_responses": 0, "parse_failures": 0, "parse_drops": []}
         self._fallback_client = None
         if fallback_cfg:
             self._fallback_client = OpenAI(
@@ -127,23 +200,23 @@ class LLMCategoryProposer:
         self,
         prompts: list[str],
         existing: list[dict],
-        system_prompt: str | None = None,
+        *,
+        mode: str = "as-today",
+        few_shot: str | None = None,
     ) -> list[ProposedCategory]:
-        """Proposes 0-2 new categories for prompts the router can't classify.
+        """Proposes up to 3 new categories for prompts the router can't classify.
 
         `existing` is a list of dicts with "name" and "description" keys, so the
         model can avoid proposing near-duplicates of what already exists.
-        """
-        if system_prompt is None:
-            system_prompt = _build_system_prompt()
 
-        existing_lines = [
-            f'- {c["name"]}: {c["description"]}' for c in existing if c.get("name")
-        ]
-        existing_text = "\n".join(existing_lines) if existing_lines else "(none yet)"
-        prompt = PROMPT_TEMPLATE.format(
-            existing=existing_text, prompts="\n".join(prompts)
-        )
+        ``stats`` records calls (propose invocations), attempts (endpoint calls),
+        fallback_calls (endpoint calls through fallback), empty_responses,
+        parse_failures (no-JSON ValueErrors), and parse_drops (validation drops).
+        """
+        self.stats["calls"] += 1
+        selected_few_shot = few_shot if few_shot is not None else os.getenv("LAYASYS_FEWSHOT", "full")
+        system_prompt = build_system_prompt(existing=existing, mode=mode, few_shot=selected_few_shot)
+        prompt = build_user_prompt(prompts, existing, mode=mode)
         messages = [{"role": "system", "content": system_prompt}]
         messages.append({"role": "user", "content": prompt})
 
@@ -155,17 +228,37 @@ class LLMCategoryProposer:
 
         last_err: Exception | None = None
         for label, client, cfg in attempts:
-            import sys
             try:
-                resp = client.chat.completions.create(
-                    model=cfg["model"],
-                    messages=messages,
-                    max_completion_tokens=1200,
-                )
-                out = self._parse(resp.choices[0].message.content or "")
+                kwargs = dict(model=cfg["model"], messages=messages, max_completion_tokens=1200)
+                if self.temperature is not None:
+                    kwargs["temperature"] = self.temperature
+                self.stats["attempts"] += 1
+                if label == "fallback":
+                    self.stats["fallback_calls"] += 1
+                try:
+                    resp = client.chat.completions.create(**kwargs)
+                except Exception as e:
+                    from openai import APIError
+                    if self.temperature is None or not isinstance(e, APIError):
+                        raise
+                    print("[llm] temperature unsupported; falling back to provider default", file=sys.stderr)
+                    self.temperature = None
+                    self.stats["attempts"] += 1
+                    resp = client.chat.completions.create(
+                        model=cfg["model"], messages=messages, max_completion_tokens=1200
+                    )
+                content = resp.choices[0].message.content or ""
+                if not content:
+                    self.stats["empty_responses"] += 1
+                out, drops = self._parse_with_drops(content)
+                self.stats["parse_drops"].extend(drops)
                 if label != "primary":
                     print(f"[llm] primary failed; recovered via {label}", file=sys.stderr)
                 return out
+            except ValueError as e:
+                self.stats["parse_failures"] += 1
+                last_err = e
+                print(f"[llm] {label} attempt failed: {e}", file=sys.stderr)
             except Exception as e:  # noqa: BLE001
                 last_err = e
                 print(f"[llm] {label} attempt failed: {e}", file=sys.stderr)
@@ -173,29 +266,45 @@ class LLMCategoryProposer:
 
     @staticmethod
     def _from_obj(obj) -> list[ProposedCategory]:
+        return LLMCategoryProposer._from_obj_with_drops(obj)[0]
+
+    @staticmethod
+    def _from_obj_with_drops(obj) -> tuple[list[ProposedCategory], list[dict]]:
         if not isinstance(obj, list):
-            return []
+            return [], []
         out = []
+        drops = []
         for item in obj:
             if not isinstance(item, dict):
+                drops.append({"name": None, "reason": "not_dict"})
                 continue
-            name, desc = item.get("name", "").strip(), item.get("description", "").strip()
-            if name and desc and len(desc.split()) <= 14:
+            raw_name, raw_desc = item.get("name", ""), item.get("description", "")
+            name = raw_name.strip() if isinstance(raw_name, str) else ""
+            desc = raw_desc.strip() if isinstance(raw_desc, str) else ""
+            if not name or not desc:
+                drops.append({"name": name or None, "reason": "missing_fields"})
+            elif len(desc.split()) > 14:
+                drops.append({"name": name, "reason": "desc_too_long"})
+            else:
                 out.append(ProposedCategory(name=name, description=desc))
-        return out
+        return out, drops
 
     @staticmethod
     def _parse(text: str) -> list[ProposedCategory]:
+        return LLMCategoryProposer._parse_with_drops(text)[0]
+
+    @staticmethod
+    def _parse_with_drops(text: str) -> tuple[list[ProposedCategory], list[dict]]:
         text = text.strip()
         # Direct JSON (whole payload).
         try:
-            return LLMCategoryProposer._from_obj(json.loads(text))
+            return LLMCategoryProposer._from_obj_with_drops(json.loads(text))
         except Exception:
             pass
         # Simple bracketed arrays (descriptions have no nesting).
         for cand in re.findall(r"\[[^\[\]]*\]", text):
             try:
-                parsed = LLMCategoryProposer._from_obj(json.loads(cand))
+                parsed = LLMCategoryProposer._from_obj_with_drops(json.loads(cand))
                 if parsed:
                     return parsed
             except Exception:
@@ -204,7 +313,7 @@ class LLMCategoryProposer:
         m = re.search(r"\[.*\]", text, re.S)
         if m:
             try:
-                return LLMCategoryProposer._from_obj(json.loads(m.group(0)))
+                return LLMCategoryProposer._from_obj_with_drops(json.loads(m.group(0)))
             except Exception:
                 pass
         raise ValueError(f"no JSON array in LLM response: {text[:120]!r}")
