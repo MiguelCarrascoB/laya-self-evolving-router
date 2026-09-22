@@ -13,6 +13,7 @@ class Category:
     description: str  # one-line criteria passed to Laya
     created_at_step: int
     created_from: list[str] = field(default_factory=list)  # prompt ids
+    seeded: bool = False
 
 
 class CategoryRegistry:
@@ -21,6 +22,8 @@ class CategoryRegistry:
     def __init__(self, max_categories: int = MAX_CATEGORIES) -> None:
         self._cats: list[Category] = []
         self._max = max_categories
+        self.rejections: list[dict] = []
+        self.seed_rejections: list[dict] = []
 
     def all(self) -> list[Category]:
         return list(self._cats)
@@ -48,11 +51,55 @@ class CategoryRegistry:
 
     def add(self, name: str, description: str, step: int, source_ids: list[str]) -> Category | None:
         """Returns the new Category, or None if duplicate / cap reached."""
-        if self.is_full() or self.has_similar(name):
+        if self.is_full():
+            self.rejections.append(
+                {"name": name, "reason": "cap", "step": step, "source_ids": list(source_ids)}
+            )
+            return None
+        if self.has_similar(name):
+            self.rejections.append(
+                {"name": name, "reason": "duplicate", "step": step, "source_ids": list(source_ids)}
+            )
             return None
         cat = Category(name=name, description=description, created_at_step=step, created_from=source_ids)
         self._cats.append(cat)
         return cat
+
+    def seed(
+        self, name: str, description: str, step: int = 0, source_ids: tuple[str, ...] = ()
+    ) -> Category | None:
+        """Insert an initial category, applying the same cap and duplicate gates as ``add``."""
+        if self.is_full():
+            self.seed_rejections.append(
+                {"name": name, "reason": "cap", "step": step, "source_ids": list(source_ids)}
+            )
+            return None
+        if self.has_similar(name):
+            self.seed_rejections.append(
+                {"name": name, "reason": "duplicate", "step": step, "source_ids": list(source_ids)}
+            )
+            return None
+        cat = Category(
+            name=name,
+            description=description,
+            created_at_step=step,
+            created_from=list(source_ids),
+            seeded=True,
+        )
+        self._cats.append(cat)
+        return cat
+
+    def as_dicts(self) -> list[dict]:
+        return [
+            {
+                "name": c.name,
+                "description": c.description,
+                "created_at_step": c.created_at_step,
+                "created_from": c.created_from,
+                "seeded": c.seeded,
+            }
+            for c in self._cats
+        ]
 
     def growth_history(self) -> list[dict]:
         return [{"step": c.created_at_step, "name": c.name, "from": c.created_from} for c in self._cats]
