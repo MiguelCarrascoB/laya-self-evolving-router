@@ -138,7 +138,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     else:
         import laya_mlx as laya  # type: ignore
         agent = laya.load(args.model, dtype="float16")
-    prompts = [json.loads(line) for line in Path(args.dataset).read_text(encoding="utf-8").splitlines()]
+    prompts = [json.loads(line) for line in Path(args.dataset).read_text(encoding="utf-8").splitlines() if line.strip()]
     if args.limit is not None:
         prompts = prompts[:args.limit]
     discovered = load_discovered(Path(args.discovered))
@@ -176,12 +176,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def main() -> None:
-    p = argparse.ArgumentParser()
-    p.add_argument("--dataset", default="data/dataset.jsonl"); p.add_argument("--model", default="aac6fef/laya-mlx")
-    p.add_argument("--backend", default="mlx"); p.add_argument("--out", default="results/probe/probe_results.json")
-    p.add_argument("--sizes", default="4,9,10,15,30"); p.add_argument("--discovered", default="results/results-v3-full.json")
-    p.add_argument("--limit", type=int)
-    args = p.parse_args(); args.sizes = [int(x) for x in args.sizes.split(",") if x.strip()]
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--dataset", default="data/dataset.jsonl", help="JSONL prompts with id/text/ground_truth (default: %(default)s)")
+    p.add_argument("--model", default="aac6fef/laya-mlx", help="Laya model id (default: %(default)s)")
+    p.add_argument("--backend", default="mlx", help="Laya backend: mlx or coreml (default: %(default)s)")
+    p.add_argument("--out", default="results/probe/probe_results.json", help="output JSON (default: %(default)s)")
+    p.add_argument("--sizes", default="4,9,10,15,30", help="comma-separated registry sizes k (default: %(default)s)")
+    p.add_argument("--discovered", default="results/results-v3-full.json", help="results JSON whose final registry is the 'discovered' family")
+    p.add_argument("--limit", type=int, help="only probe the first N prompts")
+    args = p.parse_args()
+    try:
+        args.sizes = [int(x) for x in args.sizes.split(",") if x.strip()]
+    except ValueError:
+        p.error(f"--sizes must be comma-separated integers, got {args.sizes!r}")
     run(args)
 
 

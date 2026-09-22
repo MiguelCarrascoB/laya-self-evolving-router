@@ -97,26 +97,29 @@ def _load_ledger(path: Path) -> list[dict[str, Any]]:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--list", action="store_true", dest="list_matrix")
-    parser.add_argument("--only")
-    parser.add_argument("--kinds")
-    parser.add_argument("--seeds", default=",".join(map(str, DEFAULT_SEEDS)))
-    parser.add_argument("--repeat", type=int, default=1)
-    parser.add_argument("--out-dir", default="results/ablation")
-    parser.add_argument("--backend", default="mlx")
-    parser.add_argument("--model", default="aac6fef/laya-mlx")
-    parser.add_argument("--threshold", type=float, default=0.5)
-    parser.add_argument("--jobs", type=int, default=1)
-    parser.add_argument("--force", action="store_true")
-    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--list", action="store_true", dest="list_matrix", help="print the cell matrix and exit")
+    parser.add_argument("--only", help="comma-separated cell ids to run")
+    parser.add_argument("--kinds", help="comma-separated cell kinds to run (factorial, anchor, stress, dedup)")
+    parser.add_argument("--seeds", default=",".join(map(str, DEFAULT_SEEDS)), help="comma-separated permutation seeds (default: %(default)s)")
+    parser.add_argument("--repeat", type=int, default=1, help="repeats per cell/seed; >1 adds -rN filename suffixes")
+    parser.add_argument("--out-dir", default="results/ablation", help="output directory (default: %(default)s)")
+    parser.add_argument("--backend", default="mlx", help="Laya backend passed to simulate (default: %(default)s)")
+    parser.add_argument("--model", default="aac6fef/laya-mlx", help="Laya model id (default: %(default)s)")
+    parser.add_argument("--threshold", type=float, default=0.5, help="routing threshold (default: %(default)s)")
+    parser.add_argument("--jobs", type=int, default=1, help="accepted for compatibility; runs are always sequential")
+    parser.add_argument("--force", action="store_true", help="re-run even when a valid output JSON exists")
+    parser.add_argument("--dry-run", action="store_true", help="print the commands without running them")
     args = parser.parse_args(argv)
     if args.repeat < 1 or args.jobs < 1:
         parser.error("--repeat and --jobs must be positive")
+    try:
+        seeds = _parse_seeds(args.seeds)
+    except ValueError:
+        parser.error(f"--seeds must be comma-separated integers, got {args.seeds!r}")
     if args.list_matrix:
         _print_matrix()
         return 0
 
-    seeds = _parse_seeds(args.seeds)
     cells = selected_cells(args.only, args.kinds)
     jobs_note = " (sequential; MLX jobs are intentionally not parallelized)" if args.jobs > 1 else ""
     if args.jobs > 1:

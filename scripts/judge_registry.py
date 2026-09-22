@@ -192,11 +192,28 @@ def _judge(client: Any, model: str, categories: list[dict[str, Any]]) -> dict[st
     return _parse_judge_response(last)
 
 
+def _prior_key(output: dict[str, Any], path: Path) -> str | None:
+    """Return the key of a prior judgment for ``path``, relative or absolute.
+
+    Resumed judge files may have been written from another cwd or with the
+    other path spelling; matching by resolved path avoids paid re-judging and
+    duplicate entries. The prior key is kept as-is.
+    """
+    if str(path) in output:
+        return str(path)
+    target = path.resolve()
+    for key in output:
+        if key != "run_config" and Path(key).resolve() == target:
+            return key
+    return None
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("results", nargs="+", type=Path)
-    parser.add_argument("--out", required=True, type=Path)
-    parser.add_argument("--model", default=None)
+    parser.add_argument("results", nargs="+", type=Path, help="run result JSON files to judge")
+    parser.add_argument("--out", required=True, type=Path,
+                        help="judge JSON to write; prior successful judgments in it are reused")
+    parser.add_argument("--model", default=None, help="judge model (default: $OPENAI_MODEL or gpt-5.6-luna)")
     args = parser.parse_args(argv)
     load_dotenv()
     model = args.model or os.getenv("OPENAI_MODEL", "gpt-5.6-luna")
@@ -215,11 +232,15 @@ def main(argv: list[str] | None = None) -> int:
                     output[key] = value
     rows = []
     for path in args.results:
-        if str(path) in output:
-            rows.append((str(path), output[str(path)]["summary"]))
+        prior_key = _prior_key(output, path)
+        if prior_key is not None:
+            rows.append((prior_key, output[prior_key]["summary"]))
             continue
         try:
             data = json.loads(path.read_text())
+        except OSError as exc:
+            print(f"{path}: unreadable ({exc.strerror or exc}); skipped", file=sys.stderr)
+            continue
         except (ValueError, json.JSONDecodeError):
             print(f"{path}: not valid JSON; skipped", file=sys.stderr)
             continue

@@ -198,12 +198,13 @@ def _judge_summary(judge: dict[str, Any], path: str | Path) -> dict[str, Any]:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--ablation-dir", required=True, type=Path)
-    parser.add_argument("--baselines", nargs="*", type=Path, default=[])
-    parser.add_argument("--out", required=True, type=Path)
-    parser.add_argument("--table-out", type=Path)
+    parser.add_argument("--ablation-dir", required=True, type=Path, help="directory of run_ablation.py result JSONs")
+    parser.add_argument("--baselines", nargs="*", type=Path, default=[], help="extra non-ablation result JSONs to summarise")
+    parser.add_argument("--out", required=True, type=Path, help="analysis JSON to write")
+    parser.add_argument("--table-out", type=Path, help="optional Markdown table output")
     judge_group = parser.add_mutually_exclusive_group()
-    judge_group.add_argument("--judge", action="store_true")
+    judge_group.add_argument("--judge", action="store_true",
+                             help="run scripts/judge_registry.py (needs OPENAI_API_KEY); otherwise reuse <ablation-dir>/judge.json if present")
     judge_group.add_argument("--skip-judge", action="store_true", help="explicitly disable registry judging")
     args = parser.parse_args(argv)
     if not args.ablation_dir.is_dir():
@@ -211,24 +212,28 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     groups: dict[tuple[str, str | None], list[dict[str, Any]]] = {}
     paths = sorted(args.ablation_dir.glob("*.json"))
+    run_paths: list[Path] = []
     for path in paths:
         parsed = parse_filename(path)
         if not parsed:
             print(f"skipping unparseable ablation file: {path}", file=sys.stderr); continue
+        run_paths.append(path)
         data = _load(path)
         if data is None: print(f"skipping invalid JSON: {path}", file=sys.stderr); continue
         data["_parsed"] = parsed
         groups.setdefault((parsed["cell"], parsed["dedup_tag"]), []).append(data)
-    baseline_data = [(str(p), _load(p)) for p in args.baselines if _load(p) is not None]
+    baseline_data = [(str(p), data) for p in args.baselines if (data := _load(p)) is not None]
     judge: dict[str, Any] = {}
     judge_out = args.ablation_dir / "judge.json"
     loaded_judge = _load(judge_out)
     if loaded_judge is not None:
         judge = loaded_judge
     if args.judge:
-        judge_paths = [str(p) for p in paths] + [p for p, _ in baseline_data]
+        # Only run files: ledger/summary/analysis/judge JSONs are not registries.
+        judge_paths = [str(p) for p in run_paths] + [p for p, _ in baseline_data]
         if judge_paths:
-            subprocess.run(["uv", "run", "python", "scripts/judge_registry.py", *judge_paths, "--out", str(judge_out)], check=True)
+            judge_script = Path(__file__).resolve().parent / "judge_registry.py"
+            subprocess.run(["uv", "run", "python", str(judge_script), *judge_paths, "--out", str(judge_out)], check=True)
             loaded = _load(judge_out)
             judge = loaded or {}
     cells: dict[str, Any] = {}

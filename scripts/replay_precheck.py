@@ -214,11 +214,11 @@ def run_replay(results: dict, proposer, max_calls: int = 36, seed: int = 0) -> d
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--out", default="results/replay/precheck.json")
-    parser.add_argument("--max-calls", type=int, default=36)
-    parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--input", default="results/results-v3-full.json")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--out", default="results/replay/precheck.json", help="report JSON (default: %(default)s)")
+    parser.add_argument("--max-calls", type=int, default=36, help="proposer call budget, capped at 36 (default: %(default)s)")
+    parser.add_argument("--seed", type=int, default=0, help="batch sampling seed (default: %(default)s)")
+    parser.add_argument("--input", default="results/results-v3-full.json", help="results JSON to replay (default: %(default)s)")
     args = parser.parse_args()
     with open(args.input) as fh:
         results = json.load(fh)
@@ -231,7 +231,8 @@ def main() -> None:
     print("|---|---:|---:|---:|---:|---:|")
     for mode, s in report["modes"].items():
         calls = sum(1 for c in report["call_records"] if c["mode"] == mode)
-        print(f"| {mode} | {s['proposals']} | {s['empty'] / calls:.1%} | {s['has_similar_rejected']} | {s['overlap_flagged']} | {s['parse_failures']} |")
+        empty_rate = f"{s['empty'] / calls:.1%}" if calls else "n/a"
+        print(f"| {mode} | {s['proposals']} | {empty_rate} | {s['has_similar_rejected']} | {s['overlap_flagged']} | {s['parse_failures']} |")
     print("\n| dedup variant | blocked | TP-proxy | missed |")
     print("|---|---:|---:|---:|")
     for variant, s in report["dedup_variants"].items():
