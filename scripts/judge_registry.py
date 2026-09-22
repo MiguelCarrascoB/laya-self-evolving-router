@@ -60,12 +60,20 @@ def build_user_prompt(categories: list[dict[str, Any]]) -> str:
     )
 
 
-def _normalize_categories(raw: list[Any]) -> list[dict[str, Any]]:
-    """Accept the documented objects and older result files' name strings."""
+def _normalize_categories(
+    raw: list[Any], descriptions: dict[str, str] | None = None
+) -> list[dict[str, Any]]:
+    """Accept the documented objects and older result files' name strings.
+
+    Historical result files store registry categories as bare names; their
+    birth descriptions are recovered from ``category_creations`` via
+    ``descriptions`` so the judge can weigh scope overlap.
+    """
+    descriptions = descriptions or {}
     normalized = []
     for category in raw:
         if isinstance(category, str):
-            normalized.append({"name": category, "description": ""})
+            normalized.append({"name": category, "description": descriptions.get(category, "")})
         elif isinstance(category, dict):
             normalized.append(category)
     return normalized
@@ -201,13 +209,29 @@ def main(argv: list[str] | None = None) -> int:
         registry = data.get("registry_final")
         if not isinstance(registry, dict) or not isinstance(registry.get("categories"), list):
             raise SystemExit(f"{path}: missing registry_final.categories")
-        categories = _normalize_categories(registry["categories"])
+        created = {
+            c.get("name", ""): c.get("description", "")
+            for c in data.get("category_creations", [])
+            if isinstance(c, dict)
+        }
+        categories = _normalize_categories(registry["categories"], created)
         if len(categories) != len(registry["categories"]):
             print(f"{path}: ignored malformed registry category entries", file=sys.stderr)
         judged = _judge(client, model, categories)
         judged["fragmentation"] = _fragmentation(judged["mapping"])
         judged["summary"] = _summary(len(categories), judged["mapping"], judged["dup_pairs"])
-        output[str(path)] = {k: judged[k] for k in ("mapping", "dup_pairs", "fragmentation", "summary")}
+        judged_ok = bool(judged["mapping"]) and len(judged["mapping"]) == len(categories)
+        if not judged_ok:
+            print(
+                f"{path}: judge returned an incomplete mapping "
+                f"({len(judged['mapping'])}/{len(categories)}); treat results as unreliable",
+                file=sys.stderr,
+            )
+        output[str(path)] = {
+            **{k: judged[k] for k in ("mapping", "dup_pairs", "fragmentation", "summary")},
+            "warnings": judged.get("_warnings", []),
+            "judged_ok": judged_ok,
+        }
         s = judged["summary"]
         rows.append((str(path), s))
     args.out.parent.mkdir(parents=True, exist_ok=True)
