@@ -1060,7 +1060,7 @@ function renderEvents(){
       if (Number(v) > bestP){ bestP = Number(v); bestName = k; }
     });
     const conf = bestP;
-    const isCat = (data.registry_final.categories || []).includes(e.route);
+    const isCat = (data.registry_final.categories || []).some(c => (typeof c === "string" ? c : c.name) === e.route);
     return `<div class="ev ${t === current ? 'cur' : ''}" data-step="${t}">
       <div class="id">${esc(e.id || ('#' + t))}<div class="stepn">step ${t}</div></div>
       <div class="body"><div class="txt" title="click to expand">${esc(e.text || '')}</div>
