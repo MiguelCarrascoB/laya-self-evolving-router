@@ -8,6 +8,7 @@ def test_near_duplicate_and_substring_semantics():
     assert registry.add("plant_care", "Plants", 1, ["p1"])
     assert registry.add("houseplant_care", "Houseplants", 2, ["p2"]) is None
     assert registry.rejections[-1]["reason"] == "duplicate"
+    assert registry.rejections[-1]["rule"] == "substring"
 
     for name in ("math_homework", "math_help", "cooking_recipes", "cooking_tips", "shopping", "gift_ideas"):
         assert registry.add(name, name, 3, []) is not None
@@ -22,7 +23,7 @@ def test_seeded_categories_and_rejections():
 
     assert registry.seed("houseplant_care", "Houseplants", source_ids=("s1",)) is None
     assert registry.seed_rejections == [
-        {"name": "houseplant_care", "reason": "duplicate", "step": 0, "source_ids": ["s1"]}
+        {"name": "houseplant_care", "reason": "duplicate", "rule": "substring", "step": 0, "source_ids": ["s1"]}
     ]
     assert registry.add("houseplant_care", "Houseplants", 4, ["p4"]) is None
     assert registry.rejections[-1]["reason"] == "duplicate"
@@ -40,6 +41,7 @@ def test_seed_and_add_fill_cap():
     assert registry.rejections[-1] == {
         "name": "last",
         "reason": "cap",
+        "rule": "cap",
         "step": 99,
         "source_ids": ["p99"],
     }
@@ -80,7 +82,37 @@ def test_add_rejection_records_all_fields():
         {
             "name": "houseplant_care",
             "reason": "duplicate",
+            "rule": "substring",
             "step": 8,
             "source_ids": ["p8", "p9"],
         }
     ]
+
+
+def test_token_jaccard_dedup_is_opt_in_and_descriptions_participate():
+    today = CategoryRegistry()
+    assert today.add("travel_planning", "trip planning", 0, [])
+    assert today.add("travel_logistics", "freight logistics", 0, [])
+
+    hardened = CategoryRegistry(extra_dedup="token_jaccard_025")
+    assert hardened.add("travel_planning", "", 0, [])
+    assert hardened.add("travel_logistics", "", 0, []) is None
+    assert hardened.rejections[-1]["reason"] == "duplicate"
+    assert hardened.rejections[-1]["rule"] == "token_overlap"
+
+    descriptions = CategoryRegistry(extra_dedup="token_jaccard_025")
+    assert descriptions.add("travel_planning", "trip itineraries", 0, [])
+    assert descriptions.add("travel_logistics", "freight shipping", 0, [])
+
+
+def test_token_jaccard_dedup_applies_to_seed():
+    registry = CategoryRegistry(extra_dedup="token_jaccard_025")
+    assert registry.seed("travel_planning", "")
+    assert registry.seed("travel_logistics", "") is None
+    assert registry.seed_rejections[-1]["rule"] == "token_overlap"
+
+
+def test_token_jaccard_dedup_allows_unrelated_names():
+    registry = CategoryRegistry(extra_dedup="token_jaccard_025")
+    assert registry.add("gift_ideas", "presents", 0, [])
+    assert registry.add("scheduling", "calendar", 0, [])

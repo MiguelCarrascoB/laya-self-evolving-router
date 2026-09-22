@@ -20,19 +20,22 @@ def test_matrix_completeness_and_kinds():
     assert sum(c["kind"] == "dedup" for c in run_ablation.CELLS) == 2
     assert all(c["few_shot"] == "none" for c in run_ablation.CELLS if c["kind"] in {"factorial", "stress", "dedup"})
     assert all(c["few_shot"] == "full" for c in run_ablation.CELLS if c["kind"] == "anchor")
-    assert all(c.get("enabled", True) is False for c in run_ablation.CELLS if c["kind"] == "dedup")
+    assert all(c["dedup"] is None for c in run_ablation.CELLS if c["kind"] != "dedup")
+    assert all(c.get("enabled", True) is True for c in run_ablation.CELLS if c["kind"] == "dedup")
 
 
 def test_output_naming_including_repeats(tmp_path):
     cell = run_ablation.CELLS[0]
     assert run_ablation.output_path(tmp_path, cell, 13, 1) == tmp_path / "cold-blind-fshot-none-p13.json"
     assert run_ablation.output_path(tmp_path, cell, 13, 2, 2) == tmp_path / "cold-blind-fshot-none-p13-r2.json"
+    dedup = next(c for c in run_ablation.CELLS if c["id"] == "dedup-cold-hardened")
+    assert run_ablation.output_path(tmp_path, dedup, 13, 1) == tmp_path / "dedup-cold-hardened-fshot-none-p13-dedup-jaccard.json"
 
 
 def test_filters():
     assert [c["id"] for c in run_ablation.selected_cells(only="cold-blind,anchor-cold-as-today")] == ["cold-blind", "anchor-cold-as-today"]
     assert all(c["kind"] == "factorial" for c in run_ablation.selected_cells(kinds="factorial"))
-    assert not run_ablation.selected_cells(only="dedup-cold-hardened")
+    assert [c["id"] for c in run_ablation.selected_cells(only="dedup-cold-hardened")] == ["dedup-cold-hardened"]
 
 
 def test_command_construction():
@@ -42,6 +45,9 @@ def test_command_construction():
         "--backend", "mlx", "--model", "model", "--threshold", "0.5", "--seed", "42",
         "--seed-file", "data/seeds_canonical.json", "--proposer", "hardened", "--few-shot", "none",
     ]
+
+    dedup = next(c for c in run_ablation.CELLS if c["id"] == "dedup-cold-hardened")
+    assert run_ablation.build_command(dedup, 42, "out.json", "mlx", "model", 0.5)[-2:] == ["--dedup", "token-jaccard-025"]
 
 
 def test_skip_existing_logic(tmp_path):

@@ -13,25 +13,27 @@ from typing import Any
 
 
 CELLS: tuple[dict[str, Any], ...] = (
-    {"id": "cold-blind", "seed_file": None, "proposer": "blind", "few_shot": "none", "kind": "factorial"},
-    {"id": "cold-as-today", "seed_file": None, "proposer": "as-today", "few_shot": "none", "kind": "factorial"},
-    {"id": "cold-hardened", "seed_file": None, "proposer": "hardened", "few_shot": "none", "kind": "factorial"},
-    {"id": "cold-system-placement", "seed_file": None, "proposer": "system-placement", "few_shot": "none", "kind": "factorial"},
-    {"id": "seeded-blind", "seed_file": "data/seeds_canonical.json", "proposer": "blind", "few_shot": "none", "kind": "factorial"},
-    {"id": "seeded-as-today", "seed_file": "data/seeds_canonical.json", "proposer": "as-today", "few_shot": "none", "kind": "factorial"},
-    {"id": "seeded-hardened", "seed_file": "data/seeds_canonical.json", "proposer": "hardened", "few_shot": "none", "kind": "factorial"},
-    {"id": "seeded-system-placement", "seed_file": "data/seeds_canonical.json", "proposer": "system-placement", "few_shot": "none", "kind": "factorial"},
-    {"id": "anchor-cold-as-today", "seed_file": None, "proposer": "as-today", "few_shot": "full", "kind": "anchor"},
-    {"id": "anchor-seeded-hardened", "seed_file": "data/seeds_canonical.json", "proposer": "hardened", "few_shot": "full", "kind": "anchor"},
-    {"id": "stress-imperfect-hardened", "seed_file": "data/seeds_imperfect.json", "proposer": "hardened", "few_shot": "none", "kind": "stress"},
-    {"id": "dedup-seeded-hardened", "seed_file": "data/seeds_canonical.json", "proposer": "hardened", "few_shot": "none", "kind": "dedup", "enabled": False},
-    {"id": "dedup-cold-hardened", "seed_file": None, "proposer": "hardened", "few_shot": "none", "kind": "dedup", "enabled": False},
+    {"id": "cold-blind", "seed_file": None, "proposer": "blind", "few_shot": "none", "kind": "factorial", "dedup": None},
+    {"id": "cold-as-today", "seed_file": None, "proposer": "as-today", "few_shot": "none", "kind": "factorial", "dedup": None},
+    {"id": "cold-hardened", "seed_file": None, "proposer": "hardened", "few_shot": "none", "kind": "factorial", "dedup": None},
+    {"id": "cold-system-placement", "seed_file": None, "proposer": "system-placement", "few_shot": "none", "kind": "factorial", "dedup": None},
+    {"id": "seeded-blind", "seed_file": "data/seeds_canonical.json", "proposer": "blind", "few_shot": "none", "kind": "factorial", "dedup": None},
+    {"id": "seeded-as-today", "seed_file": "data/seeds_canonical.json", "proposer": "as-today", "few_shot": "none", "kind": "factorial", "dedup": None},
+    {"id": "seeded-hardened", "seed_file": "data/seeds_canonical.json", "proposer": "hardened", "few_shot": "none", "kind": "factorial", "dedup": None},
+    {"id": "seeded-system-placement", "seed_file": "data/seeds_canonical.json", "proposer": "system-placement", "few_shot": "none", "kind": "factorial", "dedup": None},
+    {"id": "anchor-cold-as-today", "seed_file": None, "proposer": "as-today", "few_shot": "full", "kind": "anchor", "dedup": None},
+    {"id": "anchor-seeded-hardened", "seed_file": "data/seeds_canonical.json", "proposer": "hardened", "few_shot": "full", "kind": "anchor", "dedup": None},
+    {"id": "stress-imperfect-hardened", "seed_file": "data/seeds_imperfect.json", "proposer": "hardened", "few_shot": "none", "kind": "stress", "dedup": None},
+    {"id": "dedup-seeded-hardened", "seed_file": "data/seeds_canonical.json", "proposer": "hardened", "few_shot": "none", "kind": "dedup", "dedup": "token-jaccard-025", "enabled": True},
+    {"id": "dedup-cold-hardened", "seed_file": None, "proposer": "hardened", "few_shot": "none", "kind": "dedup", "dedup": "token-jaccard-025", "enabled": True},
 )
 DEFAULT_SEEDS = (13, 42, 77)
 
 
 def output_path(out_dir: str | Path, cell: dict[str, Any], permseed: int, repeat: int, repeats: int = 1) -> Path:
     name = f"{cell['id']}-fshot-{cell['few_shot']}-p{permseed}"
+    if cell.get("dedup"):
+        name += "-dedup-jaccard"
     if repeats > 1:
         name += f"-r{repeat}"
     return Path(out_dir) / f"{name}.json"
@@ -58,6 +60,8 @@ def build_command(cell: dict[str, Any], permseed: int, out: str | Path, backend:
     if cell.get("seed_file"):
         command += ["--seed-file", cell["seed_file"]]
     command += ["--proposer", cell["proposer"], "--few-shot", cell["few_shot"]]
+    if cell.get("dedup"):
+        command += ["--dedup", cell["dedup"]]
     return command
 
 
@@ -75,10 +79,10 @@ def _parse_seeds(value: str) -> list[int]:
 
 
 def _print_matrix() -> None:
-    print("id                         kind       seed_file                         proposer          few_shot  enabled")
+    print("id                         kind       seed_file                         proposer          few_shot  dedup              enabled")
     print("-" * 112)
     for cell in CELLS:
-        print(f"{cell['id']:<26} {cell['kind']:<10} {(cell.get('seed_file') or 'cold'):<34} {cell['proposer']:<17} {cell['few_shot']:<9} {cell.get('enabled', True)}")
+        print(f"{cell['id']:<26} {cell['kind']:<10} {(cell.get('seed_file') or 'cold'):<34} {cell['proposer']:<17} {cell['few_shot']:<9} {(cell.get('dedup') or 'none'):<18} {cell.get('enabled', True)}")
 
 
 def _load_ledger(path: Path) -> list[dict[str, Any]]:

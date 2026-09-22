@@ -23,8 +23,9 @@ class SelfEvolvingRouter:
         proposer_mode: str = "as-today",
         few_shot: str | None = None,
         initial_categories: list[dict] | None = None,
+        extra_dedup: str | None = None,
     ) -> None:
-        self.registry = CategoryRegistry()
+        self.registry = CategoryRegistry(extra_dedup=extra_dedup)
         self.proposer = proposer
         self.threshold = confidence_threshold
         self.batch_size = batch_size

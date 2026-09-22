@@ -13,6 +13,7 @@ from .simulation import run_simulation
 
 PROPOSER_MODES = ["blind", "as-today", "hardened", "system-placement"]
 FEWSHOT_CHOICES = ["none", "three", "full"]
+DEDUP_CHOICES = ["none", "token-jaccard-025"]
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -30,6 +31,7 @@ def build_parser() -> argparse.ArgumentParser:
     sim.add_argument("--proposer", default="as-today", choices=PROPOSER_MODES)
     sim.add_argument("--few-shot", default=None, choices=FEWSHOT_CHOICES,
                      help="few-shot examples (default: env LAYASYS_FEWSHOT, else full)")
+    sim.add_argument("--dedup", default="none", choices=DEDUP_CHOICES)
 
     live = sub.add_parser("live", help="route a prompt and watch categories grow")
     live.add_argument("--backend", default="mlx", choices=["mlx", "coreml"])
@@ -39,6 +41,7 @@ def build_parser() -> argparse.ArgumentParser:
     live.add_argument("--proposer", default="as-today", choices=PROPOSER_MODES)
     live.add_argument("--few-shot", default=None, choices=FEWSHOT_CHOICES,
                       help="few-shot examples (default: env LAYASYS_FEWSHOT, else full)")
+    live.add_argument("--dedup", default="none", choices=DEDUP_CHOICES)
 
     return ap
 
@@ -48,6 +51,10 @@ def _resolve_few_shot(arg_few_shot: str | None) -> str:
     if arg_few_shot is not None:
         return arg_few_shot
     return os.getenv("LAYASYS_FEWSHOT", "full").strip().lower()
+
+
+def _resolve_dedup(value: str | None) -> str | None:
+    return "token_jaccard_025" if value == "token-jaccard-025" else None
 
 
 def _load_seed_categories(path: str | None) -> list[dict] | None:
@@ -73,6 +80,7 @@ def main() -> None:
         model = args.model or "aac6fef/laya-coreml"
 
     few_shot = _resolve_few_shot(args.few_shot)
+    extra_dedup = _resolve_dedup(args.dedup)
     initial_categories = _load_seed_categories(args.seed_file)
 
     router = SelfEvolvingRouter(
@@ -83,15 +91,16 @@ def main() -> None:
         proposer_mode=args.proposer,
         few_shot=few_shot,
         initial_categories=initial_categories,
+        extra_dedup=extra_dedup,
     )
-    print(f"Router ready | backend={args.backend} model={model}", file=sys.stderr)
+    print(f"Router ready | backend={args.backend} model={model} dedup={args.dedup}", file=sys.stderr)
 
     if args.cmd == "simulate":
         print(
             f"run config | dataset={args.dataset} backend={args.backend} model={model} "
             f"threshold={args.threshold} proposer={args.proposer} few_shot={few_shot} "
             f"seed={args.seed} seed_file={args.seed_file} "
-            f"initial_categories={len(initial_categories or [])}",
+            f"initial_categories={len(initial_categories or [])} dedup={args.dedup}",
             file=sys.stderr,
         )
         results = run_simulation(

@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from laya_router.cli import _load_seed_categories, _resolve_few_shot, build_parser
+from laya_router.cli import _load_seed_categories, _resolve_dedup, _resolve_few_shot, build_parser
 
 
 def test_simulate_defaults():
@@ -19,6 +19,7 @@ def test_simulate_defaults():
     assert args.seed_file is None
     assert args.proposer == "as-today"
     assert args.few_shot is None
+    assert args.dedup == "none"
 
 
 def test_simulate_flags():
@@ -40,6 +41,12 @@ def test_simulate_flags():
 def test_proposer_choices_reject_invalid():
     with pytest.raises(SystemExit):
         build_parser().parse_args(["simulate", "--proposer", "bogus"])
+
+
+def test_dedup_flag_maps_to_registry_setting():
+    assert _resolve_dedup("none") is None
+    assert _resolve_dedup("token-jaccard-025") == "token_jaccard_025"
+    assert build_parser().parse_args(["live", "--dedup", "token-jaccard-025"]).dedup == "token-jaccard-025"
 
 
 def test_few_shot_choices_reject_invalid():
