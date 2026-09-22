@@ -32,8 +32,8 @@ flowchart LR
     F -- "re-route pending" --> B
 ```
 
-- Options are rebuilt per call from the registry, one name and a one-line description each, capped at 30 because Laya's context is 512 tokens. The registry starts empty.
-- A top non-`other` pick scoring under `--threshold` (default `0.5`) is treated as `other`.
+- Options are rebuilt per call from the registry, one name and a one-line description each, capped at 30 because Laya's question head is 192 tokens (see [Limits](#limits)). The registry starts empty unless `--seed-file` provides initial categories.
+- A top non-`other` pick failing the confidence gate is treated as `other`. `--gate bucket-topprob` (default) demotes picks whose calibrated probability is under `0.5` at ≤10 options and under `0.9` at 11+; `--gate frozen` keeps the original `--threshold` (default `0.5`) entropy-confidence check for reproducing earlier runs.
 - The proposer sees one batch of 10 `other` prompts at a time and must answer with a JSON array of up to 3 categories, or `[]`. It calls an OpenAI-compatible endpoint and falls back to LMStudio.
 - Every decision, probability, latency, category birth and re-route is written to `results/*.json`, which is what the visualizer reads.
 
@@ -60,6 +60,14 @@ uv sync
 cp .env.example .env        # fill OPENAI_API_KEY (gitignored - never commit it)
 uv run laya-router simulate  # closed-loop over data/dataset.jsonl → results/results.json
 uv run laya-router live      # type prompts, watch categories appear
+
+# experiment controls (both commands)
+#   --seed N                 stream permutation for paired comparisons; omit for file order
+#   --seed-file FILE         seeded start (data/seeds_canonical.json | data/seeds_imperfect.json)
+#   --proposer MODE          blind | as-today | hardened | system-placement
+#   --few-shot FS            none | three | full (default: LAYASYS_FEWSHOT env, then full)
+#   --gate POLICY            bucket-topprob (default) | frozen
+#   --dedup RULE             none (default) | token-jaccard-025
 
 # view the dashboard (serve once from the repo root)
 python -m http.server 8787
@@ -101,7 +109,7 @@ The proposer's system prompt carries the canonical seed names with their descrip
 | Decision latency p50 / p95 | 32.0 ms / 37.6 ms |
 | LLM calls / wall time | 39 / 133 s |
 
-Coverage stops near 65% because 97–99% of the remaining `other` events are Laya deciding that no single category fits, not prompts lost to the threshold. Getting past that means changing routing policy (threshold, bucketing, hierarchy) rather than changing the proposer.
+Coverage stops near 65% because essentially all residual `other` events are Laya deciding that no single category fits — 100% and 99% of them across the two reproduction runs, with confidence-gate demotions accounting for 0 and 2. Getting past that ceiling means changing routing policy (bucketing, hierarchy, multi-label) rather than changing the proposer.
 
 ### Cross-backend, base proposer
 
@@ -135,7 +143,7 @@ Re-routing is where coverage comes from. 486 held prompts get a second pass once
 
 - One label per prompt. A prompt spanning two intents has to lose one of them, which is most of the
   residual `other`-rate.
-- The registry stops at 30 categories, because the option list shares Laya's 512-token context.
+- The registry stops at 30 categories. The binding constraint is Laya's 192-token question-head budget (not the 512-token total): one-line descriptions fit only ~7–9 options before truncation, and at 30 options each category reaches Laya as ~4–5 tokens. The routing probe (`scripts/probe_routing.py`) measured name-only criteria beating full descriptions by 2–3× at every registry size — the criteria format is the top item of the next campaign.
 - The registry only grows. Nothing merges near-duplicates or retires a category that stops earning
   its slot, and nothing persists across runs.
 - In `live` mode the proposer runs after every `other` prompt rather than in batches of 10, so it
