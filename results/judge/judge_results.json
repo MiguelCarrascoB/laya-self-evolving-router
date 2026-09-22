@@ -1,0 +1,644 @@
+{
+  "run_config": {
+    "model": "gpt-5.6-luna",
+    "temperature": 0,
+    "timestamp": "2026-09-22T16:51:36.337332+00:00",
+    "policy_version": "q14-v1"
+  },
+  "results/results.json": {
+    "mapping": [
+      {
+        "name": "math_fundamentals",
+        "mapped_to": "math_homework",
+        "why": "Covers introductory mathematical concepts and problem-solving."
+      },
+      {
+        "name": "programming_basics",
+        "mapped_to": "coding_help",
+        "why": "Addresses beginner programming, data structures, and web development questions."
+      },
+      {
+        "name": "travel_comparison",
+        "mapped_to": "travel_planning",
+        "why": "Compares destinations to support travel decisions and plans."
+      },
+      {
+        "name": "gift_selection",
+        "mapped_to": "shopping",
+        "why": "Selecting personalized gifts is a product-shopping intent."
+      },
+      {
+        "name": "web_layout",
+        "mapped_to": "coding_help",
+        "why": "Covers implementation questions about arranging elements in web pages."
+      },
+      {
+        "name": "sports_statistics",
+        "mapped_to": "novel_esports_betting",
+        "why": "Performance and head-to-head analysis aligns with the available sports/esports intent."
+      },
+      {
+        "name": "purchase_advice",
+        "mapped_to": "shopping",
+        "why": "Concerns choosing products and evaluating used goods before purchase."
+      },
+      {
+        "name": "copy_editing",
+        "mapped_to": "writing_editing",
+        "why": "Rewriting prose for tone, clarity, and audience is editing."
+      },
+      {
+        "name": "meal_pairing",
+        "mapped_to": "cooking_recipes",
+        "why": "Choosing complementary dishes is a cooking and meal-planning request."
+      },
+      {
+        "name": "fitness_health",
+        "mapped_to": "fitness_health",
+        "why": "Directly concerns exercise recovery and overtraining symptoms."
+      },
+      {
+        "name": "scheduling",
+        "mapped_to": "scheduling",
+        "why": "Directly covers reminders and recurring task timing."
+      },
+      {
+        "name": "data_analysis",
+        "mapped_to": "data_analysis",
+        "why": "Analyzing relationships, correlations, and important columns is data analysis."
+      },
+      {
+        "name": "translation",
+        "mapped_to": "translation",
+        "why": "Directly covers translation and natural phrasing across languages and dialects."
+      },
+      {
+        "name": "statistical_significance",
+        "mapped_to": "data_analysis",
+        "why": "Testing whether group differences are meaningful is a data-analysis task."
+      },
+      {
+        "name": "software_configuration",
+        "mapped_to": "coding_help",
+        "why": "Configuring Node and Docker development environments is technical coding support."
+      },
+      {
+        "name": "watch_basics",
+        "mapped_to": "novel_watch_collecting",
+        "why": "Covers watch types, storage, and ownership practices."
+      },
+      {
+        "name": "travel_logistics",
+        "mapped_to": "travel_planning",
+        "why": "Transportation routes and public transit are components of planning a trip."
+      },
+      {
+        "name": "technical_troubleshooting",
+        "mapped_to": "coding_help",
+        "why": "Diagnosing build and development-environment failures is coding support."
+      },
+      {
+        "name": "astronomy_concepts",
+        "mapped_to": "novel_astronomy",
+        "why": "Directly covers astronomical objects, measurements, distances, and concepts."
+      },
+      {
+        "name": "plant_care",
+        "mapped_to": "novel_home_plants",
+        "why": "Covers care and growing conditions for houseplants."
+      },
+      {
+        "name": "genealogy_research",
+        "mapped_to": "novel_genealogy_research",
+        "why": "Directly concerns researching ancestors in historical records."
+      },
+      {
+        "name": "data_wrangling",
+        "mapped_to": "data_analysis",
+        "why": "Restructuring and cleaning tabular or array data is part of data analysis."
+      },
+      {
+        "name": "travel_planning",
+        "mapped_to": "travel_planning",
+        "why": "Directly covers itineraries, documents, connectivity, and transportation."
+      },
+      {
+        "name": "culinary_skills",
+        "mapped_to": "cooking_recipes",
+        "why": "Covers cooking techniques, temperatures, tasting, and preparation fixes."
+      },
+      {
+        "name": "food_safety",
+        "mapped_to": "cooking_recipes",
+        "why": "Safe cooking, handling, and storage are food-preparation concerns."
+      },
+      {
+        "name": "strength_training",
+        "mapped_to": "fitness_health",
+        "why": "Progressive lifting and resistance-training practices are fitness intents."
+      },
+      {
+        "name": "mobile_roaming",
+        "mapped_to": "travel_planning",
+        "why": "Using cellular service abroad supports trip preparation and logistics."
+      },
+      {
+        "name": "deadline_prioritization",
+        "mapped_to": "scheduling",
+        "why": "Ordering tasks around imminent deadlines is a scheduling and time-management intent."
+      },
+      {
+        "name": "file_streaming",
+        "mapped_to": "coding_help",
+        "why": "Efficiently streaming large files is a programming implementation question."
+      },
+      {
+        "name": "language_nuance",
+        "mapped_to": "translation",
+        "why": "Interpreting cultural, emotional, and implied meaning in expressions aligns with nuanced translation."
+      }
+    ],
+    "dup_pairs": [
+      {
+        "a": "gift_selection",
+        "b": "purchase_advice",
+        "borderline": false,
+        "why": "Both handle choosing products for purchase, with gift selection being a recipient-focused version of purchase advice."
+      },
+      {
+        "a": "software_configuration",
+        "b": "technical_troubleshooting",
+        "borderline": true,
+        "why": "Node or Docker configuration failures can reasonably be routed to either environment configuration or development troubleshooting."
+      }
+    ],
+    "fragmentation": {
+      "coding_help": 5,
+      "cooking_recipes": 3,
+      "data_analysis": 3,
+      "fitness_health": 2,
+      "math_homework": 1,
+      "novel_astronomy": 1,
+      "novel_esports_betting": 1,
+      "novel_genealogy_research": 1,
+      "novel_home_plants": 1,
+      "novel_watch_collecting": 1,
+      "scheduling": 2,
+      "shopping": 2,
+      "translation": 2,
+      "travel_planning": 4,
+      "writing_editing": 1
+    },
+    "summary": {
+      "n_categories": 30,
+      "n_mapped": 30,
+      "n_junk": 0,
+      "n_unclear": 0,
+      "dup_pair_count": 2,
+      "dup_pair_count_strict": 1,
+      "fragmentation_max": 5,
+      "fragmentation": {
+        "coding_help": 5,
+        "cooking_recipes": 3,
+        "data_analysis": 3,
+        "fitness_health": 2,
+        "math_homework": 1,
+        "novel_astronomy": 1,
+        "novel_esports_betting": 1,
+        "novel_genealogy_research": 1,
+        "novel_home_plants": 1,
+        "novel_watch_collecting": 1,
+        "scheduling": 2,
+        "shopping": 2,
+        "translation": 2,
+        "travel_planning": 4,
+        "writing_editing": 1
+      }
+    },
+    "warnings": [],
+    "judged_ok": true
+  },
+  "results/results-v3-full.json": {
+    "mapping": [
+      {
+        "name": "coding_help",
+        "mapped_to": "coding_help",
+        "why": "Directly covers programming explanations, debugging, and layout problems."
+      },
+      {
+        "name": "math_homework",
+        "mapped_to": "math_homework",
+        "why": "Directly covers solving and explaining mathematical concepts and operations."
+      },
+      {
+        "name": "scheduling",
+        "mapped_to": "scheduling",
+        "why": "Covers planning study blocks and distributing tasks over time."
+      },
+      {
+        "name": "fitness_health",
+        "mapped_to": "fitness_health",
+        "why": "Directly covers exercise, stretching, and physical-health questions."
+      },
+      {
+        "name": "travel_planning",
+        "mapped_to": "travel_planning",
+        "why": "Directly covers destinations, trips, and itineraries."
+      },
+      {
+        "name": "shopping",
+        "mapped_to": "shopping",
+        "why": "Directly covers choosing, comparing, and buying products or gifts."
+      },
+      {
+        "name": "cooking_recipes",
+        "mapped_to": "cooking_recipes",
+        "why": "Directly covers recipes, ingredients, side dishes, and meal preparation."
+      },
+      {
+        "name": "game_rules",
+        "mapped_to": "novel_board_games",
+        "why": "Covers rules, setup, and gameplay for board and card games."
+      },
+      {
+        "name": "beekeeping",
+        "mapped_to": "novel_beekeeping",
+        "why": "Directly covers bee-colony management and hive care."
+      },
+      {
+        "name": "writing_editing",
+        "mapped_to": "writing_editing",
+        "why": "Directly covers improving, rewriting, and polishing written text."
+      },
+      {
+        "name": "data_analysis",
+        "mapped_to": "data_analysis",
+        "why": "Directly covers summarizing, comparing, and finding patterns in datasets."
+      },
+      {
+        "name": "translation",
+        "mapped_to": "translation",
+        "why": "Directly covers converting text between languages or adjusting register."
+      },
+      {
+        "name": "genealogy",
+        "mapped_to": "novel_genealogy_research",
+        "why": "Directly covers family trees, ancestry records, and genealogical information."
+      },
+      {
+        "name": "watch_care",
+        "mapped_to": "novel_watch_collecting",
+        "why": "Covers storing, maintaining, and protecting watches."
+      },
+      {
+        "name": "data_wrangling",
+        "mapped_to": "data_analysis",
+        "why": "Data cleaning and restructuring are narrower data-analysis sub-intents."
+      },
+      {
+        "name": "astronomy",
+        "mapped_to": "novel_astronomy",
+        "why": "Directly covers astronomical objects, measurements, and concepts."
+      },
+      {
+        "name": "plant_care",
+        "mapped_to": "novel_home_plants",
+        "why": "Directly covers care of houseplants and their growing conditions."
+      },
+      {
+        "name": "vehicle_maintenance",
+        "mapped_to": "novel_car_maintenance",
+        "why": "Directly covers inspecting, servicing, and maintaining vehicles."
+      },
+      {
+        "name": "food_safety",
+        "mapped_to": "cooking_recipes",
+        "why": "Food handling and safe cooking are a distinct food-preparation sub-intent."
+      },
+      {
+        "name": "sports_betting",
+        "mapped_to": "novel_esports_betting",
+        "why": "Covers odds, wagers, and betting-market movements."
+      },
+      {
+        "name": "travel_logistics",
+        "mapped_to": "travel_planning",
+        "why": "Practical travel requirements and border logistics are narrower travel-planning intents."
+      },
+      {
+        "name": "language_interpretation",
+        "mapped_to": "translation",
+        "why": "Interpreting implied meaning and context is a narrower language-translation intent."
+      },
+      {
+        "name": "music_composition",
+        "mapped_to": "novel_music_theory",
+        "why": "Covers harmonies, chord progressions, melodies, and composition."
+      },
+      {
+        "name": "home_improvement",
+        "mapped_to": "junk",
+        "why": "Household repair and DIY projects match none of the listed ground-truth intents."
+      },
+      {
+        "name": "language_learning",
+        "mapped_to": "translation",
+        "why": "Pronunciation, vocabulary, and language meaning are a narrower language intent under the available labels."
+      },
+      {
+        "name": "wine_tasting",
+        "mapped_to": "novel_wine_tasting",
+        "why": "Directly covers wine aromas, flavors, and tasting characteristics."
+      },
+      {
+        "name": "game_design",
+        "mapped_to": "novel_board_games",
+        "why": "Designing cards, mechanics, and gameplay systems belongs to the board-games intent."
+      },
+      {
+        "name": "calendar_dates",
+        "mapped_to": "scheduling",
+        "why": "Calendar relationships and date lookup support the scheduling intent."
+      },
+      {
+        "name": "watch_mechanics",
+        "mapped_to": "novel_watch_collecting",
+        "why": "Watch mechanisms and specifications are a distinct watch-related sub-intent."
+      },
+      {
+        "name": "statistical_methods",
+        "mapped_to": "data_analysis",
+        "why": "Imputation and estimation are narrower statistical data-analysis methods."
+      }
+    ],
+    "dup_pairs": [],
+    "fragmentation": {
+      "coding_help": 1,
+      "cooking_recipes": 2,
+      "data_analysis": 3,
+      "fitness_health": 1,
+      "math_homework": 1,
+      "novel_astronomy": 1,
+      "novel_beekeeping": 1,
+      "novel_board_games": 2,
+      "novel_car_maintenance": 1,
+      "novel_esports_betting": 1,
+      "novel_genealogy_research": 1,
+      "novel_home_plants": 1,
+      "novel_music_theory": 1,
+      "novel_watch_collecting": 2,
+      "novel_wine_tasting": 1,
+      "scheduling": 2,
+      "shopping": 1,
+      "translation": 3,
+      "travel_planning": 2,
+      "writing_editing": 1
+    },
+    "summary": {
+      "n_categories": 30,
+      "n_mapped": 29,
+      "n_junk": 1,
+      "n_unclear": 0,
+      "dup_pair_count": 0,
+      "dup_pair_count_strict": 0,
+      "fragmentation_max": 3,
+      "fragmentation": {
+        "coding_help": 1,
+        "cooking_recipes": 2,
+        "data_analysis": 3,
+        "fitness_health": 1,
+        "math_homework": 1,
+        "novel_astronomy": 1,
+        "novel_beekeeping": 1,
+        "novel_board_games": 2,
+        "novel_car_maintenance": 1,
+        "novel_esports_betting": 1,
+        "novel_genealogy_research": 1,
+        "novel_home_plants": 1,
+        "novel_music_theory": 1,
+        "novel_watch_collecting": 2,
+        "novel_wine_tasting": 1,
+        "scheduling": 2,
+        "shopping": 1,
+        "translation": 3,
+        "travel_planning": 2,
+        "writing_editing": 1
+      }
+    },
+    "warnings": [],
+    "judged_ok": true
+  },
+  "results/results-coreml.json": {
+    "mapping": [
+      {
+        "name": "programming_help",
+        "mapped_to": "coding_help",
+        "why": "Covers general programming concepts and CSS implementation help."
+      },
+      {
+        "name": "math_help",
+        "mapped_to": "math_homework",
+        "why": "Explains mathematical concepts and operations."
+      },
+      {
+        "name": "destination_comparison",
+        "mapped_to": "travel_planning",
+        "why": "Compares destinations to support travel decisions."
+      },
+      {
+        "name": "gift_selection",
+        "mapped_to": "shopping",
+        "why": "Selects physical products as gifts based on preferences and occasion."
+      },
+      {
+        "name": "study_planning",
+        "mapped_to": "scheduling",
+        "why": "Organizes study sessions and time blocks."
+      },
+      {
+        "name": "food_pairing",
+        "mapped_to": "cooking_recipes",
+        "why": "Provides meal accompaniment and pairing guidance."
+      },
+      {
+        "name": "product_buying",
+        "mapped_to": "shopping",
+        "why": "Evaluates physical products before purchase."
+      },
+      {
+        "name": "text_transformation",
+        "mapped_to": "writing_editing",
+        "why": "Primarily covers rewriting and changing wording, although it also mentions translation."
+      },
+      {
+        "name": "task_scheduling",
+        "mapped_to": "scheduling",
+        "why": "Distributes tasks across specified days or times."
+      },
+      {
+        "name": "product_care",
+        "mapped_to": "junk",
+        "why": "General maintenance and storage of physical items do not match a dataset intent."
+      },
+      {
+        "name": "translation",
+        "mapped_to": "translation",
+        "why": "Directly covers translating and naturally phrasing text across languages."
+      },
+      {
+        "name": "data_analysis",
+        "mapped_to": "data_analysis",
+        "why": "Analyzes quantitative patterns in datasets."
+      },
+      {
+        "name": "recipe_instructions",
+        "mapped_to": "cooking_recipes",
+        "why": "Provides step-by-step instructions for preparing dishes."
+      },
+      {
+        "name": "travel_itinerary",
+        "mapped_to": "travel_planning",
+        "why": "Creates multi-day travel plans."
+      },
+      {
+        "name": "fitness_routine",
+        "mapped_to": "fitness_health",
+        "why": "Creates structured exercise routines."
+      },
+      {
+        "name": "concept_explanation",
+        "mapped_to": "junk",
+        "why": "General concept explanation is not one of the listed dataset intents."
+      },
+      {
+        "name": "transportation_navigation",
+        "mapped_to": "travel_planning",
+        "why": "Finds transportation routes and options for travel."
+      },
+      {
+        "name": "address_parsing",
+        "mapped_to": "junk",
+        "why": "Address field extraction is not represented by a ground-truth intent."
+      },
+      {
+        "name": "vehicle_maintenance",
+        "mapped_to": "novel_car_maintenance",
+        "why": "Matches the novel car maintenance intent."
+      },
+      {
+        "name": "food_safety",
+        "mapped_to": "cooking_recipes",
+        "why": "Concerns safe handling and cooking of food."
+      },
+      {
+        "name": "genealogy_research",
+        "mapped_to": "novel_genealogy_research",
+        "why": "Matches the novel genealogy research intent."
+      },
+      {
+        "name": "houseplant_care",
+        "mapped_to": "novel_home_plants",
+        "why": "Matches the novel home plants intent."
+      },
+      {
+        "name": "array_operations",
+        "mapped_to": "coding_help",
+        "why": "Requests implementation help for array manipulation."
+      },
+      {
+        "name": "web_form_debugging",
+        "mapped_to": "coding_help",
+        "why": "Diagnoses HTML, JavaScript, and fetch behavior."
+      },
+      {
+        "name": "sports_betting",
+        "mapped_to": "novel_esports_betting",
+        "why": "Matches the novel betting intent despite being phrased as sports betting."
+      },
+      {
+        "name": "wine_tasting",
+        "mapped_to": "novel_wine_tasting",
+        "why": "Matches the novel wine tasting intent."
+      },
+      {
+        "name": "strength_progression",
+        "mapped_to": "fitness_health",
+        "why": "Concerns strength training progression and recovery."
+      },
+      {
+        "name": "large_file_processing",
+        "mapped_to": "coding_help",
+        "why": "Covers programming techniques for streaming and aggregating files."
+      },
+      {
+        "name": "contextual_meaning",
+        "mapped_to": "translation",
+        "why": "Interprets phrases beyond literal translation and language-level meaning."
+      },
+      {
+        "name": "data_reconciliation",
+        "mapped_to": "data_analysis",
+        "why": "Analyzes tabular discrepancies between totals and components."
+      }
+    ],
+    "dup_pairs": [
+      {
+        "a": "gift_selection",
+        "b": "product_buying",
+        "borderline": true,
+        "why": "Gift selection is a specialized form of choosing physical products, so many purchase prompts could reasonably fit either category."
+      },
+      {
+        "a": "text_transformation",
+        "b": "translation",
+        "borderline": true,
+        "why": "Both explicitly cover translation, though text_transformation also includes rewriting while translation focuses on cross-language phrasing."
+      }
+    ],
+    "fragmentation": {
+      "coding_help": 4,
+      "cooking_recipes": 3,
+      "data_analysis": 2,
+      "fitness_health": 2,
+      "math_homework": 1,
+      "novel_car_maintenance": 1,
+      "novel_esports_betting": 1,
+      "novel_genealogy_research": 1,
+      "novel_home_plants": 1,
+      "novel_wine_tasting": 1,
+      "scheduling": 2,
+      "shopping": 2,
+      "translation": 2,
+      "travel_planning": 3,
+      "writing_editing": 1
+    },
+    "summary": {
+      "n_categories": 30,
+      "n_mapped": 27,
+      "n_junk": 3,
+      "n_unclear": 0,
+      "dup_pair_count": 2,
+      "dup_pair_count_strict": 0,
+      "fragmentation_max": 4,
+      "fragmentation": {
+        "coding_help": 4,
+        "cooking_recipes": 3,
+        "data_analysis": 2,
+        "fitness_health": 2,
+        "math_homework": 1,
+        "novel_car_maintenance": 1,
+        "novel_esports_betting": 1,
+        "novel_genealogy_research": 1,
+        "novel_home_plants": 1,
+        "novel_wine_tasting": 1,
+        "scheduling": 2,
+        "shopping": 2,
+        "translation": 2,
+        "travel_planning": 3,
+        "writing_editing": 1
+      }
+    },
+    "warnings": [],
+    "judged_ok": true
+  }
+}

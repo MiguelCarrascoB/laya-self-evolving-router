@@ -1,0 +1,62 @@
+{
+  "cold-blind": [
+    "results/ablation/cold-blind-fshot-none-p13.json",
+    "results/ablation/cold-blind-fshot-none-p42.json",
+    "results/ablation/cold-blind-fshot-none-p77.json"
+  ],
+  "cold-as-today": [
+    "results/ablation/cold-as-today-fshot-none-p13.json",
+    "results/ablation/cold-as-today-fshot-none-p42.json",
+    "results/ablation/cold-as-today-fshot-none-p77.json"
+  ],
+  "cold-hardened": [
+    "results/ablation/cold-hardened-fshot-none-p13.json",
+    "results/ablation/cold-hardened-fshot-none-p42.json",
+    "results/ablation/cold-hardened-fshot-none-p77.json"
+  ],
+  "cold-system-placement": [
+    "results/ablation/cold-system-placement-fshot-none-p13.json",
+    "results/ablation/cold-system-placement-fshot-none-p42.json",
+    "results/ablation/cold-system-placement-fshot-none-p77.json"
+  ],
+  "seeded-blind": [
+    "results/ablation/seeded-blind-fshot-none-p13.json",
+    "results/ablation/seeded-blind-fshot-none-p42.json",
+    "results/ablation/seeded-blind-fshot-none-p77.json"
+  ],
+  "seeded-as-today": [
+    "results/ablation/seeded-as-today-fshot-none-p13.json",
+    "results/ablation/seeded-as-today-fshot-none-p42.json",
+    "results/ablation/seeded-as-today-fshot-none-p77.json"
+  ],
+  "seeded-hardened": [
+    "results/ablation/seeded-hardened-fshot-none-p13.json",
+    "results/ablation/seeded-hardened-fshot-none-p42.json",
+    "results/ablation/seeded-hardened-fshot-none-p77.json"
+  ],
+  "seeded-system-placement": [
+    "results/ablation/seeded-system-placement-fshot-none-p13.json",
+    "results/ablation/seeded-system-placement-fshot-none-p42.json",
+    "results/ablation/seeded-system-placement-fshot-none-p77.json"
+  ],
+  "anchor-seeded-hardened": [
+    "results/ablation/anchor-seeded-hardened-fshot-full-p13.json",
+    "results/ablation/anchor-seeded-hardened-fshot-full-p42.json",
+    "results/ablation/anchor-seeded-hardened-fshot-full-p77.json"
+  ],
+  "stress-imperfect-hardened": [
+    "results/ablation/stress-imperfect-hardened-fshot-none-p13.json",
+    "results/ablation/stress-imperfect-hardened-fshot-none-p42.json",
+    "results/ablation/stress-imperfect-hardened-fshot-none-p77.json"
+  ],
+  "dedup-seeded-hardened": [
+    "results/ablation/dedup-seeded-hardened-fshot-none-p13-dedup-jaccard.json",
+    "results/ablation/dedup-seeded-hardened-fshot-none-p42-dedup-jaccard.json",
+    "results/ablation/dedup-seeded-hardened-fshot-none-p77-dedup-jaccard.json"
+  ],
+  "dedup-cold-hardened": [
+    "results/ablation/dedup-cold-hardened-fshot-none-p13-dedup-jaccard.json",
+    "results/ablation/dedup-cold-hardened-fshot-none-p42-dedup-jaccard.json",
+    "results/ablation/dedup-cold-hardened-fshot-none-p77-dedup-jaccard.json"
+  ]
+}

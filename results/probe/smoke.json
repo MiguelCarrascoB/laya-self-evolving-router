@@ -1,0 +1,834 @@
+{
+  "run_config": {
+    "dataset": "data/dataset.jsonl",
+    "model": "aac6fef/laya-mlx",
+    "backend": "mlx",
+    "limit": 20
+  },
+  "configs": [
+    {
+      "family": "perfect",
+      "k": 4,
+      "policy": "full",
+      "n_options": 5,
+      "accuracy_exact": 0.25,
+      "accuracy_stripped": 0.25,
+      "other_rate": 0.7,
+      "gate_entropy0.5": 0.5,
+      "gate_topprob0.5": 0.16666666666666666,
+      "gate_topprob0.9": 1.0,
+      "mean_confidence": 0.32769,
+      "min_confidence": 0.0794,
+      "mean_top_prob": 0.62104,
+      "mean_top2_margin": 0.45275,
+      "mean_input_tokens": 99.3,
+      "buckets": {
+        "3-5": {
+          "accuracy_exact": 0.25,
+          "other_rate": 0.7,
+          "n": 20
+        }
+      },
+      "routes": [
+        {
+          "id": "p0001",
+          "ground_truth": "scheduling",
+          "choice": "scheduling",
+          "confidence": 0.7389,
+          "top_prob": 0.8934,
+          "top2_margin": 0.8099,
+          "input_tokens": 98
+        },
+        {
+          "id": "p0002",
+          "ground_truth": "coding_help",
+          "choice": "other",
+          "confidence": 0.1784,
+          "top_prob": 0.4395,
+          "top2_margin": 0.11820000000000003,
+          "input_tokens": 105
+        },
+        {
+          "id": "p0003",
+          "ground_truth": "novel_esports_betting",
+          "choice": "other",
+          "confidence": 0.3409,
+          "top_prob": 0.6504,
+          "top2_margin": 0.475,
+          "input_tokens": 111
+        },
+        {
+          "id": "p0004",
+          "ground_truth": "coding_help",
+          "choice": "other",
+          "confidence": 0.2014,
+          "top_prob": 0.4763,
+          "top2_margin": 0.18159999999999998,
+          "input_tokens": 100
+        },
+        {
+          "id": "p0005",
+          "ground_truth": "fitness_health",
+          "choice": "other",
+          "confidence": 0.4275,
+          "top_prob": 0.7379,
+          "top2_margin": 0.643,
+          "input_tokens": 97
+        },
+        {
+          "id": "p0006",
+          "ground_truth": "math_homework",
+          "choice": "coding_help",
+          "confidence": 0.1454,
+          "top_prob": 0.4392,
+          "top2_margin": 0.19049999999999997,
+          "input_tokens": 93
+        },
+        {
+          "id": "p0007",
+          "ground_truth": "novel_beekeeping",
+          "choice": "other",
+          "confidence": 0.1328,
+          "top_prob": 0.4783,
+          "top2_margin": 0.30169999999999997,
+          "input_tokens": 99
+        },
+        {
+          "id": "p0008",
+          "ground_truth": "travel_planning",
+          "choice": "other",
+          "confidence": 0.5004,
+          "top_prob": 0.7903,
+          "top2_margin": 0.7353,
+          "input_tokens": 98
+        },
+        {
+          "id": "p0009",
+          "ground_truth": "math_homework",
+          "choice": "other",
+          "confidence": 0.3501,
+          "top_prob": 0.6477,
+          "top2_margin": 0.4504,
+          "input_tokens": 103
+        },
+        {
+          "id": "p0010",
+          "ground_truth": "shopping",
+          "choice": "other",
+          "confidence": 0.2222,
+          "top_prob": 0.5508,
+          "top2_margin": 0.33329999999999993,
+          "input_tokens": 100
+        },
+        {
+          "id": "p0011",
+          "ground_truth": "shopping",
+          "choice": "other",
+          "confidence": 0.2247,
+          "top_prob": 0.5738,
+          "top2_margin": 0.41589999999999994,
+          "input_tokens": 98
+        },
+        {
+          "id": "p0012",
+          "ground_truth": "cooking_recipes",
+          "choice": "other",
+          "confidence": 0.1478,
+          "top_prob": 0.4963,
+          "top2_margin": 0.3137,
+          "input_tokens": 95
+        },
+        {
+          "id": "p0013",
+          "ground_truth": "novel_board_games",
+          "choice": "other",
+          "confidence": 0.0794,
+          "top_prob": 0.378,
+          "top2_margin": 0.15610000000000002,
+          "input_tokens": 98
+        },
+        {
+          "id": "p0014",
+          "ground_truth": "novel_genealogy_research",
+          "choice": "other",
+          "confidence": 0.5417,
+          "top_prob": 0.8123,
+          "top2_margin": 0.7468,
+          "input_tokens": 106
+        },
+        {
+          "id": "p0015",
+          "ground_truth": "writing_editing",
+          "choice": "other",
+          "confidence": 0.2761,
+          "top_prob": 0.6277,
+          "top2_margin": 0.5115000000000001,
+          "input_tokens": 96
+        },
+        {
+          "id": "p0016",
+          "ground_truth": "coding_help",
+          "choice": "coding_help",
+          "confidence": 0.3378,
+          "top_prob": 0.6343,
+          "top2_margin": 0.4214,
+          "input_tokens": 99
+        },
+        {
+          "id": "p0017",
+          "ground_truth": "data_analysis",
+          "choice": "data_analysis",
+          "confidence": 0.5883,
+          "top_prob": 0.8313,
+          "top2_margin": 0.7525000000000001,
+          "input_tokens": 93
+        },
+        {
+          "id": "p0018",
+          "ground_truth": "scheduling",
+          "choice": "scheduling",
+          "confidence": 0.4123,
+          "top_prob": 0.7075,
+          "top2_margin": 0.5616,
+          "input_tokens": 105
+        },
+        {
+          "id": "p0019",
+          "ground_truth": "translation",
+          "choice": "translation",
+          "confidence": 0.5635,
+          "top_prob": 0.805,
+          "top2_margin": 0.6844,
+          "input_tokens": 95
+        },
+        {
+          "id": "p0020",
+          "ground_truth": "shopping",
+          "choice": "other",
+          "confidence": 0.1442,
+          "top_prob": 0.4508,
+          "top2_margin": 0.2522,
+          "input_tokens": 97
+        }
+      ]
+    },
+    {
+      "family": "perfect",
+      "k": 4,
+      "policy": "name-only",
+      "n_options": 5,
+      "accuracy_exact": 0.2,
+      "accuracy_stripped": 0.2,
+      "other_rate": 0.55,
+      "gate_entropy0.5": 0.8888888888888888,
+      "gate_topprob0.5": 0.2222222222222222,
+      "gate_topprob0.9": 1.0,
+      "mean_confidence": 0.33102,
+      "min_confidence": 0.1382,
+      "mean_top_prob": 0.6058399999999999,
+      "mean_top2_margin": 0.40426,
+      "mean_input_tokens": 51.3,
+      "buckets": {
+        "3-5": {
+          "accuracy_exact": 0.2,
+          "other_rate": 0.55,
+          "n": 20
+        }
+      },
+      "routes": [
+        {
+          "id": "p0001",
+          "ground_truth": "scheduling",
+          "choice": "other",
+          "confidence": 0.2986,
+          "top_prob": 0.5429,
+          "top2_margin": 0.24550000000000005,
+          "input_tokens": 50
+        },
+        {
+          "id": "p0002",
+          "ground_truth": "coding_help",
+          "choice": "coding_help",
+          "confidence": 0.2608,
+          "top_prob": 0.5756,
+          "top2_margin": 0.359,
+          "input_tokens": 57
+        },
+        {
+          "id": "p0003",
+          "ground_truth": "novel_esports_betting",
+          "choice": "other",
+          "confidence": 0.2807,
+          "top_prob": 0.5842,
+          "top2_margin": 0.36390000000000006,
+          "input_tokens": 63
+        },
+        {
+          "id": "p0004",
+          "ground_truth": "coding_help",
+          "choice": "other",
+          "confidence": 0.1382,
+          "top_prob": 0.3561,
+          "top2_margin": 0.06480000000000002,
+          "input_tokens": 52
+        },
+        {
+          "id": "p0005",
+          "ground_truth": "fitness_health",
+          "choice": "coding_help",
+          "confidence": 0.2842,
+          "top_prob": 0.5479,
+          "top2_margin": 0.25370000000000004,
+          "input_tokens": 49
+        },
+        {
+          "id": "p0006",
+          "ground_truth": "math_homework",
+          "choice": "coding_help",
+          "confidence": 0.4544,
+          "top_prob": 0.7027,
+          "top2_margin": 0.4911,
+          "input_tokens": 45
+        },
+        {
+          "id": "p0007",
+          "ground_truth": "novel_beekeeping",
+          "choice": "coding_help",
+          "confidence": 0.1585,
+          "top_prob": 0.377,
+          "top2_margin": 0.04139999999999999,
+          "input_tokens": 51
+        },
+        {
+          "id": "p0008",
+          "ground_truth": "travel_planning",
+          "choice": "other",
+          "confidence": 0.4188,
+          "top_prob": 0.7344,
+          "top2_margin": 0.6336,
+          "input_tokens": 50
+        },
+        {
+          "id": "p0009",
+          "ground_truth": "math_homework",
+          "choice": "coding_help",
+          "confidence": 0.278,
+          "top_prob": 0.5035,
+          "top2_margin": 0.25249999999999995,
+          "input_tokens": 55
+        },
+        {
+          "id": "p0010",
+          "ground_truth": "shopping",
+          "choice": "other",
+          "confidence": 0.3753,
+          "top_prob": 0.6884,
+          "top2_margin": 0.5668,
+          "input_tokens": 52
+        },
+        {
+          "id": "p0011",
+          "ground_truth": "shopping",
+          "choice": "other",
+          "confidence": 0.3215,
+          "top_prob": 0.6424,
+          "top2_margin": 0.4614,
+          "input_tokens": 50
+        },
+        {
+          "id": "p0012",
+          "ground_truth": "cooking_recipes",
+          "choice": "other",
+          "confidence": 0.3354,
+          "top_prob": 0.6793,
+          "top2_margin": 0.5916,
+          "input_tokens": 47
+        },
+        {
+          "id": "p0013",
+          "ground_truth": "novel_board_games",
+          "choice": "scheduling",
+          "confidence": 0.1624,
+          "top_prob": 0.4404,
+          "top2_margin": 0.18180000000000002,
+          "input_tokens": 50
+        },
+        {
+          "id": "p0014",
+          "ground_truth": "novel_genealogy_research",
+          "choice": "other",
+          "confidence": 0.3498,
+          "top_prob": 0.653,
+          "top2_margin": 0.46490000000000004,
+          "input_tokens": 58
+        },
+        {
+          "id": "p0015",
+          "ground_truth": "writing_editing",
+          "choice": "other",
+          "confidence": 0.3457,
+          "top_prob": 0.682,
+          "top2_margin": 0.5639000000000001,
+          "input_tokens": 48
+        },
+        {
+          "id": "p0016",
+          "ground_truth": "coding_help",
+          "choice": "coding_help",
+          "confidence": 0.2541,
+          "top_prob": 0.5423,
+          "top2_margin": 0.2773,
+          "input_tokens": 51
+        },
+        {
+          "id": "p0017",
+          "ground_truth": "data_analysis",
+          "choice": "data_analysis",
+          "confidence": 0.4779,
+          "top_prob": 0.7371,
+          "top2_margin": 0.5685,
+          "input_tokens": 45
+        },
+        {
+          "id": "p0018",
+          "ground_truth": "scheduling",
+          "choice": "other",
+          "confidence": 0.191,
+          "top_prob": 0.432,
+          "top2_margin": 0.1451,
+          "input_tokens": 57
+        },
+        {
+          "id": "p0019",
+          "ground_truth": "translation",
+          "choice": "translation",
+          "confidence": 0.6309,
+          "top_prob": 0.8521,
+          "top2_margin": 0.7726999999999999,
+          "input_tokens": 47
+        },
+        {
+          "id": "p0020",
+          "ground_truth": "shopping",
+          "choice": "other",
+          "confidence": 0.6042,
+          "top_prob": 0.8435,
+          "top2_margin": 0.7857000000000001,
+          "input_tokens": 49
+        }
+      ]
+    },
+    {
+      "family": "discovered",
+      "k": 4,
+      "policy": "full",
+      "n_options": 5,
+      "accuracy_exact": 0.25,
+      "accuracy_stripped": 0.25,
+      "other_rate": 0.75,
+      "gate_entropy0.5": 0.8,
+      "gate_topprob0.5": 0.6,
+      "gate_topprob0.9": 1.0,
+      "mean_confidence": 0.23904999999999998,
+      "min_confidence": 0.073,
+      "mean_top_prob": 0.55732,
+      "mean_top2_margin": 0.37951999999999997,
+      "mean_input_tokens": 99.3,
+      "buckets": {
+        "3-5": {
+          "accuracy_exact": 0.25,
+          "other_rate": 0.75,
+          "n": 20
+        }
+      },
+      "routes": [
+        {
+          "id": "p0001",
+          "ground_truth": "scheduling",
+          "choice": "scheduling",
+          "confidence": 0.4787,
+          "top_prob": 0.7359,
+          "top2_margin": 0.5622,
+          "input_tokens": 98
+        },
+        {
+          "id": "p0002",
+          "ground_truth": "coding_help",
+          "choice": "other",
+          "confidence": 0.1251,
+          "top_prob": 0.3726,
+          "top2_margin": 0.041200000000000014,
+          "input_tokens": 105
+        },
+        {
+          "id": "p0003",
+          "ground_truth": "novel_esports_betting",
+          "choice": "other",
+          "confidence": 0.2721,
+          "top_prob": 0.6187,
+          "top2_margin": 0.4778,
+          "input_tokens": 111
+        },
+        {
+          "id": "p0004",
+          "ground_truth": "coding_help",
+          "choice": "other",
+          "confidence": 0.1912,
+          "top_prob": 0.5347,
+          "top2_margin": 0.37239999999999995,
+          "input_tokens": 100
+        },
+        {
+          "id": "p0005",
+          "ground_truth": "fitness_health",
+          "choice": "fitness_health",
+          "confidence": 0.5153,
+          "top_prob": 0.7972,
+          "top2_margin": 0.7277,
+          "input_tokens": 97
+        },
+        {
+          "id": "p0006",
+          "ground_truth": "math_homework",
+          "choice": "math_homework",
+          "confidence": 0.143,
+          "top_prob": 0.4301,
+          "top2_margin": 0.1775,
+          "input_tokens": 93
+        },
+        {
+          "id": "p0007",
+          "ground_truth": "novel_beekeeping",
+          "choice": "other",
+          "confidence": 0.1091,
+          "top_prob": 0.4538,
+          "top2_margin": 0.2789,
+          "input_tokens": 99
+        },
+        {
+          "id": "p0008",
+          "ground_truth": "travel_planning",
+          "choice": "other",
+          "confidence": 0.4169,
+          "top_prob": 0.7366,
+          "top2_margin": 0.6569,
+          "input_tokens": 98
+        },
+        {
+          "id": "p0009",
+          "ground_truth": "math_homework",
+          "choice": "math_homework",
+          "confidence": 0.2178,
+          "top_prob": 0.4522,
+          "top2_margin": 0.11319999999999997,
+          "input_tokens": 103
+        },
+        {
+          "id": "p0010",
+          "ground_truth": "shopping",
+          "choice": "other",
+          "confidence": 0.2429,
+          "top_prob": 0.6028,
+          "top2_margin": 0.4807,
+          "input_tokens": 100
+        },
+        {
+          "id": "p0011",
+          "ground_truth": "shopping",
+          "choice": "other",
+          "confidence": 0.275,
+          "top_prob": 0.6317,
+          "top2_margin": 0.5258,
+          "input_tokens": 98
+        },
+        {
+          "id": "p0012",
+          "ground_truth": "cooking_recipes",
+          "choice": "other",
+          "confidence": 0.2063,
+          "top_prob": 0.5674,
+          "top2_margin": 0.4353,
+          "input_tokens": 95
+        },
+        {
+          "id": "p0013",
+          "ground_truth": "novel_board_games",
+          "choice": "other",
+          "confidence": 0.1888,
+          "top_prob": 0.4895,
+          "top2_margin": 0.22949999999999998,
+          "input_tokens": 98
+        },
+        {
+          "id": "p0014",
+          "ground_truth": "novel_genealogy_research",
+          "choice": "other",
+          "confidence": 0.3541,
+          "top_prob": 0.693,
+          "top2_margin": 0.602,
+          "input_tokens": 106
+        },
+        {
+          "id": "p0015",
+          "ground_truth": "writing_editing",
+          "choice": "other",
+          "confidence": 0.2655,
+          "top_prob": 0.6188,
+          "top2_margin": 0.4851,
+          "input_tokens": 96
+        },
+        {
+          "id": "p0016",
+          "ground_truth": "coding_help",
+          "choice": "coding_help",
+          "confidence": 0.1936,
+          "top_prob": 0.4888,
+          "top2_margin": 0.22139999999999999,
+          "input_tokens": 99
+        },
+        {
+          "id": "p0017",
+          "ground_truth": "data_analysis",
+          "choice": "other",
+          "confidence": 0.0745,
+          "top_prob": 0.3899,
+          "top2_margin": 0.16780000000000003,
+          "input_tokens": 93
+        },
+        {
+          "id": "p0018",
+          "ground_truth": "scheduling",
+          "choice": "other",
+          "confidence": 0.2152,
+          "top_prob": 0.5685,
+          "top2_margin": 0.4363,
+          "input_tokens": 105
+        },
+        {
+          "id": "p0019",
+          "ground_truth": "translation",
+          "choice": "other",
+          "confidence": 0.2229,
+          "top_prob": 0.5751,
+          "top2_margin": 0.41489999999999994,
+          "input_tokens": 95
+        },
+        {
+          "id": "p0020",
+          "ground_truth": "shopping",
+          "choice": "other",
+          "confidence": 0.073,
+          "top_prob": 0.3891,
+          "top2_margin": 0.1838,
+          "input_tokens": 97
+        }
+      ]
+    },
+    {
+      "family": "discovered",
+      "k": 4,
+      "policy": "name-only",
+      "n_options": 5,
+      "accuracy_exact": 0.1,
+      "accuracy_stripped": 0.1,
+      "other_rate": 0.7,
+      "gate_entropy0.5": 0.8333333333333334,
+      "gate_topprob0.5": 0.16666666666666666,
+      "gate_topprob0.9": 0.8333333333333334,
+      "mean_confidence": 0.326715,
+      "min_confidence": 0.0934,
+      "mean_top_prob": 0.61694,
+      "mean_top2_margin": 0.440745,
+      "mean_input_tokens": 54.3,
+      "buckets": {
+        "3-5": {
+          "accuracy_exact": 0.1,
+          "other_rate": 0.7,
+          "n": 20
+        }
+      },
+      "routes": [
+        {
+          "id": "p0001",
+          "ground_truth": "scheduling",
+          "choice": "math_homework",
+          "confidence": 0.3604,
+          "top_prob": 0.6755,
+          "top2_margin": 0.5519,
+          "input_tokens": 53
+        },
+        {
+          "id": "p0002",
+          "ground_truth": "coding_help",
+          "choice": "other",
+          "confidence": 0.1337,
+          "top_prob": 0.4024,
+          "top2_margin": 0.08749999999999997,
+          "input_tokens": 60
+        },
+        {
+          "id": "p0003",
+          "ground_truth": "novel_esports_betting",
+          "choice": "other",
+          "confidence": 0.3372,
+          "top_prob": 0.6644,
+          "top2_margin": 0.5085,
+          "input_tokens": 66
+        },
+        {
+          "id": "p0004",
+          "ground_truth": "coding_help",
+          "choice": "other",
+          "confidence": 0.2084,
+          "top_prob": 0.5273,
+          "top2_margin": 0.2898,
+          "input_tokens": 55
+        },
+        {
+          "id": "p0005",
+          "ground_truth": "fitness_health",
+          "choice": "fitness_health",
+          "confidence": 0.7666,
+          "top_prob": 0.9209,
+          "top2_margin": 0.8869,
+          "input_tokens": 52
+        },
+        {
+          "id": "p0006",
+          "ground_truth": "math_homework",
+          "choice": "coding_help",
+          "confidence": 0.3647,
+          "top_prob": 0.4578,
+          "top2_margin": 0.003500000000000003,
+          "input_tokens": 48
+        },
+        {
+          "id": "p0007",
+          "ground_truth": "novel_beekeeping",
+          "choice": "other",
+          "confidence": 0.1844,
+          "top_prob": 0.4338,
+          "top2_margin": 0.0943,
+          "input_tokens": 54
+        },
+        {
+          "id": "p0008",
+          "ground_truth": "travel_planning",
+          "choice": "other",
+          "confidence": 0.5133,
+          "top_prob": 0.797,
+          "top2_margin": 0.7329,
+          "input_tokens": 53
+        },
+        {
+          "id": "p0009",
+          "ground_truth": "math_homework",
+          "choice": "coding_help",
+          "confidence": 0.3035,
+          "top_prob": 0.5614,
+          "top2_margin": 0.35040000000000004,
+          "input_tokens": 58
+        },
+        {
+          "id": "p0010",
+          "ground_truth": "shopping",
+          "choice": "other",
+          "confidence": 0.3513,
+          "top_prob": 0.6907,
+          "top2_margin": 0.6034999999999999,
+          "input_tokens": 55
+        },
+        {
+          "id": "p0011",
+          "ground_truth": "shopping",
+          "choice": "other",
+          "confidence": 0.2817,
+          "top_prob": 0.6334,
+          "top2_margin": 0.5052,
+          "input_tokens": 53
+        },
+        {
+          "id": "p0012",
+          "ground_truth": "cooking_recipes",
+          "choice": "other",
+          "confidence": 0.4278,
+          "top_prob": 0.7434,
+          "top2_margin": 0.6630999999999999,
+          "input_tokens": 50
+        },
+        {
+          "id": "p0013",
+          "ground_truth": "novel_board_games",
+          "choice": "coding_help",
+          "confidence": 0.2362,
+          "top_prob": 0.512,
+          "top2_margin": 0.2752,
+          "input_tokens": 53
+        },
+        {
+          "id": "p0014",
+          "ground_truth": "novel_genealogy_research",
+          "choice": "other",
+          "confidence": 0.4508,
+          "top_prob": 0.7485,
+          "top2_margin": 0.6304000000000001,
+          "input_tokens": 61
+        },
+        {
+          "id": "p0015",
+          "ground_truth": "writing_editing",
+          "choice": "other",
+          "confidence": 0.1459,
+          "top_prob": 0.4957,
+          "top2_margin": 0.33499999999999996,
+          "input_tokens": 51
+        },
+        {
+          "id": "p0016",
+          "ground_truth": "coding_help",
+          "choice": "coding_help",
+          "confidence": 0.4371,
+          "top_prob": 0.7285,
+          "top2_margin": 0.5859000000000001,
+          "input_tokens": 54
+        },
+        {
+          "id": "p0017",
+          "ground_truth": "data_analysis",
+          "choice": "other",
+          "confidence": 0.0934,
+          "top_prob": 0.431,
+          "top2_margin": 0.2483,
+          "input_tokens": 48
+        },
+        {
+          "id": "p0018",
+          "ground_truth": "scheduling",
+          "choice": "other",
+          "confidence": 0.2401,
+          "top_prob": 0.5781,
+          "top2_margin": 0.4124,
+          "input_tokens": 60
+        },
+        {
+          "id": "p0019",
+          "ground_truth": "translation",
+          "choice": "other",
+          "confidence": 0.26,
+          "top_prob": 0.5994,
+          "top2_margin": 0.4323,
+          "input_tokens": 50
+        },
+        {
+          "id": "p0020",
+          "ground_truth": "shopping",
+          "choice": "other",
+          "confidence": 0.4378,
+          "top_prob": 0.7376,
+          "top2_margin": 0.6179,
+          "input_tokens": 52
+        }
+      ]
+    }
+  ]
+}

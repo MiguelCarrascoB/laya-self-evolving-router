@@ -1,0 +1,3349 @@
+{
+  "cells": {
+    "anchor-cold-as-today": {
+      "accuracy_final": {
+        "mean": 0.4023,
+        "min": 0.4023,
+        "max": 0.4023,
+        "range": 0.0
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.6216,
+        "min": 0.6216,
+        "max": 0.6216,
+        "range": 0.0
+      },
+      "coverage_final": {
+        "mean": 0.64765,
+        "min": 0.64765,
+        "max": 0.64765,
+        "range": 0.0
+      },
+      "other_rate_final": {
+        "mean": 0.35235,
+        "min": 0.35235,
+        "max": 0.35235,
+        "range": 0.0
+      },
+      "novel_absorbed": {
+        "mean": 75.5,
+        "min": 75.5,
+        "max": 75.5,
+        "range": 0.0
+      },
+      "births_beyond_seeds": {
+        "mean": 30.0,
+        "min": 30.0,
+        "max": 30.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 228.0,
+        "min": 228.0,
+        "max": 228.0,
+        "range": 0.0
+      },
+      "low_confidence_final": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0,
+        "range": 0.0
+      },
+      "llm_calls": {
+        "mean": 32.5,
+        "min": 32.5,
+        "max": 32.5,
+        "range": 0.0
+      },
+      "re_route_count": {
+        "mean": 507.0,
+        "min": 507.0,
+        "max": 507.0,
+        "range": 0.0
+      },
+      "latency_p50": {
+        "mean": 29.27,
+        "min": 29.27,
+        "max": 29.27,
+        "range": 0.0
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": 0.5,
+        "min": 0.0,
+        "max": 1.0,
+        "range": 1.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "fragmentation_max": {
+        "mean": 4.0,
+        "min": 4.0,
+        "max": 4.0,
+        "range": 0.0
+      },
+      "n_junk": {
+        "mean": 2.5,
+        "min": 1.0,
+        "max": 4.0,
+        "range": 3.0
+      },
+      "n_seeds": 1,
+      "n_runs": 2,
+      "gate_decomposition": {
+        "low_confidence_final": 1.0,
+        "other_bucket_final": 228.0,
+        "low_confidence_share": 0.004366812227074236,
+        "other_bucket_share": 0.9956331877729258,
+        "other_rate_final": 0.35235000000000005
+      },
+      "low_confidence_share": {
+        "mean": 0.004366812227074236,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.9956331877729258,
+        "min": 0.9956331877729258,
+        "max": 0.9956331877729258,
+        "range": 0.0
+      }
+    },
+    "anchor-seeded-hardened": {
+      "accuracy_final": {
+        "mean": 0.3651,
+        "min": 0.3446,
+        "max": 0.3815,
+        "range": 0.0369
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.6240666667,
+        "min": 0.612,
+        "max": 0.6417,
+        "range": 0.0297
+      },
+      "coverage_final": {
+        "mean": 0.5851333333,
+        "min": 0.5631,
+        "max": 0.6169,
+        "range": 0.0538
+      },
+      "other_rate_final": {
+        "mean": 0.4148666667,
+        "min": 0.3831,
+        "max": 0.4369,
+        "range": 0.0538
+      },
+      "novel_absorbed": {
+        "mean": 76.6666666667,
+        "min": 74.0,
+        "max": 81.0,
+        "range": 7.0
+      },
+      "births_beyond_seeds": {
+        "mean": 20.0,
+        "min": 20.0,
+        "max": 20.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 249.3333333333,
+        "min": 221.0,
+        "max": 269.0,
+        "range": 48.0
+      },
+      "low_confidence_final": {
+        "mean": 20.3333333333,
+        "min": 15.0,
+        "max": 28.0,
+        "range": 13.0
+      },
+      "llm_calls": {
+        "mean": 25.0,
+        "min": 17.0,
+        "max": 32.0,
+        "range": 15.0
+      },
+      "re_route_count": {
+        "mean": 570.3333333333,
+        "min": 524.0,
+        "max": 596.0,
+        "range": 72.0
+      },
+      "latency_p50": {
+        "mean": 27.5233333333,
+        "min": 27.4,
+        "max": 27.65,
+        "range": 0.25
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": 0.3333333333,
+        "min": 0.0,
+        "max": 1.0,
+        "range": 1.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "fragmentation_max": {
+        "mean": 2.6666666667,
+        "min": 2.0,
+        "max": 3.0,
+        "range": 1.0
+      },
+      "n_junk": {
+        "mean": 4.3333333333,
+        "min": 0.0,
+        "max": 7.0,
+        "range": 7.0
+      },
+      "n_seeds": 3,
+      "n_runs": 3,
+      "gate_decomposition": {
+        "low_confidence_final": 20.333333333333332,
+        "other_bucket_final": 249.33333333333334,
+        "low_confidence_share": 0.07540173053152038,
+        "other_bucket_share": 0.9245982694684796,
+        "other_rate_final": 0.41486666666666666
+      },
+      "low_confidence_share": {
+        "mean": 0.07540173053152038,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.9245982694684796,
+        "min": 0.9245982694684796,
+        "max": 0.9245982694684796,
+        "range": 0.0
+      }
+    },
+    "cold-as-today": {
+      "accuracy_final": {
+        "mean": 0.0636,
+        "min": 0.0385,
+        "max": 0.1092,
+        "range": 0.0707
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.1295,
+        "min": 0.0881,
+        "max": 0.2,
+        "range": 0.1119
+      },
+      "coverage_final": {
+        "mean": 0.4728333333,
+        "min": 0.3831,
+        "max": 0.5462,
+        "range": 0.1631
+      },
+      "other_rate_final": {
+        "mean": 0.5271666667,
+        "min": 0.4538,
+        "max": 0.6169,
+        "range": 0.1631
+      },
+      "novel_absorbed": {
+        "mean": 45.3333333333,
+        "min": 33.0,
+        "max": 56.0,
+        "range": 23.0
+      },
+      "births_beyond_seeds": {
+        "mean": 30.0,
+        "min": 30.0,
+        "max": 30.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 328.3333333333,
+        "min": 284.0,
+        "max": 386.0,
+        "range": 102.0
+      },
+      "low_confidence_final": {
+        "mean": 14.3333333333,
+        "min": 11.0,
+        "max": 17.0,
+        "range": 6.0
+      },
+      "llm_calls": {
+        "mean": 10.6666666667,
+        "min": 10.0,
+        "max": 11.0,
+        "range": 1.0
+      },
+      "re_route_count": {
+        "mean": 719.3333333333,
+        "min": 623.0,
+        "max": 838.0,
+        "range": 215.0
+      },
+      "latency_p50": {
+        "mean": 27.4033333333,
+        "min": 27.36,
+        "max": 27.44,
+        "range": 0.08
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "fragmentation_max": {
+        "mean": 4.3333333333,
+        "min": 3.0,
+        "max": 6.0,
+        "range": 3.0
+      },
+      "n_junk": {
+        "mean": 0.6666666667,
+        "min": 0.0,
+        "max": 2.0,
+        "range": 2.0
+      },
+      "n_seeds": 3,
+      "n_runs": 3,
+      "gate_decomposition": {
+        "low_confidence_final": 14.333333333333334,
+        "other_bucket_final": 328.3333333333333,
+        "low_confidence_share": 0.04182879377431907,
+        "other_bucket_share": 0.958171206225681,
+        "other_rate_final": 0.5271666666666667
+      },
+      "low_confidence_share": {
+        "mean": 0.04182879377431907,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.958171206225681,
+        "min": 0.958171206225681,
+        "max": 0.958171206225681,
+        "range": 0.0
+      }
+    },
+    "cold-blind": {
+      "accuracy_final": {
+        "mean": 0.1338666667,
+        "min": 0.0523,
+        "max": 0.1831,
+        "range": 0.1308
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.2230666667,
+        "min": 0.0909,
+        "max": 0.2895,
+        "range": 0.1986
+      },
+      "coverage_final": {
+        "mean": 0.5943333333,
+        "min": 0.5738,
+        "max": 0.6338,
+        "range": 0.06
+      },
+      "other_rate_final": {
+        "mean": 0.4056666667,
+        "min": 0.3662,
+        "max": 0.4262,
+        "range": 0.06
+      },
+      "novel_absorbed": {
+        "mean": 40.6666666667,
+        "min": 37.0,
+        "max": 45.0,
+        "range": 8.0
+      },
+      "births_beyond_seeds": {
+        "mean": 30.0,
+        "min": 30.0,
+        "max": 30.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 245.0,
+        "min": 218.0,
+        "max": 267.0,
+        "range": 49.0
+      },
+      "low_confidence_final": {
+        "mean": 18.6666666667,
+        "min": 10.0,
+        "max": 26.0,
+        "range": 16.0
+      },
+      "llm_calls": {
+        "mean": 13.6666666667,
+        "min": 11.0,
+        "max": 17.0,
+        "range": 6.0
+      },
+      "re_route_count": {
+        "mean": 567.6666666667,
+        "min": 509.0,
+        "max": 600.0,
+        "range": 91.0
+      },
+      "latency_p50": {
+        "mean": 27.3733333333,
+        "min": 27.35,
+        "max": 27.41,
+        "range": 0.06
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 7.6666666667,
+        "min": 1.0,
+        "max": 17.0,
+        "range": 16.0
+      },
+      "dup_pair_count": {
+        "mean": 6.3333333333,
+        "min": 5.0,
+        "max": 8.0,
+        "range": 3.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 2.6666666667,
+        "min": 2.0,
+        "max": 3.0,
+        "range": 1.0
+      },
+      "fragmentation_max": {
+        "mean": 4.6666666667,
+        "min": 4.0,
+        "max": 5.0,
+        "range": 1.0
+      },
+      "n_junk": {
+        "mean": 0.6666666667,
+        "min": 0.0,
+        "max": 2.0,
+        "range": 2.0
+      },
+      "n_seeds": 3,
+      "n_runs": 3,
+      "gate_decomposition": {
+        "low_confidence_final": 18.666666666666668,
+        "other_bucket_final": 245.0,
+        "low_confidence_share": 0.07079646017699115,
+        "other_bucket_share": 0.9292035398230087,
+        "other_rate_final": 0.4056666666666667
+      },
+      "low_confidence_share": {
+        "mean": 0.07079646017699115,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.9292035398230087,
+        "min": 0.9292035398230087,
+        "max": 0.9292035398230087,
+        "range": 0.0
+      }
+    },
+    "cold-hardened": {
+      "accuracy_final": {
+        "mean": 0.0861333333,
+        "min": 0.0569,
+        "max": 0.1015,
+        "range": 0.0446
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.1794333333,
+        "min": 0.0941,
+        "max": 0.2347,
+        "range": 0.1406
+      },
+      "coverage_final": {
+        "mean": 0.5051333333,
+        "min": 0.4262,
+        "max": 0.6046,
+        "range": 0.1784
+      },
+      "other_rate_final": {
+        "mean": 0.4948666667,
+        "min": 0.3954,
+        "max": 0.5738,
+        "range": 0.1784
+      },
+      "novel_absorbed": {
+        "mean": 54.0,
+        "min": 47.0,
+        "max": 58.0,
+        "range": 11.0
+      },
+      "births_beyond_seeds": {
+        "mean": 30.0,
+        "min": 30.0,
+        "max": 30.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 301.6666666667,
+        "min": 240.0,
+        "max": 354.0,
+        "range": 114.0
+      },
+      "low_confidence_final": {
+        "mean": 20.0,
+        "min": 17.0,
+        "max": 24.0,
+        "range": 7.0
+      },
+      "llm_calls": {
+        "mean": 10.3333333333,
+        "min": 10.0,
+        "max": 11.0,
+        "range": 1.0
+      },
+      "re_route_count": {
+        "mean": 679.6666666667,
+        "min": 562.0,
+        "max": 775.0,
+        "range": 213.0
+      },
+      "latency_p50": {
+        "mean": 27.3733333333,
+        "min": 27.33,
+        "max": 27.4,
+        "range": 0.07
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": 0.3333333333,
+        "min": 0.0,
+        "max": 1.0,
+        "range": 1.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "fragmentation_max": {
+        "mean": 4.3333333333,
+        "min": 3.0,
+        "max": 5.0,
+        "range": 2.0
+      },
+      "n_junk": {
+        "mean": 0.6666666667,
+        "min": 0.0,
+        "max": 2.0,
+        "range": 2.0
+      },
+      "n_seeds": 3,
+      "n_runs": 3,
+      "gate_decomposition": {
+        "low_confidence_final": 20.0,
+        "other_bucket_final": 301.6666666666667,
+        "low_confidence_share": 0.06217616580310881,
+        "other_bucket_share": 0.9378238341968912,
+        "other_rate_final": 0.4948666666666666
+      },
+      "low_confidence_share": {
+        "mean": 0.06217616580310881,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.9378238341968912,
+        "min": 0.9378238341968912,
+        "max": 0.9378238341968912,
+        "range": 0.0
+      }
+    },
+    "cold-system-placement": {
+      "accuracy_final": {
+        "mean": 0.0569,
+        "min": 0.0292,
+        "max": 0.1015,
+        "range": 0.0723
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.1145,
+        "min": 0.0597,
+        "max": 0.1941,
+        "range": 0.1344
+      },
+      "coverage_final": {
+        "mean": 0.4861666667,
+        "min": 0.4462,
+        "max": 0.5231,
+        "range": 0.0769
+      },
+      "other_rate_final": {
+        "mean": 0.5138333333,
+        "min": 0.4769,
+        "max": 0.5538,
+        "range": 0.0769
+      },
+      "novel_absorbed": {
+        "mean": 50.6666666667,
+        "min": 46.0,
+        "max": 56.0,
+        "range": 10.0
+      },
+      "births_beyond_seeds": {
+        "mean": 30.0,
+        "min": 30.0,
+        "max": 30.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 319.3333333333,
+        "min": 292.0,
+        "max": 348.0,
+        "range": 56.0
+      },
+      "low_confidence_final": {
+        "mean": 14.6666666667,
+        "min": 12.0,
+        "max": 18.0,
+        "range": 6.0
+      },
+      "llm_calls": {
+        "mean": 11.0,
+        "min": 11.0,
+        "max": 11.0,
+        "range": 0.0
+      },
+      "re_route_count": {
+        "mean": 693.6666666667,
+        "min": 647.0,
+        "max": 749.0,
+        "range": 102.0
+      },
+      "latency_p50": {
+        "mean": 27.3866666667,
+        "min": 27.36,
+        "max": 27.4,
+        "range": 0.04
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": 0.3333333333,
+        "min": 0.0,
+        "max": 1.0,
+        "range": 1.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "fragmentation_max": {
+        "mean": 4.6666666667,
+        "min": 4.0,
+        "max": 5.0,
+        "range": 1.0
+      },
+      "n_junk": {
+        "mean": 0.6666666667,
+        "min": 0.0,
+        "max": 1.0,
+        "range": 1.0
+      },
+      "n_seeds": 3,
+      "n_runs": 3,
+      "gate_decomposition": {
+        "low_confidence_final": 14.666666666666666,
+        "other_bucket_final": 319.3333333333333,
+        "low_confidence_share": 0.043912175648702596,
+        "other_bucket_share": 0.9560878243512974,
+        "other_rate_final": 0.5138333333333334
+      },
+      "low_confidence_share": {
+        "mean": 0.043912175648702596,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.9560878243512974,
+        "min": 0.9560878243512974,
+        "max": 0.9560878243512974,
+        "range": 0.0
+      }
+    },
+    "dedup-cold-hardened [dedup:jaccard]": {
+      "accuracy_final": {
+        "mean": 0.0907666667,
+        "min": 0.0554,
+        "max": 0.1415,
+        "range": 0.0861
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.1824666667,
+        "min": 0.1053,
+        "max": 0.2514,
+        "range": 0.1461
+      },
+      "coverage_final": {
+        "mean": 0.4949,
+        "min": 0.3954,
+        "max": 0.5631,
+        "range": 0.1677
+      },
+      "other_rate_final": {
+        "mean": 0.5051,
+        "min": 0.4369,
+        "max": 0.6046,
+        "range": 0.1677
+      },
+      "novel_absorbed": {
+        "mean": 52.0,
+        "min": 43.0,
+        "max": 63.0,
+        "range": 20.0
+      },
+      "births_beyond_seeds": {
+        "mean": 30.0,
+        "min": 30.0,
+        "max": 30.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 306.6666666667,
+        "min": 274.0,
+        "max": 362.0,
+        "range": 88.0
+      },
+      "low_confidence_final": {
+        "mean": 21.6666666667,
+        "min": 10.0,
+        "max": 31.0,
+        "range": 21.0
+      },
+      "llm_calls": {
+        "mean": 11.0,
+        "min": 10.0,
+        "max": 13.0,
+        "range": 3.0
+      },
+      "re_route_count": {
+        "mean": 692.3333333333,
+        "min": 605.0,
+        "max": 822.0,
+        "range": 217.0
+      },
+      "latency_p50": {
+        "mean": 44.69,
+        "min": 27.32,
+        "max": 53.54,
+        "range": 26.22
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 1.6666666667,
+        "min": 0.0,
+        "max": 5.0,
+        "range": 5.0
+      },
+      "dup_pair_count": {
+        "mean": 3.3333333333,
+        "min": 0.0,
+        "max": 6.0,
+        "range": 6.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 1.3333333333,
+        "min": 0.0,
+        "max": 4.0,
+        "range": 4.0
+      },
+      "fragmentation_max": {
+        "mean": 4.3333333333,
+        "min": 4.0,
+        "max": 5.0,
+        "range": 1.0
+      },
+      "n_junk": {
+        "mean": 0.3333333333,
+        "min": 0.0,
+        "max": 1.0,
+        "range": 1.0
+      },
+      "n_seeds": 3,
+      "n_runs": 3,
+      "gate_decomposition": {
+        "low_confidence_final": 21.666666666666668,
+        "other_bucket_final": 306.6666666666667,
+        "low_confidence_share": 0.06598984771573603,
+        "other_bucket_share": 0.9340101522842639,
+        "other_rate_final": 0.5051
+      },
+      "low_confidence_share": {
+        "mean": 0.06598984771573603,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.9340101522842639,
+        "min": 0.9340101522842639,
+        "max": 0.9340101522842639,
+        "range": 0.0
+      }
+    },
+    "dedup-seeded-hardened [dedup:jaccard]": {
+      "accuracy_final": {
+        "mean": 0.3374666667,
+        "min": 0.3185,
+        "max": 0.3662,
+        "range": 0.0477
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.6224333333,
+        "min": 0.5965,
+        "max": 0.6494,
+        "range": 0.0529
+      },
+      "coverage_final": {
+        "mean": 0.5425333333,
+        "min": 0.5046,
+        "max": 0.5892,
+        "range": 0.0846
+      },
+      "other_rate_final": {
+        "mean": 0.4574666667,
+        "min": 0.4108,
+        "max": 0.4954,
+        "range": 0.0846
+      },
+      "novel_absorbed": {
+        "mean": 60.0,
+        "min": 54.0,
+        "max": 63.0,
+        "range": 9.0
+      },
+      "births_beyond_seeds": {
+        "mean": 20.0,
+        "min": 20.0,
+        "max": 20.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 279.3333333333,
+        "min": 252.0,
+        "max": 302.0,
+        "range": 50.0
+      },
+      "low_confidence_final": {
+        "mean": 18.0,
+        "min": 15.0,
+        "max": 20.0,
+        "range": 5.0
+      },
+      "llm_calls": {
+        "mean": 15.0,
+        "min": 11.0,
+        "max": 19.0,
+        "range": 8.0
+      },
+      "re_route_count": {
+        "mean": 614.6666666667,
+        "min": 552.0,
+        "max": 666.0,
+        "range": 114.0
+      },
+      "latency_p50": {
+        "mean": 27.8333333333,
+        "min": 27.32,
+        "max": 28.76,
+        "range": 1.44
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 1.0,
+        "min": 0.0,
+        "max": 3.0,
+        "range": 3.0
+      },
+      "dup_pair_count": {
+        "mean": 6.6666666667,
+        "min": 0.0,
+        "max": 11.0,
+        "range": 11.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 3.6666666667,
+        "min": 0.0,
+        "max": 9.0,
+        "range": 9.0
+      },
+      "fragmentation_max": {
+        "mean": 4.0,
+        "min": 3.0,
+        "max": 5.0,
+        "range": 2.0
+      },
+      "n_junk": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0,
+        "range": 0.0
+      },
+      "n_seeds": 3,
+      "n_runs": 3,
+      "gate_decomposition": {
+        "low_confidence_final": 18.0,
+        "other_bucket_final": 279.3333333333333,
+        "low_confidence_share": 0.06053811659192825,
+        "other_bucket_share": 0.9394618834080718,
+        "other_rate_final": 0.4574666666666667
+      },
+      "low_confidence_share": {
+        "mean": 0.06053811659192825,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.9394618834080718,
+        "min": 0.9394618834080718,
+        "max": 0.9394618834080718,
+        "range": 0.0
+      }
+    },
+    "gatecheck-bucket": {
+      "accuracy_final": {
+        "mean": 0.3969,
+        "min": 0.3969,
+        "max": 0.3969,
+        "range": 0.0
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.6172,
+        "min": 0.6172,
+        "max": 0.6172,
+        "range": 0.0
+      },
+      "coverage_final": {
+        "mean": 0.6431,
+        "min": 0.6431,
+        "max": 0.6431,
+        "range": 0.0
+      },
+      "other_rate_final": {
+        "mean": 0.3569,
+        "min": 0.3569,
+        "max": 0.3569,
+        "range": 0.0
+      },
+      "novel_absorbed": {
+        "mean": 81.0,
+        "min": 81.0,
+        "max": 81.0,
+        "range": 0.0
+      },
+      "births_beyond_seeds": {
+        "mean": 30.0,
+        "min": 30.0,
+        "max": 30.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 213.0,
+        "min": 213.0,
+        "max": 213.0,
+        "range": 0.0
+      },
+      "low_confidence_final": {
+        "mean": 19.0,
+        "min": 19.0,
+        "max": 19.0,
+        "range": 0.0
+      },
+      "llm_calls": {
+        "mean": 32.0,
+        "min": 32.0,
+        "max": 32.0,
+        "range": 0.0
+      },
+      "re_route_count": {
+        "mean": 515.0,
+        "min": 515.0,
+        "max": 515.0,
+        "range": 0.0
+      },
+      "latency_p50": {
+        "mean": 29.4,
+        "min": 29.4,
+        "max": 29.4,
+        "range": 0.0
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "fragmentation_max": {
+        "mean": 3.0,
+        "min": 3.0,
+        "max": 3.0,
+        "range": 0.0
+      },
+      "n_junk": {
+        "mean": 2.0,
+        "min": 2.0,
+        "max": 2.0,
+        "range": 0.0
+      },
+      "n_seeds": 1,
+      "n_runs": 1,
+      "gate_decomposition": {
+        "low_confidence_final": 19.0,
+        "other_bucket_final": 213.0,
+        "low_confidence_share": 0.08189655172413793,
+        "other_bucket_share": 0.9181034482758621,
+        "other_rate_final": 0.3569
+      },
+      "low_confidence_share": {
+        "mean": 0.08189655172413793,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.9181034482758621,
+        "min": 0.9181034482758621,
+        "max": 0.9181034482758621,
+        "range": 0.0
+      }
+    },
+    "seeded-as-today": {
+      "accuracy_final": {
+        "mean": 0.3389666667,
+        "min": 0.3169,
+        "max": 0.3538,
+        "range": 0.0369
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.6383,
+        "min": 0.6168,
+        "max": 0.6534,
+        "range": 0.0366
+      },
+      "coverage_final": {
+        "mean": 0.5307333333,
+        "min": 0.5138,
+        "max": 0.5415,
+        "range": 0.0277
+      },
+      "other_rate_final": {
+        "mean": 0.4692666667,
+        "min": 0.4585,
+        "max": 0.4862,
+        "range": 0.0277
+      },
+      "novel_absorbed": {
+        "mean": 58.6666666667,
+        "min": 49.0,
+        "max": 67.0,
+        "range": 18.0
+      },
+      "births_beyond_seeds": {
+        "mean": 20.0,
+        "min": 20.0,
+        "max": 20.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 284.3333333333,
+        "min": 273.0,
+        "max": 301.0,
+        "range": 28.0
+      },
+      "low_confidence_final": {
+        "mean": 20.6666666667,
+        "min": 15.0,
+        "max": 25.0,
+        "range": 10.0
+      },
+      "llm_calls": {
+        "mean": 17.3333333333,
+        "min": 13.0,
+        "max": 24.0,
+        "range": 11.0
+      },
+      "re_route_count": {
+        "mean": 636.3333333333,
+        "min": 620.0,
+        "max": 652.0,
+        "range": 32.0
+      },
+      "latency_p50": {
+        "mean": 27.4033333333,
+        "min": 27.35,
+        "max": 27.44,
+        "range": 0.09
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": 0.6666666667,
+        "min": 0.0,
+        "max": 1.0,
+        "range": 1.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "fragmentation_max": {
+        "mean": 3.6666666667,
+        "min": 3.0,
+        "max": 4.0,
+        "range": 1.0
+      },
+      "n_junk": {
+        "mean": 5.3333333333,
+        "min": 2.0,
+        "max": 8.0,
+        "range": 6.0
+      },
+      "n_seeds": 3,
+      "n_runs": 3,
+      "gate_decomposition": {
+        "low_confidence_final": 20.666666666666668,
+        "other_bucket_final": 284.3333333333333,
+        "low_confidence_share": 0.06775956284153006,
+        "other_bucket_share": 0.9322404371584699,
+        "other_rate_final": 0.46926666666666667
+      },
+      "low_confidence_share": {
+        "mean": 0.06775956284153006,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.9322404371584699,
+        "min": 0.9322404371584699,
+        "max": 0.9322404371584699,
+        "range": 0.0
+      }
+    },
+    "seeded-blind": {
+      "accuracy_final": {
+        "mean": 0.2738333333,
+        "min": 0.2338,
+        "max": 0.2985,
+        "range": 0.0647
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.5176333333,
+        "min": 0.4211,
+        "max": 0.5689,
+        "range": 0.1478
+      },
+      "coverage_final": {
+        "mean": 0.5312666667,
+        "min": 0.5138,
+        "max": 0.5554,
+        "range": 0.0416
+      },
+      "other_rate_final": {
+        "mean": 0.4687333333,
+        "min": 0.4446,
+        "max": 0.4862,
+        "range": 0.0416
+      },
+      "novel_absorbed": {
+        "mean": 38.0,
+        "min": 29.0,
+        "max": 46.0,
+        "range": 17.0
+      },
+      "births_beyond_seeds": {
+        "mean": 20.0,
+        "min": 20.0,
+        "max": 20.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 273.3333333333,
+        "min": 258.0,
+        "max": 288.0,
+        "range": 30.0
+      },
+      "low_confidence_final": {
+        "mean": 31.3333333333,
+        "min": 28.0,
+        "max": 35.0,
+        "range": 7.0
+      },
+      "llm_calls": {
+        "mean": 11.6666666667,
+        "min": 10.0,
+        "max": 14.0,
+        "range": 4.0
+      },
+      "re_route_count": {
+        "mean": 634.3333333333,
+        "min": 620.0,
+        "max": 642.0,
+        "range": 22.0
+      },
+      "latency_p50": {
+        "mean": 27.35,
+        "min": 27.3,
+        "max": 27.38,
+        "range": 0.08
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 11.0,
+        "min": 7.0,
+        "max": 17.0,
+        "range": 10.0
+      },
+      "dup_pair_count": {
+        "mean": 4.6666666667,
+        "min": 3.0,
+        "max": 6.0,
+        "range": 3.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 1.6666666667,
+        "min": 0.0,
+        "max": 3.0,
+        "range": 3.0
+      },
+      "fragmentation_max": {
+        "mean": 5.0,
+        "min": 4.0,
+        "max": 6.0,
+        "range": 2.0
+      },
+      "n_junk": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "n_seeds": 3,
+      "n_runs": 3,
+      "gate_decomposition": {
+        "low_confidence_final": 31.333333333333332,
+        "other_bucket_final": 273.3333333333333,
+        "low_confidence_share": 0.10284463894967179,
+        "other_bucket_share": 0.8971553610503282,
+        "other_rate_final": 0.46873333333333334
+      },
+      "low_confidence_share": {
+        "mean": 0.10284463894967179,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.8971553610503282,
+        "min": 0.8971553610503282,
+        "max": 0.8971553610503282,
+        "range": 0.0
+      }
+    },
+    "seeded-hardened": {
+      "accuracy_final": {
+        "mean": 0.3620333333,
+        "min": 0.3492,
+        "max": 0.3692,
+        "range": 0.02
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.6265333333,
+        "min": 0.5866,
+        "max": 0.654,
+        "range": 0.0674
+      },
+      "coverage_final": {
+        "mean": 0.5784666667,
+        "min": 0.5646,
+        "max": 0.5954,
+        "range": 0.0308
+      },
+      "other_rate_final": {
+        "mean": 0.4215333333,
+        "min": 0.4046,
+        "max": 0.4354,
+        "range": 0.0308
+      },
+      "novel_absorbed": {
+        "mean": 72.6666666667,
+        "min": 65.0,
+        "max": 79.0,
+        "range": 14.0
+      },
+      "births_beyond_seeds": {
+        "mean": 20.0,
+        "min": 20.0,
+        "max": 20.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 254.3333333333,
+        "min": 244.0,
+        "max": 265.0,
+        "range": 21.0
+      },
+      "low_confidence_final": {
+        "mean": 19.6666666667,
+        "min": 18.0,
+        "max": 22.0,
+        "range": 4.0
+      },
+      "llm_calls": {
+        "mean": 18.6666666667,
+        "min": 13.0,
+        "max": 28.0,
+        "range": 15.0
+      },
+      "re_route_count": {
+        "mean": 575.6666666667,
+        "min": 562.0,
+        "max": 586.0,
+        "range": 24.0
+      },
+      "latency_p50": {
+        "mean": 27.8066666667,
+        "min": 27.39,
+        "max": 28.6,
+        "range": 1.21
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "fragmentation_max": {
+        "mean": 4.0,
+        "min": 3.0,
+        "max": 5.0,
+        "range": 2.0
+      },
+      "n_junk": {
+        "mean": 3.0,
+        "min": 2.0,
+        "max": 5.0,
+        "range": 3.0
+      },
+      "n_seeds": 3,
+      "n_runs": 3,
+      "gate_decomposition": {
+        "low_confidence_final": 19.666666666666668,
+        "other_bucket_final": 254.33333333333334,
+        "low_confidence_share": 0.07177615571776157,
+        "other_bucket_share": 0.9282238442822385,
+        "other_rate_final": 0.4215333333333333
+      },
+      "low_confidence_share": {
+        "mean": 0.07177615571776157,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.9282238442822385,
+        "min": 0.9282238442822385,
+        "max": 0.9282238442822385,
+        "range": 0.0
+      }
+    },
+    "seeded-system-placement": {
+      "accuracy_final": {
+        "mean": 0.3589666667,
+        "min": 0.3369,
+        "max": 0.3769,
+        "range": 0.04
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.632,
+        "min": 0.6134,
+        "max": 0.6516,
+        "range": 0.0382
+      },
+      "coverage_final": {
+        "mean": 0.5677,
+        "min": 0.5492,
+        "max": 0.5785,
+        "range": 0.0293
+      },
+      "other_rate_final": {
+        "mean": 0.4323,
+        "min": 0.4215,
+        "max": 0.4508,
+        "range": 0.0293
+      },
+      "novel_absorbed": {
+        "mean": 71.0,
+        "min": 63.0,
+        "max": 79.0,
+        "range": 16.0
+      },
+      "births_beyond_seeds": {
+        "mean": 20.0,
+        "min": 20.0,
+        "max": 20.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 260.0,
+        "min": 253.0,
+        "max": 272.0,
+        "range": 19.0
+      },
+      "low_confidence_final": {
+        "mean": 21.0,
+        "min": 19.0,
+        "max": 23.0,
+        "range": 4.0
+      },
+      "llm_calls": {
+        "mean": 24.0,
+        "min": 19.0,
+        "max": 29.0,
+        "range": 10.0
+      },
+      "re_route_count": {
+        "mean": 586.6666666667,
+        "min": 573.0,
+        "max": 612.0,
+        "range": 39.0
+      },
+      "latency_p50": {
+        "mean": 27.3766666667,
+        "min": 27.33,
+        "max": 27.4,
+        "range": 0.07
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": 3.6666666667,
+        "min": 0.0,
+        "max": 9.0,
+        "range": 9.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 1.3333333333,
+        "min": 0.0,
+        "max": 4.0,
+        "range": 4.0
+      },
+      "fragmentation_max": {
+        "mean": 4.0,
+        "min": 3.0,
+        "max": 5.0,
+        "range": 2.0
+      },
+      "n_junk": {
+        "mean": 3.6666666667,
+        "min": 2.0,
+        "max": 5.0,
+        "range": 3.0
+      },
+      "n_seeds": 3,
+      "n_runs": 3,
+      "gate_decomposition": {
+        "low_confidence_final": 21.0,
+        "other_bucket_final": 260.0,
+        "low_confidence_share": 0.07473309608540925,
+        "other_bucket_share": 0.9252669039145908,
+        "other_rate_final": 0.43229999999999996
+      },
+      "low_confidence_share": {
+        "mean": 0.07473309608540925,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.9252669039145908,
+        "min": 0.9252669039145908,
+        "max": 0.9252669039145908,
+        "range": 0.0
+      }
+    },
+    "stress-imperfect-hardened": {
+      "accuracy_final": {
+        "mean": 0.2436,
+        "min": 0.18,
+        "max": 0.3154,
+        "range": 0.1354
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.4203,
+        "min": 0.3589,
+        "max": 0.4734,
+        "range": 0.1145
+      },
+      "coverage_final": {
+        "mean": 0.5723,
+        "min": 0.5015,
+        "max": 0.6662,
+        "range": 0.1647
+      },
+      "other_rate_final": {
+        "mean": 0.4277,
+        "min": 0.3338,
+        "max": 0.4985,
+        "range": 0.1647
+      },
+      "novel_absorbed": {
+        "mean": 55.0,
+        "min": 49.0,
+        "max": 64.0,
+        "range": 15.0
+      },
+      "births_beyond_seeds": {
+        "mean": 20.0,
+        "min": 20.0,
+        "max": 20.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 256.6666666667,
+        "min": 193.0,
+        "max": 302.0,
+        "range": 109.0
+      },
+      "low_confidence_final": {
+        "mean": 21.3333333333,
+        "min": 18.0,
+        "max": 24.0,
+        "range": 6.0
+      },
+      "llm_calls": {
+        "mean": 8.3333333333,
+        "min": 8.0,
+        "max": 9.0,
+        "range": 1.0
+      },
+      "re_route_count": {
+        "mean": 576.6666666667,
+        "min": 452.0,
+        "max": 674.0,
+        "range": 222.0
+      },
+      "latency_p50": {
+        "mean": 27.5133333333,
+        "min": 27.49,
+        "max": 27.54,
+        "range": 0.05
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": 2.0,
+        "min": 2.0,
+        "max": 2.0,
+        "range": 0.0
+      },
+      "dup_pair_count_strict": {
+        "mean": 1.6666666667,
+        "min": 1.0,
+        "max": 2.0,
+        "range": 1.0
+      },
+      "fragmentation_max": {
+        "mean": 4.3333333333,
+        "min": 3.0,
+        "max": 5.0,
+        "range": 2.0
+      },
+      "n_junk": {
+        "mean": 3.3333333333,
+        "min": 2.0,
+        "max": 4.0,
+        "range": 2.0
+      },
+      "n_seeds": 3,
+      "n_runs": 3,
+      "gate_decomposition": {
+        "low_confidence_final": 21.333333333333332,
+        "other_bucket_final": 256.6666666666667,
+        "low_confidence_share": 0.07673860911270983,
+        "other_bucket_share": 0.9232613908872902,
+        "other_rate_final": 0.42769999999999997
+      },
+      "low_confidence_share": {
+        "mean": 0.07673860911270983,
+        "range": null,
+        "min": null,
+        "max": null
+      },
+      "other_bucket_share": {
+        "mean": 0.9232613908872902,
+        "min": 0.9232613908872902,
+        "max": 0.9232613908872902,
+        "range": 0.0
+      }
+    }
+  },
+  "paired_deltas": {
+    "cold as-today vs blind": {
+      "accuracy_final": {
+        "mean": -0.0702666667,
+        "min": -0.1231,
+        "max": -0.0138,
+        "range": 0.1093
+      },
+      "label_match_rate_of_covered": {
+        "mean": -0.0935666667,
+        "min": -0.2014,
+        "max": 0.0095,
+        "range": 0.2109
+      },
+      "coverage_final": {
+        "mean": -0.1215,
+        "min": -0.1923,
+        "max": -0.0846,
+        "range": 0.1077
+      },
+      "other_rate_final": {
+        "mean": 0.1215,
+        "min": 0.0846,
+        "max": 0.1923,
+        "range": 0.1077
+      },
+      "novel_absorbed": {
+        "mean": 4.6666666667,
+        "min": -4.0,
+        "max": 16.0,
+        "range": 20.0
+      },
+      "births_beyond_seeds": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 83.3333333333,
+        "min": 48.0,
+        "max": 136.0,
+        "range": 88.0
+      },
+      "low_confidence_final": {
+        "mean": -4.3333333333,
+        "min": -11.0,
+        "max": 7.0,
+        "range": 18.0
+      },
+      "llm_calls": {
+        "mean": -3.0,
+        "min": -7.0,
+        "max": 0.0,
+        "range": 7.0
+      },
+      "re_route_count": {
+        "mean": 151.6666666667,
+        "min": 97.0,
+        "max": 244.0,
+        "range": 147.0
+      },
+      "latency_p50": {
+        "mean": 0.03,
+        "min": 0.0,
+        "max": 0.08,
+        "range": 0.08
+      },
+      "rejected_proposals_duplicate": {
+        "mean": -7.6666666667,
+        "min": -17.0,
+        "max": -1.0,
+        "range": 16.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": -0.0294793855,
+        "min": -0.0567964148,
+        "max": 0.0151037362,
+        "range": 0.071900151
+      }
+    },
+    "cold hardened vs blind": {
+      "accuracy_final": {
+        "mean": -0.0477333333,
+        "min": -0.1093,
+        "max": 0.0492,
+        "range": 0.1585
+      },
+      "label_match_rate_of_covered": {
+        "mean": -0.0436333333,
+        "min": -0.1954,
+        "max": 0.1186,
+        "range": 0.314
+      },
+      "coverage_final": {
+        "mean": -0.0892,
+        "min": -0.2076,
+        "max": 0.0308,
+        "range": 0.2384
+      },
+      "other_rate_final": {
+        "mean": 0.0892,
+        "min": -0.0308,
+        "max": 0.2076,
+        "range": 0.2384
+      },
+      "novel_absorbed": {
+        "mean": 13.3333333333,
+        "min": 7.0,
+        "max": 20.0,
+        "range": 13.0
+      },
+      "births_beyond_seeds": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 56.6666666667,
+        "min": -27.0,
+        "max": 136.0,
+        "range": 163.0
+      },
+      "low_confidence_final": {
+        "mean": 1.3333333333,
+        "min": -2.0,
+        "max": 7.0,
+        "range": 9.0
+      },
+      "llm_calls": {
+        "mean": -3.3333333333,
+        "min": -7.0,
+        "max": 0.0,
+        "range": 7.0
+      },
+      "re_route_count": {
+        "mean": 112.0,
+        "min": -38.0,
+        "max": 266.0,
+        "range": 304.0
+      },
+      "latency_p50": {
+        "mean": -0.0,
+        "min": -0.08,
+        "max": 0.04,
+        "range": 0.12
+      },
+      "rejected_proposals_duplicate": {
+        "mean": -7.6666666667,
+        "min": -17.0,
+        "max": -1.0,
+        "range": 16.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": -0.0085365354,
+        "min": -0.0330952756,
+        "max": 0.0300467769,
+        "range": 0.0631420525
+      }
+    },
+    "cold system-placement vs blind": {
+      "accuracy_final": {
+        "mean": -0.0769666667,
+        "min": -0.1539,
+        "max": -0.0123,
+        "range": 0.1416
+      },
+      "label_match_rate_of_covered": {
+        "mean": -0.1085666667,
+        "min": -0.2291,
+        "max": -0.0012,
+        "range": 0.2279
+      },
+      "coverage_final": {
+        "mean": -0.1081666667,
+        "min": -0.1446,
+        "max": -0.0507,
+        "range": 0.0939
+      },
+      "other_rate_final": {
+        "mean": 0.1081666667,
+        "min": 0.0507,
+        "max": 0.1446,
+        "range": 0.0939
+      },
+      "novel_absorbed": {
+        "mean": 10.0,
+        "min": 5.0,
+        "max": 16.0,
+        "range": 11.0
+      },
+      "births_beyond_seeds": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 74.3333333333,
+        "min": 25.0,
+        "max": 100.0,
+        "range": 75.0
+      },
+      "low_confidence_final": {
+        "mean": -4.0,
+        "min": -14.0,
+        "max": 8.0,
+        "range": 22.0
+      },
+      "llm_calls": {
+        "mean": -2.6666666667,
+        "min": -6.0,
+        "max": 0.0,
+        "range": 6.0
+      },
+      "re_route_count": {
+        "mean": 126.0,
+        "min": 47.0,
+        "max": 176.0,
+        "range": 129.0
+      },
+      "latency_p50": {
+        "mean": 0.0133333333,
+        "min": -0.01,
+        "max": 0.04,
+        "range": 0.05
+      },
+      "rejected_proposals_duplicate": {
+        "mean": -7.6666666667,
+        "min": -17.0,
+        "max": -1.0,
+        "range": 16.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": -0.0269236903,
+        "min": -0.0608695652,
+        "max": 0.0219634331,
+        "range": 0.0828329983
+      }
+    },
+    "seeded as-today vs blind": {
+      "accuracy_final": {
+        "mean": 0.0651333333,
+        "min": 0.0184,
+        "max": 0.1124,
+        "range": 0.094
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.1206666667,
+        "min": 0.0479,
+        "max": 0.2236,
+        "range": 0.1757
+      },
+      "coverage_final": {
+        "mean": -0.0005333333,
+        "min": -0.0185,
+        "max": 0.0277,
+        "range": 0.0462
+      },
+      "other_rate_final": {
+        "mean": 0.0005333333,
+        "min": -0.0277,
+        "max": 0.0185,
+        "range": 0.0462
+      },
+      "novel_absorbed": {
+        "mean": 20.6666666667,
+        "min": 20.0,
+        "max": 21.0,
+        "range": 1.0
+      },
+      "births_beyond_seeds": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 11.0,
+        "min": -15.0,
+        "max": 27.0,
+        "range": 42.0
+      },
+      "low_confidence_final": {
+        "mean": -10.6666666667,
+        "min": -20.0,
+        "max": -3.0,
+        "range": 17.0
+      },
+      "llm_calls": {
+        "mean": 5.6666666667,
+        "min": 2.0,
+        "max": 10.0,
+        "range": 8.0
+      },
+      "re_route_count": {
+        "mean": 2.0,
+        "min": -22.0,
+        "max": 17.0,
+        "range": 39.0
+      },
+      "latency_p50": {
+        "mean": 0.0533333333,
+        "min": 0.05,
+        "max": 0.06,
+        "range": 0.01
+      },
+      "rejected_proposals_duplicate": {
+        "mean": -11.0,
+        "min": -17.0,
+        "max": -7.0,
+        "range": 10.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": -0.0348973222,
+        "min": -0.065800254,
+        "max": -0.0047149775,
+        "range": 0.0610852765
+      }
+    },
+    "seeded hardened vs blind": {
+      "accuracy_final": {
+        "mean": 0.0882,
+        "min": 0.0707,
+        "max": 0.1154,
+        "range": 0.0447
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.1089,
+        "min": 0.0761,
+        "max": 0.1655,
+        "range": 0.0894
+      },
+      "coverage_final": {
+        "mean": 0.0472,
+        "min": 0.04,
+        "max": 0.0616,
+        "range": 0.0216
+      },
+      "other_rate_final": {
+        "mean": -0.0472,
+        "min": -0.0616,
+        "max": -0.04,
+        "range": 0.0216
+      },
+      "novel_absorbed": {
+        "mean": 34.6666666667,
+        "min": 33.0,
+        "max": 36.0,
+        "range": 3.0
+      },
+      "births_beyond_seeds": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": -19.0,
+        "min": -34.0,
+        "max": -9.0,
+        "range": 25.0
+      },
+      "low_confidence_final": {
+        "mean": -11.6666666667,
+        "min": -17.0,
+        "max": -6.0,
+        "range": 11.0
+      },
+      "llm_calls": {
+        "mean": 7.0,
+        "min": 2.0,
+        "max": 14.0,
+        "range": 12.0
+      },
+      "re_route_count": {
+        "mean": -58.6666666667,
+        "min": -63.0,
+        "max": -55.0,
+        "range": 8.0
+      },
+      "latency_p50": {
+        "mean": 0.4566666667,
+        "min": 0.02,
+        "max": 1.3,
+        "range": 1.28
+      },
+      "rejected_proposals_duplicate": {
+        "mean": -11.0,
+        "min": -17.0,
+        "max": -7.0,
+        "range": 10.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": -0.0311949694,
+        "min": -0.0496643681,
+        "max": -0.00889745,
+        "range": 0.0407669181
+      }
+    },
+    "seeded system-placement vs blind": {
+      "accuracy_final": {
+        "mean": 0.0851333333,
+        "min": 0.0384,
+        "max": 0.1431,
+        "range": 0.1047
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.1143666667,
+        "min": 0.0445,
+        "max": 0.2305,
+        "range": 0.186
+      },
+      "coverage_final": {
+        "mean": 0.0364333333,
+        "min": 0.0231,
+        "max": 0.0616,
+        "range": 0.0385
+      },
+      "other_rate_final": {
+        "mean": -0.0364333333,
+        "min": -0.0616,
+        "max": -0.0231,
+        "range": 0.0385
+      },
+      "novel_absorbed": {
+        "mean": 33.0,
+        "min": 32.0,
+        "max": 34.0,
+        "range": 2.0
+      },
+      "births_beyond_seeds": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": -13.3333333333,
+        "min": -35.0,
+        "max": -2.0,
+        "range": 33.0
+      },
+      "low_confidence_final": {
+        "mean": -10.3333333333,
+        "min": -14.0,
+        "max": -5.0,
+        "range": 9.0
+      },
+      "llm_calls": {
+        "mean": 12.3333333333,
+        "min": 8.0,
+        "max": 15.0,
+        "range": 7.0
+      },
+      "re_route_count": {
+        "mean": -47.6666666667,
+        "min": -69.0,
+        "max": -29.0,
+        "range": 40.0
+      },
+      "latency_p50": {
+        "mean": 0.0266666667,
+        "min": 0.02,
+        "max": 0.03,
+        "range": 0.01
+      },
+      "rejected_proposals_duplicate": {
+        "mean": -11.0,
+        "min": -17.0,
+        "max": -7.0,
+        "range": 10.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": -0.0282646285,
+        "min": -0.0415962535,
+        "max": -0.0052742616,
+        "range": 0.0363219919
+      }
+    },
+    "seeded vs cold blind": {
+      "accuracy_final": {
+        "mean": 0.1399666667,
+        "min": 0.0676,
+        "max": 0.2462,
+        "range": 0.1786
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.2945666667,
+        "min": 0.1316,
+        "max": 0.478,
+        "range": 0.3464
+      },
+      "coverage_final": {
+        "mean": -0.0630666667,
+        "min": -0.12,
+        "max": -0.0184,
+        "range": 0.1016
+      },
+      "other_rate_final": {
+        "mean": 0.0630666667,
+        "min": 0.0184,
+        "max": 0.12,
+        "range": 0.1016
+      },
+      "novel_absorbed": {
+        "mean": -2.6666666667,
+        "min": -8.0,
+        "max": 1.0,
+        "range": 9.0
+      },
+      "births_beyond_seeds": {
+        "mean": -10.0,
+        "min": -10.0,
+        "max": -10.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 28.3333333333,
+        "min": -9.0,
+        "max": 70.0,
+        "range": 79.0
+      },
+      "low_confidence_final": {
+        "mean": 12.6666666667,
+        "min": 8.0,
+        "max": 21.0,
+        "range": 13.0
+      },
+      "llm_calls": {
+        "mean": -2.0,
+        "min": -7.0,
+        "max": 1.0,
+        "range": 8.0
+      },
+      "re_route_count": {
+        "mean": 66.6666666667,
+        "min": 20.0,
+        "max": 133.0,
+        "range": 113.0
+      },
+      "latency_p50": {
+        "mean": -0.0233333333,
+        "min": -0.06,
+        "max": 0.03,
+        "range": 0.09
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 3.3333333333,
+        "min": -10.0,
+        "max": 12.0,
+        "range": 22.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": 0.0316016814,
+        "min": 0.0045739815,
+        "max": 0.071165353,
+        "range": 0.0665913715
+      }
+    },
+    "seeded vs cold as-today": {
+      "accuracy_final": {
+        "mean": 0.2753666667,
+        "min": 0.2446,
+        "max": 0.3031,
+        "range": 0.0585
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.5088,
+        "min": 0.4534,
+        "max": 0.5566,
+        "range": 0.1032
+      },
+      "coverage_final": {
+        "mean": 0.0579,
+        "min": -0.0047,
+        "max": 0.1307,
+        "range": 0.1354
+      },
+      "other_rate_final": {
+        "mean": -0.0579,
+        "min": -0.1307,
+        "max": 0.0047,
+        "range": 0.1354
+      },
+      "novel_absorbed": {
+        "mean": 13.3333333333,
+        "min": 4.0,
+        "max": 20.0,
+        "range": 16.0
+      },
+      "births_beyond_seeds": {
+        "mean": -10.0,
+        "min": -10.0,
+        "max": -10.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": -44.0,
+        "min": -85.0,
+        "max": -11.0,
+        "range": 74.0
+      },
+      "low_confidence_final": {
+        "mean": 6.3333333333,
+        "min": 0.0,
+        "max": 14.0,
+        "range": 14.0
+      },
+      "llm_calls": {
+        "mean": 6.6666666667,
+        "min": 2.0,
+        "max": 13.0,
+        "range": 11.0
+      },
+      "re_route_count": {
+        "mean": -83.0,
+        "min": -186.0,
+        "max": -3.0,
+        "range": 183.0
+      },
+      "latency_p50": {
+        "mean": 0.0,
+        "min": -0.09,
+        "max": 0.08,
+        "range": 0.17
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": 0.0261837447,
+        "min": 0.0100618706,
+        "max": 0.0466044819,
+        "range": 0.0365426112
+      }
+    },
+    "seeded vs cold hardened": {
+      "accuracy_final": {
+        "mean": 0.2759,
+        "min": 0.2677,
+        "max": 0.2923,
+        "range": 0.0246
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.4471,
+        "min": 0.4043,
+        "max": 0.4925,
+        "range": 0.0882
+      },
+      "coverage_final": {
+        "mean": 0.0733333333,
+        "min": -0.0092,
+        "max": 0.1492,
+        "range": 0.1584
+      },
+      "other_rate_final": {
+        "mean": -0.0733333333,
+        "min": -0.1492,
+        "max": 0.0092,
+        "range": 0.1584
+      },
+      "novel_absorbed": {
+        "mean": 18.6666666667,
+        "min": 8.0,
+        "max": 27.0,
+        "range": 19.0
+      },
+      "births_beyond_seeds": {
+        "mean": -10.0,
+        "min": -10.0,
+        "max": -10.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": -47.3333333333,
+        "min": -100.0,
+        "max": 4.0,
+        "range": 104.0
+      },
+      "low_confidence_final": {
+        "mean": -0.3333333333,
+        "min": -6.0,
+        "max": 3.0,
+        "range": 9.0
+      },
+      "llm_calls": {
+        "mean": 8.3333333333,
+        "min": 2.0,
+        "max": 18.0,
+        "range": 16.0
+      },
+      "re_route_count": {
+        "mean": -104.0,
+        "min": -196.0,
+        "max": 0.0,
+        "range": 196.0
+      },
+      "latency_p50": {
+        "mean": 0.4333333333,
+        "min": 0.04,
+        "max": 1.2,
+        "range": 1.16
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": 0.0089432475,
+        "min": -0.0080375508,
+        "max": 0.0287718071,
+        "range": 0.0368093579
+      }
+    },
+    "seeded vs cold system-placement": {
+      "accuracy_final": {
+        "mean": 0.3020666667,
+        "min": 0.2754,
+        "max": 0.3339,
+        "range": 0.0585
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.5175,
+        "min": 0.4575,
+        "max": 0.5713,
+        "range": 0.1138
+      },
+      "coverage_final": {
+        "mean": 0.0815333333,
+        "min": 0.0554,
+        "max": 0.103,
+        "range": 0.0476
+      },
+      "other_rate_final": {
+        "mean": -0.0815333333,
+        "min": -0.103,
+        "max": -0.0554,
+        "range": 0.0476
+      },
+      "novel_absorbed": {
+        "mean": 20.3333333333,
+        "min": 15.0,
+        "max": 29.0,
+        "range": 14.0
+      },
+      "births_beyond_seeds": {
+        "mean": -10.0,
+        "min": -10.0,
+        "max": -10.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": -59.3333333333,
+        "min": -76.0,
+        "max": -37.0,
+        "range": 39.0
+      },
+      "low_confidence_final": {
+        "mean": 6.3333333333,
+        "min": 1.0,
+        "max": 9.0,
+        "range": 8.0
+      },
+      "llm_calls": {
+        "mean": 13.0,
+        "min": 8.0,
+        "max": 18.0,
+        "range": 10.0
+      },
+      "re_route_count": {
+        "mean": -107.0,
+        "min": -137.0,
+        "max": -72.0,
+        "range": 65.0
+      },
+      "latency_p50": {
+        "mean": -0.01,
+        "min": -0.07,
+        "max": 0.04,
+        "range": 0.11
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": 0.0302607433,
+        "min": 0.0112785496,
+        "max": 0.0411646586,
+        "range": 0.0298861091
+      }
+    },
+    "none vs full cold as-today": {
+      "accuracy_final": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "label_match_rate_of_covered": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "coverage_final": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "other_rate_final": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "novel_absorbed": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "births_beyond_seeds": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "other_bucket_final": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_final": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "llm_calls": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "re_route_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "latency_p50": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "rejected_proposals_duplicate": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      }
+    },
+    "none vs full seeded hardened": {
+      "accuracy_final": {
+        "mean": -0.0030666667,
+        "min": -0.02,
+        "max": 0.0231,
+        "range": 0.0431
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.0024666667,
+        "min": -0.0551,
+        "max": 0.0355,
+        "range": 0.0906
+      },
+      "coverage_final": {
+        "mean": -0.0066666667,
+        "min": -0.0523,
+        "max": 0.02,
+        "range": 0.0723
+      },
+      "other_rate_final": {
+        "mean": 0.0066666667,
+        "min": -0.02,
+        "max": 0.0523,
+        "range": 0.0723
+      },
+      "novel_absorbed": {
+        "mean": -4.0,
+        "min": -16.0,
+        "max": 5.0,
+        "range": 21.0
+      },
+      "births_beyond_seeds": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 5.0,
+        "min": -15.0,
+        "max": 44.0,
+        "range": 59.0
+      },
+      "low_confidence_final": {
+        "mean": -0.6666666667,
+        "min": -10.0,
+        "max": 7.0,
+        "range": 17.0
+      },
+      "llm_calls": {
+        "mean": -6.3333333333,
+        "min": -11.0,
+        "max": -4.0,
+        "range": 7.0
+      },
+      "re_route_count": {
+        "mean": 5.3333333333,
+        "min": -29.0,
+        "max": 62.0,
+        "range": 91.0
+      },
+      "latency_p50": {
+        "mean": 0.2833333333,
+        "min": -0.22,
+        "max": 1.08,
+        "range": 1.3
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": -0.0049754536,
+        "min": -0.0488455589,
+        "max": 0.0268932435,
+        "range": 0.0757388024
+      }
+    },
+    "dedup seeded hardened vs base": {
+      "accuracy_final": {
+        "mean": -0.0245666667,
+        "min": -0.0415,
+        "max": -0.0015,
+        "range": 0.04
+      },
+      "label_match_rate_of_covered": {
+        "mean": -0.0041,
+        "min": -0.0176,
+        "max": 0.0099,
+        "range": 0.0275
+      },
+      "coverage_final": {
+        "mean": -0.0359333333,
+        "min": -0.0616,
+        "max": 0.0138,
+        "range": 0.0754
+      },
+      "other_rate_final": {
+        "mean": 0.0359333333,
+        "min": -0.0138,
+        "max": 0.0616,
+        "range": 0.0754
+      },
+      "novel_absorbed": {
+        "mean": -12.6666666667,
+        "min": -16.0,
+        "max": -11.0,
+        "range": 5.0
+      },
+      "births_beyond_seeds": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 25.0,
+        "min": -2.0,
+        "max": 40.0,
+        "range": 42.0
+      },
+      "low_confidence_final": {
+        "mean": -1.6666666667,
+        "min": -7.0,
+        "max": 2.0,
+        "range": 9.0
+      },
+      "llm_calls": {
+        "mean": -3.6666666667,
+        "min": -9.0,
+        "max": 0.0,
+        "range": 9.0
+      },
+      "re_route_count": {
+        "mean": 39.0,
+        "min": -27.0,
+        "max": 80.0,
+        "range": 107.0
+      },
+      "latency_p50": {
+        "mean": 0.0266666667,
+        "min": -1.28,
+        "max": 1.37,
+        "range": 2.65
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 1.0,
+        "min": 0.0,
+        "max": 3.0,
+        "range": 3.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": -0.0115199614,
+        "min": -0.0235303696,
+        "max": -0.001492439,
+        "range": 0.0220379306
+      }
+    },
+    "dedup cold hardened vs base": {
+      "accuracy_final": {
+        "mean": 0.0046333333,
+        "min": -0.0261,
+        "max": 0.0415,
+        "range": 0.0676
+      },
+      "label_match_rate_of_covered": {
+        "mean": 0.0030333333,
+        "min": -0.0188,
+        "max": 0.0167,
+        "range": 0.0355
+      },
+      "coverage_final": {
+        "mean": -0.0102333333,
+        "min": -0.0892,
+        "max": 0.1369,
+        "range": 0.2261
+      },
+      "other_rate_final": {
+        "mean": 0.0102333333,
+        "min": -0.1369,
+        "max": 0.0892,
+        "range": 0.2261
+      },
+      "novel_absorbed": {
+        "mean": -2.0,
+        "min": -14.0,
+        "max": 16.0,
+        "range": 30.0
+      },
+      "births_beyond_seeds": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0
+      },
+      "other_bucket_final": {
+        "mean": 5.0,
+        "min": -80.0,
+        "max": 51.0,
+        "range": 131.0
+      },
+      "low_confidence_final": {
+        "mean": 1.6666666667,
+        "min": -9.0,
+        "max": 7.0,
+        "range": 16.0
+      },
+      "llm_calls": {
+        "mean": 0.6666666667,
+        "min": 0.0,
+        "max": 2.0,
+        "range": 2.0
+      },
+      "re_route_count": {
+        "mean": 12.6666666667,
+        "min": -170.0,
+        "max": 120.0,
+        "range": 290.0
+      },
+      "latency_p50": {
+        "mean": 17.3166666667,
+        "min": -0.01,
+        "max": 26.14,
+        "range": 26.15
+      },
+      "rejected_proposals_duplicate": {
+        "mean": 1.6666666667,
+        "min": 0.0,
+        "max": 5.0,
+        "range": 5.0
+      },
+      "dup_pair_count": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "dup_pair_count_strict": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "fragmentation_max": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "n_junk": {
+        "mean": null,
+        "min": null,
+        "max": null,
+        "range": null
+      },
+      "low_confidence_share": {
+        "mean": 0.0010952546,
+        "min": -0.0157270702,
+        "max": 0.011774218,
+        "range": 0.0275012882
+      }
+    }
+  },
+  "noise_floor": {
+    "accuracy_final": {
+      "mean": 0.0108,
+      "min": 0.0108,
+      "max": 0.0108,
+      "range": 0.0
+    },
+    "label_match_rate_of_covered": {
+      "mean": 0.0432,
+      "min": 0.0432,
+      "max": 0.0432,
+      "range": 0.0
+    },
+    "coverage_final": {
+      "mean": 0.0277,
+      "min": 0.0277,
+      "max": 0.0277,
+      "range": 0.0
+    },
+    "other_rate_final": {
+      "mean": 0.0277,
+      "min": 0.0277,
+      "max": 0.0277,
+      "range": 0.0
+    },
+    "novel_absorbed": {
+      "mean": 5.0,
+      "min": 5.0,
+      "max": 5.0,
+      "range": 0.0
+    },
+    "births_beyond_seeds": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "range": 0.0
+    },
+    "other_bucket_final": {
+      "mean": 20.0,
+      "min": 20.0,
+      "max": 20.0,
+      "range": 0.0
+    },
+    "low_confidence_final": {
+      "mean": 2.0,
+      "min": 2.0,
+      "max": 2.0,
+      "range": 0.0
+    },
+    "llm_calls": {
+      "mean": 3.0,
+      "min": 3.0,
+      "max": 3.0,
+      "range": 0.0
+    },
+    "re_route_count": {
+      "mean": 40.0,
+      "min": 40.0,
+      "max": 40.0,
+      "range": 0.0
+    },
+    "latency_p50": {
+      "mean": 0.12,
+      "min": 0.12,
+      "max": 0.12,
+      "range": 0.0
+    },
+    "rejected_proposals_duplicate": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "range": 0.0
+    },
+    "dup_pair_count": {
+      "mean": null,
+      "min": null,
+      "max": null,
+      "range": null
+    },
+    "dup_pair_count_strict": {
+      "mean": null,
+      "min": null,
+      "max": null,
+      "range": null
+    },
+    "fragmentation_max": {
+      "mean": null,
+      "min": null,
+      "max": null,
+      "range": null
+    },
+    "n_junk": {
+      "mean": null,
+      "min": null,
+      "max": null,
+      "range": null
+    }
+  },
+  "baselines": [
+    {
+      "path": "results/results.json",
+      "accuracy_final": 0.2185,
+      "label_match_rate_of_covered": 0.3242,
+      "coverage_final": 0.6738,
+      "other_rate_final": 0.3262,
+      "llm_calls": 15,
+      "judge": {
+        "n_categories": 30,
+        "n_mapped": 29,
+        "n_junk": 0,
+        "n_unclear": 1,
+        "dup_pair_count": 4,
+        "dup_pair_count_strict": 0,
+        "fragmentation_max": 5,
+        "fragmentation": {
+          "coding_help": 5,
+          "cooking_recipes": 3,
+          "data_analysis": 3,
+          "fitness_health": 2,
+          "math_homework": 1,
+          "novel_astronomy": 1,
+          "novel_genealogy_research": 1,
+          "novel_home_plants": 1,
+          "novel_watch_collecting": 1,
+          "scheduling": 2,
+          "shopping": 2,
+          "translation": 2,
+          "travel_planning": 4,
+          "writing_editing": 1
+        }
+      }
+    },
+    {
+      "path": "results/results-v3-full.json",
+      "accuracy_final": 0.4062,
+      "label_match_rate_of_covered": 0.6212,
+      "coverage_final": 0.6538,
+      "other_rate_final": 0.3462,
+      "llm_calls": 39,
+      "judge": {
+        "n_categories": 30,
+        "n_mapped": 27,
+        "n_junk": 3,
+        "n_unclear": 0,
+        "dup_pair_count": 0,
+        "dup_pair_count_strict": 0,
+        "fragmentation_max": 3,
+        "fragmentation": {
+          "coding_help": 1,
+          "cooking_recipes": 2,
+          "data_analysis": 3,
+          "fitness_health": 1,
+          "math_homework": 1,
+          "novel_astronomy": 1,
+          "novel_beekeeping": 1,
+          "novel_board_games": 2,
+          "novel_car_maintenance": 1,
+          "novel_esports_betting": 1,
+          "novel_genealogy_research": 1,
+          "novel_home_plants": 1,
+          "novel_music_theory": 1,
+          "novel_watch_collecting": 2,
+          "novel_wine_tasting": 1,
+          "scheduling": 2,
+          "shopping": 1,
+          "translation": 1,
+          "travel_planning": 2,
+          "writing_editing": 1
+        }
+      }
+    },
+    {
+      "path": "results/results-coreml.json",
+      "accuracy_final": 0.08,
+      "label_match_rate_of_covered": 0.1265,
+      "coverage_final": 0.6323,
+      "other_rate_final": 0.3677,
+      "llm_calls": 15,
+      "judge": {
+        "n_categories": 30,
+        "n_mapped": 27,
+        "n_junk": 3,
+        "n_unclear": 0,
+        "dup_pair_count": 2,
+        "dup_pair_count_strict": 1,
+        "fragmentation_max": 4,
+        "fragmentation": {
+          "coding_help": 4,
+          "cooking_recipes": 3,
+          "data_analysis": 2,
+          "fitness_health": 2,
+          "math_homework": 1,
+          "novel_car_maintenance": 1,
+          "novel_esports_betting": 1,
+          "novel_genealogy_research": 1,
+          "novel_home_plants": 1,
+          "novel_wine_tasting": 1,
+          "scheduling": 2,
+          "shopping": 2,
+          "translation": 2,
+          "travel_planning": 3,
+          "writing_editing": 1
+        }
+      }
+    }
+  ],
+  "run_config_consistency": {
+    "ok": false,
+    "issues": [
+      {
+        "path": "results/ablation/gatecheck-bucket-fshot-full-p0.json",
+        "cell": "gatecheck-bucket",
+        "differences": {
+          "proposer_mode": {
+            "expected": "bucket",
+            "actual": "as-today"
+          }
+        }
+      }
+    ]
+  }
+}
