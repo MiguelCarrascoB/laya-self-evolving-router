@@ -9,11 +9,12 @@ MAX_CATEGORIES = 30  # cap: 512-token Laya context bounds the option list size
 
 
 def _tokens(text: str) -> set[str]:
-    """Return the probe's lowercase alphanumeric word-token set."""
+    """Return the lowercase alphanumeric word-token set of ``text``."""
     return set(re.findall(r"[a-z0-9]+", text.lower().replace("_", " ").replace("-", " ")))
 
 
 def token_jaccard(left: str, right: str) -> float:
+    """Jaccard similarity of the two texts' token sets (0.0 if either is empty)."""
     a, b = _tokens(left), _tokens(right)
     return len(a & b) / len(a | b) if a and b else 0.0
 
@@ -49,7 +50,7 @@ class CategoryRegistry:
     @staticmethod
     def _norm(s: str) -> str:
         out = s.lower()
-        for ch in ("-", "_", " ", "-"):
+        for ch in ("-", "_", " "):
             out = out.replace(ch, "")
         return out
 
@@ -68,24 +69,28 @@ class CategoryRegistry:
             for c in self._cats
         )
 
+    def _rejection(self, name: str, description: str, step: int, source_ids) -> dict | None:
+        """Return the rejection record for a candidate, or None if it may be added.
+
+        Gates run in order: cap, substring-name duplicate, optional token overlap.
+        """
+        if self.is_full():
+            reason, rule = "cap", "cap"
+        elif self.has_similar(name):
+            reason, rule = "duplicate", "substring"
+        elif self._extra_dedup == "token_jaccard_025" and self._has_token_overlap(name, description):
+            reason, rule = "duplicate", "token_overlap"
+        else:
+            return None
+        return {"name": name, "reason": reason, "rule": rule, "step": step, "source_ids": list(source_ids)}
+
     def add(self, name: str, description: str, step: int, source_ids: list[str]) -> Category | None:
         """Returns the new Category, or None if duplicate / cap reached."""
-        if self.is_full():
-            self.rejections.append(
-                {"name": name, "reason": "cap", "rule": "cap", "step": step, "source_ids": list(source_ids)}
-            )
+        rejection = self._rejection(name, description, step, source_ids)
+        if rejection is not None:
+            self.rejections.append(rejection)
             return None
-        if self.has_similar(name):
-            self.rejections.append(
-                {"name": name, "reason": "duplicate", "rule": "substring", "step": step, "source_ids": list(source_ids)}
-            )
-            return None
-        if self._extra_dedup == "token_jaccard_025" and self._has_token_overlap(name, description):
-            self.rejections.append(
-                {"name": name, "reason": "duplicate", "rule": "token_overlap", "step": step, "source_ids": list(source_ids)}
-            )
-            return None
-        cat = Category(name=name, description=description, created_at_step=step, created_from=source_ids)
+        cat = Category(name=name, description=description, created_at_step=step, created_from=list(source_ids))
         self._cats.append(cat)
         return cat
 
@@ -93,20 +98,9 @@ class CategoryRegistry:
         self, name: str, description: str, step: int = 0, source_ids: tuple[str, ...] = ()
     ) -> Category | None:
         """Insert an initial category, applying the same cap and duplicate gates as ``add``."""
-        if self.is_full():
-            self.seed_rejections.append(
-                {"name": name, "reason": "cap", "rule": "cap", "step": step, "source_ids": list(source_ids)}
-            )
-            return None
-        if self.has_similar(name):
-            self.seed_rejections.append(
-                {"name": name, "reason": "duplicate", "rule": "substring", "step": step, "source_ids": list(source_ids)}
-            )
-            return None
-        if self._extra_dedup == "token_jaccard_025" and self._has_token_overlap(name, description):
-            self.seed_rejections.append(
-                {"name": name, "reason": "duplicate", "rule": "token_overlap", "step": step, "source_ids": list(source_ids)}
-            )
+        rejection = self._rejection(name, description, step, source_ids)
+        if rejection is not None:
+            self.seed_rejections.append(rejection)
             return None
         cat = Category(
             name=name,

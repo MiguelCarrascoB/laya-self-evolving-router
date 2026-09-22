@@ -93,20 +93,6 @@ Return ONLY a JSON array, for example:
 [{{"name": "translation", "description": "Converting text between languages."}}]"""
 
 
-def _build_system_prompt() -> str:
-    """Selects the system prompt by the LAYASYS_FEWSHOT env var.
-
-    Values: "full" (default, all canonical examples), "three" (first 3 only),
-    or "none" (role + rules, no examples).
-    """
-    mode = os.getenv("LAYASYS_FEWSHOT", "full").strip().lower()
-    if mode == "none":
-        return SYSTEM_PROMPT_NO_FEWSHOT
-    n = 3 if mode in ("three", "3") else len(FEWSHOT_EXAMPLES)
-    examples = "\n".join(f'- "{name}" — {desc}' for name, desc in FEWSHOT_EXAMPLES[:n])
-    return SYSTEM_PROMPT_TEMPLATE.format(examples=examples)
-
-
 def _few_shot_value(few_shot: str) -> str:
     value = few_shot.strip().lower()
     return "three" if value == "3" else value
@@ -265,10 +251,6 @@ class LLMCategoryProposer:
         raise RuntimeError(f"category proposal failed after all attempts: {last_err}")
 
     @staticmethod
-    def _from_obj(obj) -> list[ProposedCategory]:
-        return LLMCategoryProposer._from_obj_with_drops(obj)[0]
-
-    @staticmethod
     def _from_obj_with_drops(obj) -> tuple[list[ProposedCategory], list[dict]]:
         if not isinstance(obj, list):
             return [], []
@@ -301,14 +283,21 @@ class LLMCategoryProposer:
             return LLMCategoryProposer._from_obj_with_drops(json.loads(text))
         except Exception:
             pass
-        # Simple bracketed arrays (descriptions have no nesting).
+        # Simple bracketed arrays (descriptions have no nesting). Prefer the
+        # first one yielding proposals, so a stray decoy array (e.g. a quoted
+        # ["misc", "other"]) before the real answer does not hide it.
+        first_parsed: tuple[list[ProposedCategory], list[dict]] | None = None
         for cand in re.findall(r"\[[^\[\]]*\]", text):
             try:
                 parsed = LLMCategoryProposer._from_obj_with_drops(json.loads(cand))
-                if parsed:
-                    return parsed
             except Exception:
                 continue
+            if parsed[0]:
+                return parsed
+            if first_parsed is None:
+                first_parsed = parsed
+        if first_parsed is not None:
+            return first_parsed
         # Last-resort greedy block.
         m = re.search(r"\[.*\]", text, re.S)
         if m:
@@ -326,11 +315,13 @@ class LLMCategoryProposer:
 def load_providers() -> LLMCategoryProposer:
     """Loads config from env/.env; raises a clear error when no key is set."""
     load_dotenv()
-    base_url = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
+    # ``or`` (not a getenv default) so blank .env entries like ``OPENAI_BASE_URL=``
+    # fall back to the default instead of producing an empty URL/model.
+    base_url = os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1"
     api_key = os.getenv("OPENAI_API_KEY", "")
-    model = os.getenv("OPENAI_MODEL", "gpt-5.6-luna")
+    model = os.getenv("OPENAI_MODEL") or "gpt-5.6-luna"
     primary = {"base_url": base_url, "model": model, **({"api_key": api_key} if api_key else {})}
-    lm_url = os.getenv("LMSTUDIO_BASE_URL", "http://localhost:1234/v1")
-    lm_model = os.getenv("LMSTUDIO_MODEL", "qwen2.5-7b-instruct")
+    lm_url = os.getenv("LMSTUDIO_BASE_URL") or "http://localhost:1234/v1"
+    lm_model = os.getenv("LMSTUDIO_MODEL") or "qwen2.5-7b-instruct"
     fallback = {"base_url": lm_url, "model": lm_model}
     return LLMCategoryProposer(primary, fallback)

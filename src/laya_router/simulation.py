@@ -103,8 +103,15 @@ def run_simulation(
 
 def _load_prompts(dataset_path: str, seed: int | None = None) -> list[dict]:
     """Read the JSONL dataset, optionally applying a deterministic permutation."""
+    items = []
     with open(dataset_path, encoding="utf-8") as f:
-        items = [json.loads(line) for line in f if line.strip()]
+        for lineno, line in enumerate(f, 1):
+            if not line.strip():
+                continue
+            try:
+                items.append(json.loads(line))
+            except json.JSONDecodeError as e:
+                raise ValueError(f"{dataset_path}:{lineno}: invalid JSON line: {e.msg}") from e
     if seed is not None:
         random.Random(seed).shuffle(items)
     return items
@@ -152,6 +159,7 @@ def _seed_set_hash(initial_categories: list[dict]) -> str | None:
 
 
 def _file_sha1(path: str) -> str | None:
+    """SHA-1 of the file contents; None if it cannot be read."""
     try:
         with open(path, "rb") as f:
             return hashlib.sha1(f.read()).hexdigest()
@@ -159,7 +167,7 @@ def _file_sha1(path: str) -> str | None:
         return None
 
 
-def _proposer_model(proposer) -> str | None:
+def _proposer_model(proposer: object) -> str | None:
     """The configured OpenAI (primary) model, read defensively from the proposer."""
     primary = getattr(proposer, "_primary", None)
     if isinstance(primary, dict):
@@ -168,6 +176,7 @@ def _proposer_model(proposer) -> str | None:
 
 
 def _git_sha() -> str | None:
+    """Short HEAD sha of the current working directory, or None outside git."""
     try:
         out = subprocess.run(
             ["git", "rev-parse", "--short", "HEAD"],
@@ -207,6 +216,7 @@ def _retry_pending(
 
 
 def _pct(xs: list[float], p: int) -> float:
+    """Nearest-rank percentile (index ``int(n * p / 100)``), rounded to 2 dp."""
     if not xs:
         return 0.0
     s = sorted(xs)

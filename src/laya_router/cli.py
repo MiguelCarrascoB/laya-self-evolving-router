@@ -8,7 +8,7 @@ import os
 import sys
 
 from .llm import load_providers
-from .router import SelfEvolvingRouter
+from .router import OTHER, SelfEvolvingRouter
 from .metrics import GATE_POLICIES
 from .simulation import run_simulation
 
@@ -57,6 +57,7 @@ def _resolve_few_shot(arg_few_shot: str | None) -> str:
 
 
 def _resolve_dedup(value: str | None) -> str | None:
+    """Map the CLI dedup flag to the registry's ``extra_dedup`` key (None = off)."""
     return "token_jaccard_025" if value == "token-jaccard-025" else None
 
 
@@ -71,6 +72,8 @@ def _load_seed_categories(path: str | None) -> list[dict] | None:
     for item in data:
         if not isinstance(item, dict) or "name" not in item or "description" not in item:
             raise ValueError(f"seed file {path} entries need 'name' and 'description'")
+        if not isinstance(item["name"], str) or not isinstance(item["description"], str):
+            raise ValueError(f"seed file {path} entries need string 'name' and 'description'")
     return data
 
 
@@ -133,7 +136,7 @@ def main() -> None:
             step = 0  # live mode: steps purely informational
             ev = router.route("live", text, step)
             print(json.dumps(ev, indent=2, ensure_ascii=False))
-            if ev["route"] == "other":
+            if ev["route"] == OTHER:
                 pending.append(ev)
                 created = router.learn_from_others(pending, step)
                 pending = []
