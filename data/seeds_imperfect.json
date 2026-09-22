@@ -1,0 +1,12 @@
+[
+  {"name": "scheduling", "description": "Planning, reminding, or distributing tasks across time."},
+  {"name": "coding_help", "description": "Debugging, refactoring, or explaining programming problems."},
+  {"name": "math_homework", "description": "Solving or explaining math problems and exercises."},
+  {"name": "shopping", "description": "Choosing, comparing, or buying products and gifts."},
+  {"name": "cooking_recipes", "description": "Recipes, ingredients, and meal preparation."},
+  {"name": "translation", "description": "Converting text between languages or adjusting its register."},
+  {"name": "math_help", "description": "Help solving specific math problems step by step."},
+  {"name": "cooking_tips", "description": "Quick kitchen tips, techniques, and general cooking advice."},
+  {"name": "gift_ideas", "description": "Suggesting gifts and presents for people and occasions."},
+  {"name": "quantum_physics", "description": "Quantum mechanics concepts, equations, and experiments."}
+]

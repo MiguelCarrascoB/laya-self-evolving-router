@@ -1,0 +1,12 @@
+[
+  {"name": "coding_help", "description": "Debugging, refactoring, or explaining programming problems."},
+  {"name": "translation", "description": "Converting text between languages or adjusting its register."},
+  {"name": "data_analysis", "description": "Summarizing, comparing, or finding patterns in data."},
+  {"name": "scheduling", "description": "Planning, reminding, or distributing tasks across time."},
+  {"name": "shopping", "description": "Choosing, comparing, or buying products and gifts."},
+  {"name": "math_homework", "description": "Solving or explaining math problems and exercises."},
+  {"name": "cooking_recipes", "description": "Recipes, ingredients, and meal preparation."},
+  {"name": "fitness_health", "description": "Exercise, workouts, and physical-health questions."},
+  {"name": "travel_planning", "description": "Planning trips, destinations, and itineraries."},
+  {"name": "writing_editing", "description": "Improving, rewriting, or polishing written text."}
+]
