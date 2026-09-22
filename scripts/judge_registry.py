@@ -175,16 +175,16 @@ def _summary(n_categories: int, mapping: list[dict[str, Any]], dup_pairs: list[d
 def _judge(client: Any, model: str, categories: list[dict[str, Any]]) -> dict[str, Any]:
     messages = [{"role": "system", "content": build_system_prompt()}, {"role": "user", "content": build_user_prompt(categories)}]
     last = ""
-    for attempt in range(2):
+    for attempt in range(4):
         try:
-            response = client.chat.completions.create(model=model, messages=messages, temperature=TEMPERATURE, max_completion_tokens=2500)
+            response = client.chat.completions.create(model=model, messages=messages, temperature=TEMPERATURE, max_completion_tokens=6000)
         except Exception as exc:
             # Some OpenAI-compatible reasoning endpoints reject an explicit
             # temperature=0 and only permit their default. Preserve the
             # experiment's requested setting where supported, but remain usable.
             if "temperature" not in str(exc).lower():
                 raise
-            response = client.chat.completions.create(model=model, messages=messages, max_completion_tokens=2500)
+            response = client.chat.completions.create(model=model, messages=messages, max_completion_tokens=6000)
         last = response.choices[0].message.content or ""
         parsed = _parse_judge_response(last)
         if parsed["mapping"] or parsed["dup_pairs"] or parsed.get("notes") or not parsed.get("_warnings"):
@@ -203,12 +203,33 @@ def main(argv: list[str] | None = None) -> int:
     from openai import OpenAI
     client = OpenAI(base_url=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"), api_key=os.getenv("OPENAI_API_KEY", ""))
     output: dict[str, Any] = {"run_config": {"model": model, "temperature": TEMPERATURE, "timestamp": datetime.now(timezone.utc).isoformat(), "policy_version": POLICY_VERSION}}
+    # Resume by default: keep prior successful judgments, re-judge failed ones.
+    if args.out.exists():
+        try:
+            prior = json.loads(args.out.read_text())
+        except (ValueError, json.JSONDecodeError):
+            prior = {}
+        if isinstance(prior, dict):
+            for key, value in prior.items():
+                if key != "run_config" and isinstance(value, dict) and value.get("judged_ok"):
+                    output[key] = value
     rows = []
     for path in args.results:
-        data = json.loads(path.read_text())
+        if str(path) in output:
+            rows.append((str(path), output[str(path)]["summary"]))
+            continue
+        try:
+            data = json.loads(path.read_text())
+        except (ValueError, json.JSONDecodeError):
+            print(f"{path}: not valid JSON; skipped", file=sys.stderr)
+            continue
+        if not isinstance(data, dict):
+            print(f"{path}: not a run results object; skipped", file=sys.stderr)
+            continue
         registry = data.get("registry_final")
         if not isinstance(registry, dict) or not isinstance(registry.get("categories"), list):
-            raise SystemExit(f"{path}: missing registry_final.categories")
+            print(f"{path}: missing registry_final.categories; skipped", file=sys.stderr)
+            continue
         created = {
             c.get("name", ""): c.get("description", "")
             for c in data.get("category_creations", [])
@@ -232,6 +253,9 @@ def main(argv: list[str] | None = None) -> int:
             "warnings": judged.get("_warnings", []),
             "judged_ok": judged_ok,
         }
+        # Save after every file so interruptions lose nothing (resume keeps these).
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        args.out.write_text(json.dumps(output, indent=2) + "\n")
         s = judged["summary"]
         rows.append((str(path), s))
     args.out.parent.mkdir(parents=True, exist_ok=True)
