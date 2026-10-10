@@ -1,6 +1,6 @@
 """Pure math tests for metrics.compute_metrics (no Laya / no router import)."""
 
-from laya_router.metrics import compute_metrics, demotes_to_other, gate_thresholds
+from laya_evolve.metrics import compute_metrics, demotes_to_other, gate_thresholds
 
 
 def test_frozen_gate_preserves_strict_historical_check():

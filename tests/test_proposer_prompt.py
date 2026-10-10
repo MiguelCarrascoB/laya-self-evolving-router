@@ -1,4 +1,4 @@
-from laya_router.llm import (
+from laya_evolve.llm import (
     FEWSHOT_EXAMPLES,
     PROMPT_TEMPLATE,
     SYSTEM_PROMPT_NO_FEWSHOT,

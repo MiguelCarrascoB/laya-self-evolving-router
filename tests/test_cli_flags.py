@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from laya_router.cli import _load_seed_categories, _resolve_dedup, _resolve_few_shot, build_parser
+from laya_evolve.cli import _load_seed_categories, _resolve_dedup, _resolve_few_shot, build_parser
 
 
 def test_simulate_defaults():

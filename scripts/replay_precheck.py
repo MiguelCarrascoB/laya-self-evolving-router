@@ -14,8 +14,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-from laya_router.categories import CategoryRegistry
-from laya_router.llm import load_providers
+from laya_evolve.categories import CategoryRegistry
+from laya_evolve.llm import load_providers
 
 MODES = ("blind", "as-today", "hardened", "system-placement")
 

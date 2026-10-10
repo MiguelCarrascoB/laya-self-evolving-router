@@ -14,14 +14,14 @@ coreml = ["laya-coreml>=0.1.0"]
 dev = ["pytest>=8.0"]
 
 [project.scripts]
-laya-router = "laya_router.cli:main"
+laya-evolve = "laya_evolve.cli:main"
 
 [build-system]
 requires = ["uv_build>=0.7,<1"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
-module-name = "laya_router"
+module-name = "laya_evolve"
 
 [tool.uv]
 package = true
