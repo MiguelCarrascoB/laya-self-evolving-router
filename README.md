@@ -44,13 +44,13 @@ flowchart LR
 - **Log**: every decision, probability, latency, category birth and re-route goes to `results/*.json`, which the visualizer reads.
 
 ```
-src/laya_router/
+src/laya_evolve/
   router.py        SelfEvolvingRouter: Laya + registry + per-step event log
   categories.py    CategoryRegistry: monotonic growth, near-duplicate rejection
   llm.py           LLMCategoryProposer: OpenAI-compatible client + LMStudio fallback
   metrics.py       confidence-gate policies and run metrics
   simulation.py    closed loop: route → batch "other" → propose → re-route
-  cli.py           `laya-router simulate` / `laya-router live`
+  cli.py           `laya-evolve simulate` / `laya-evolve live`
 data/dataset.jsonl 650 synthetic prompts: 10 seeded intents × 55, plus 10 novel intents × 10
 visualizer/        single-file offline dashboard
 scripts/           growth plot, routing probe, ablation runner/analysis, registry judge
@@ -63,8 +63,8 @@ Requires [`uv`](https://docs.astral.sh/uv/). Only category discovery touches the
 ```bash
 uv sync
 cp .env.example .env          # set OPENAI_API_KEY (optionally OPENAI_BASE_URL / OPENAI_MODEL)
-uv run laya-router simulate   # data/dataset.jsonl → results/results.json
-uv run laya-router live       # type prompts, watch categories appear
+uv run laya-evolve simulate   # data/dataset.jsonl → results/results.json
+uv run laya-evolve live       # type prompts, watch categories appear
 ```
 
 | Flag | Values (default **bold**) | Commands |
@@ -83,7 +83,7 @@ Core ML backend (`laya-coreml` requires Python < 3.14):
 
 ```bash
 uv sync --extra coreml
-uv run laya-router simulate --backend coreml --out results/results-coreml.json
+uv run laya-evolve simulate --backend coreml --out results/results-coreml.json
 ```
 
 ### Visualizer
@@ -182,8 +182,8 @@ Apache-2.0, like `laya-mlx` and `laya-coreml`. See [LICENSE](LICENSE) and [NOTIC
 ```bash
 uv sync
 cp .env.example .env          # OPENAI_API_KEY (opcional OPENAI_BASE_URL / OPENAI_MODEL)
-uv run laya-router simulate
-uv run laya-router live
+uv run laya-evolve simulate
+uv run laya-evolve live
 ```
 
 Proyecto hermano: [laya-router](https://github.com/MiguelCarrascoB/laya-router) (servicio FastAPI que enruta por complejidad con Laya).

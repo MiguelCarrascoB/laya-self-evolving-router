@@ -4,7 +4,7 @@ These tests exercise the response-parsing logic in isolation so CI can run on
 Linux without importing ``laya_mlx`` or hitting any network endpoint.
 """
 
-from laya_router.llm import LLMCategoryProposer, ProposedCategory
+from laya_evolve.llm import LLMCategoryProposer, ProposedCategory
 
 
 def test_parse_direct_json_array():

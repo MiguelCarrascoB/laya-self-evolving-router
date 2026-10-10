@@ -2,7 +2,7 @@
 
 import json
 
-from laya_router.simulation import _load_prompts, _seed_set_hash, run_simulation
+from laya_evolve.simulation import _load_prompts, _seed_set_hash, run_simulation
 
 
 def _write_dataset(path, prompts):

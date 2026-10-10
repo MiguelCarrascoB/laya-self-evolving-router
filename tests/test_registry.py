@@ -1,6 +1,6 @@
 """Pure unit tests for the category registry."""
 
-from laya_router.categories import CategoryRegistry
+from laya_evolve.categories import CategoryRegistry
 
 
 def test_near_duplicate_and_substring_semantics():

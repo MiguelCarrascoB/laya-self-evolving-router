@@ -1,14 +1,14 @@
-"""Regression tests for src/laya_router review fixes (no Laya model, no network)."""
+"""Regression tests for src/laya_evolve review fixes (no Laya model, no network)."""
 
 import json
 
 import pytest
 
-from laya_router import llm
-from laya_router.categories import CategoryRegistry
-from laya_router.cli import _load_seed_categories
-from laya_router.llm import LLMCategoryProposer, ProposedCategory
-from laya_router.simulation import _load_prompts
+from laya_evolve import llm
+from laya_evolve.categories import CategoryRegistry
+from laya_evolve.cli import _load_seed_categories
+from laya_evolve.llm import LLMCategoryProposer, ProposedCategory
+from laya_evolve.simulation import _load_prompts
 
 
 # -- proposer parsing: decoy arrays --------------------------------------------
